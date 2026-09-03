@@ -2,7 +2,7 @@
 // After deploying code.gs (Deploy > New deployment > Web app), paste the
 // resulting URL below. Every page (login, dashboard, admin, test) reads
 // from this one file.
-const API_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+const API_URL = "https://script.google.com/macros/s/AKfycbzJ8lXzI-loqvk4csdwOqcxVEahQkWBXQjiPhJlgqL4v5K9z1pE81ei5q9HN2zieHsMkg/exec";
 
 function apiGet(action, params) {
   params = params || {};
