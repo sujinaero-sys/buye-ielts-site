@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUYE IELTS — Practice, Score, Improve</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root{
+    --paper:#F6F2E9;
+    --paper-dim:#EFE9DA;
+    --ink:#182623;
+    --ink-soft:#24352F;
+    --emerald:#23624F;
+    --emerald-deep:#164A3B;
+    --rust:#B54A2C;
+    --sage:#C9D6CE;
+    --line:#D8CFB9;
+    --line-dark:#33473F;
+    --ink-text:#1B2A26;
+    --muted:#5C6B63;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink-text);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    line-height:1.55;
+    font-size:16px;
+  }
+  h1,h2,h3,h4{
+    font-family:'Source Serif 4', Georgia, serif;
+    font-weight:600;
+    color:var(--ink);
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+  img{max-width:100%; display:block;}
+  .num{font-family:'IBM Plex Mono', monospace;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper); border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Source Serif 4', serif; font-weight:700; font-size:1.25rem; color:var(--ink);
+  }
+  .logo img{
+    width:38px; height:38px; object-fit:contain; display:block; border-radius:6px;
+  }
+  nav.primary{display:flex; gap:34px;}
+  nav.primary a{font-size:0.94rem; color:var(--ink-soft); font-weight:500;}
+  nav.primary a:hover{color:var(--emerald);}
+  .nav-actions{display:flex; align-items:center; gap:18px;}
+  .btn{
+    display:inline-block; padding:11px 22px; font-size:0.92rem; font-weight:600;
+    border:1.5px solid var(--ink); border-radius:2px; cursor:pointer;
+  }
+  .btn-primary{background:var(--emerald); border-color:var(--emerald); color:var(--paper);}
+  .btn-primary:hover{background:var(--emerald-deep); border-color:var(--emerald-deep);}
+  .btn-ghost{border-color:transparent; color:var(--ink-soft); padding:11px 6px;}
+  .btn-ghost:hover{color:var(--ink);}
+  .menu-toggle{display:none; background:none; border:none; cursor:pointer;}
+  .menu-toggle span{display:block; width:22px; height:2px; background:var(--ink); margin:5px 0;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:76px 0 90px; border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; align-items:center;}
+  .eyebrow{color:var(--emerald); font-weight:600; font-size:0.95rem; margin-bottom:14px;}
+  .hero h1{font-size:2.9rem; max-width:15ch;}
+  .hero p.lead{margin-top:20px; font-size:1.12rem; color:var(--muted); max-width:46ch;}
+  .hero-actions{display:flex; gap:16px; margin-top:32px;}
+  .hero-note{margin-top:18px; font-size:0.86rem; color:var(--muted);}
+
+  /* Test report form mock */
+  .trf{
+    background:var(--ink); color:var(--paper); border-radius:3px;
+    padding:34px 34px 30px; position:relative;
+  }
+  .trf-top{display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--line-dark); padding-bottom:18px;}
+  .trf-top .label{font-size:0.75rem; letter-spacing:0.03em; color:var(--sage);}
+  .trf-top .name{font-family:'Source Serif 4',serif; font-size:1.1rem; margin-top:4px;}
+  .trf-band{text-align:right;}
+  .trf-band .score{font-family:'IBM Plex Mono',monospace; font-size:3rem; font-weight:600; line-height:1;}
+  .trf-band .label{color:var(--sage);}
+  .trf-rows{margin-top:22px; display:flex; flex-direction:column; gap:14px;}
+  .trf-row{display:grid; grid-template-columns:110px 1fr 40px; align-items:center; gap:14px;}
+  .trf-row .skill{font-size:0.88rem; color:var(--sage);}
+  .trf-bar{height:6px; background:var(--line-dark); border-radius:3px; overflow:hidden;}
+  .trf-bar span{display:block; height:100%; background:var(--rust);}
+  .trf-row .val{font-family:'IBM Plex Mono',monospace; font-size:0.92rem; text-align:right;}
+  .trf-foot{margin-top:22px; padding-top:16px; border-top:1px solid var(--line-dark); font-size:0.78rem; color:var(--sage);}
+
+  /* ---------- Section headings ---------- */
+  .section{padding:88px 0;}
+  .section-head{max-width:56ch; margin-bottom:52px;}
+  .section-head h2{font-size:2.1rem;}
+  .section-head p{margin-top:14px; color:var(--muted); font-size:1.05rem;}
+  .border-b{border-bottom:1px solid var(--line);}
+
+  /* ---------- Skills, sequential rows ---------- */
+  .skill-row{
+    display:grid; grid-template-columns:90px 1fr 1fr; gap:40px;
+    padding:44px 0; border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .skill-row:last-child{border-bottom:1px solid var(--line);}
+  .skill-index{font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--rust); font-weight:600; padding-top:4px;}
+  .skill-row h3{font-size:1.5rem;}
+  .skill-row .desc p{color:var(--muted); margin-top:10px;}
+  .skill-row .desc .tags{margin-top:16px; display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{border:1px solid var(--line); padding:5px 12px; font-size:0.8rem; border-radius:20px; color:var(--ink-soft);}
+
+  /* ---------- Paths (Academic vs General) ---------- */
+  .paths{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  .path-card{background:var(--paper); padding:38px;}
+  .path-card h3{font-size:1.4rem;}
+  .path-card .who{color:var(--emerald); font-weight:600; font-size:0.88rem; margin-top:8px;}
+  .path-card p.desc{margin-top:16px; color:var(--muted);}
+  .path-card ul{margin-top:18px; padding-left:0; list-style:none;}
+  .path-card li{padding:8px 0; border-top:1px solid var(--line); font-size:0.95rem;}
+  .path-card li:first-child{border-top:none;}
+
+  /* ---------- Institute / dark band ---------- */
+  .band-dark{background:var(--ink); color:var(--paper);}
+  .band-dark .section-head h2{color:var(--paper);}
+  .band-dark .section-head p{color:var(--sage);}
+  .inst-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  .inst-list{display:flex; flex-direction:column; gap:0;}
+  .inst-list li{list-style:none; padding:16px 0; border-top:1px solid var(--line-dark); font-size:0.98rem; color:var(--sage);}
+  .inst-list li:first-child{border-top:none;}
+  .inst-list b{color:var(--paper); font-weight:600;}
+  .band-dark .btn-primary{background:var(--rust); border-color:var(--rust);}
+  .band-dark .btn-primary:hover{background:#9C3F24; border-color:#9C3F24;}
+
+  /* ---------- App promo ---------- */
+  .app-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  .app-badges{display:flex; gap:14px; margin-top:26px;}
+  .badge-note{
+    border:1.5px dashed var(--line); padding:12px 20px; font-size:0.85rem;
+    color:var(--muted); border-radius:4px;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{border-top:1px solid var(--line);}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-q{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 0; cursor:pointer; gap:20px;
+  }
+  .faq-q h4{font-size:1.05rem; font-weight:600; font-family:'IBM Plex Sans', sans-serif; color:var(--ink);}
+  .faq-icon{font-family:'IBM Plex Mono',monospace; font-size:1.2rem; color:var(--rust); flex-shrink:0;}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height 0.28s ease;}
+  .faq-a p{padding-bottom:22px; color:var(--muted); max-width:62ch;}
+  .faq-item.open .faq-a{max-height:220px;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink); color:var(--sage); padding:70px 0 30px;}
+  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:40px;}
+  footer h5{color:var(--paper); font-weight:600; font-size:0.9rem; margin-bottom:16px; font-family:'IBM Plex Sans',sans-serif;}
+  footer .logo{color:var(--paper);}
+  footer p.about{margin-top:16px; font-size:0.9rem; max-width:32ch; color:var(--sage);}
+  footer ul{list-style:none;}
+  footer li{margin-bottom:10px; font-size:0.9rem;}
+  footer a:hover{color:var(--paper);}
+  .footer-bottom{
+    margin-top:60px; padding-top:24px; border-top:1px solid var(--line-dark);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-size:0.8rem; color:#8FA098;
+  }
+  .disclaimer{max-width:900px; margin-top:14px; font-size:0.78rem; color:#75887F;}
+
+  @media (max-width:860px){
+    nav.primary, .nav-actions .btn-ghost{display:none;}
+    .menu-toggle{display:block;}
+    .hero-grid, .inst-grid, .app-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:2.2rem;}
+    .skill-row{grid-template-columns:1fr; gap:12px;}
+    .skill-row .desc:nth-child(2){display:none;} /* avoid dup col on narrow */
+    .paths{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="#" class="logo"><img src="data:image/jpeg;base64,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" alt="BUYE logo"> BUYE IELTS</a>
+    <nav class="primary">
+      <a href="#skills">Practice Test</a>
+      <a href="#paths">Mock Tests</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#institutes">For Institutes</a>
+      <a href="#app">Mobile App</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="login.html" class="btn-ghost btn">Log in</a>
+      <a href="https://wa.me/919995863184?text=Hi%2C%20I%27d%20like%20to%20start%20my%20free%20IELTS%20practice%20trial." class="btn btn-primary">Start Free Trial</a>
+      <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">From the team behind BUYE English programs</div>
+      <h1>Practice IELTS the way you'll sit it — then see your band score.</h1>
+      <p class="lead">Full-length Listening, Reading, Writing and Speaking practice under real exam conditions, with instant scoring and feedback built by BUYE's own English tutors.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/919995863184?text=Hi%2C%20I%27d%20like%20to%20start%20my%20free%20IELTS%20practice%20trial." class="btn btn-primary">Start Free Trial</a>
+        <a href="#skills" class="btn btn-ghost" style="border:1.5px solid var(--ink); color:var(--ink);">See how it works</a>
+      </div>
+      <div class="hero-note">No credit card needed for the free practice set · Academic &amp; General Training</div>
+    </div>
+
+    <div class="trf">
+      <div class="trf-top">
+        <div>
+          <div class="label">TEST REPORT — PRACTICE</div>
+          <div class="name">Candidate: You</div>
+        </div>
+        <div class="trf-band">
+          <div class="score">7.5</div>
+          <div class="label">Overall Band</div>
+        </div>
+      </div>
+      <div class="trf-rows">
+        <div class="trf-row"><span class="skill">Listening</span><span class="trf-bar"><span style="width:88%;"></span></span><span class="val">8.0</span></div>
+        <div class="trf-row"><span class="skill">Reading</span><span class="trf-bar"><span style="width:82%;"></span></span><span class="val">7.5</span></div>
+        <div class="trf-row"><span class="skill">Writing</span><span class="trf-bar"><span style="width:70%;"></span></span><span class="val">7.0</span></div>
+        <div class="trf-row"><span class="skill">Speaking</span><span class="trf-bar"><span style="width:75%;"></span></span><span class="val">7.0</span></div>
+      </div>
+      <div class="trf-foot">Sample report — your actual score sheet is generated after each practice test.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section border-b" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Every module of the real exam</h2>
+      <p>Practice the same four skills, in the same order, with question types drawn straight from the current IELTS format.</p>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-index">01</div>
+      <div>
+        <h3>Listening</h3>
+        <div class="desc">
+          <p>Four-part recordings — conversations, monologues, and academic discussions — played once, exactly as in the real test, with a mix of everyday and academic settings.</p>
+        </div>
+      </div>
+      <div class="desc">
+        <p>Instant scoring after each set, plus a transcript and audio replay so you can see exactly where marks were lost.</p>
+        <div class="tags"><span class="tag">Note completion</span><span class="tag">Map labelling</span><span class="tag">Matching</span><span class="tag">Multiple choice</span></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-index">02</div>
+      <div>
+        <h3>Reading</h3>
+        <div class="desc">
+          <p>Academic and General Training passages with the full range of question types — True/False/Not Given, matching headings, sentence completion, and more.</p>
+        </div>
+      </div>
+      <div class="desc">
+        <p>A built-in timer trains your pacing across all three passages, and instant scoring shows accuracy by question type so you know exactly what to revise.</p>
+        <div class="tags"><span class="tag">True/False/Not Given</span><span class="tag">Matching headings</span><span class="tag">Summary completion</span></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-index">03</div>
+      <div>
+        <h3>Writing</h3>
+        <div class="desc">
+          <p>Task 1 (report, letter, or graph description) and Task 2 (essay) prompts for both Academic and General Training, in a distraction-free answer editor with a live word count.</p>
+        </div>
+      </div>
+      <div class="desc">
+        <p>Feedback against the same four criteria examiners use — Task Achievement, Coherence and Cohesion, Lexical Resource, and Grammatical Range — reviewed by BUYE tutors.</p>
+        <div class="tags"><span class="tag">Task 1</span><span class="tag">Task 2</span><span class="tag">Tutor feedback</span></div>
+      </div>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-index">04</div>
+      <div>
+        <h3>Speaking</h3>
+        <div class="desc">
+          <p>All three parts — introduction and interview, the long-turn cue card, and the two-way discussion — recorded from your own device.</p>
+        </div>
+      </div>
+      <div class="desc">
+        <p>Get structured feedback on fluency, pronunciation, vocabulary, and grammar, with sample answers from BUYE tutors for the topics you find hardest.</p>
+        <div class="tags"><span class="tag">Cue cards</span><span class="tag">Recorded practice</span><span class="tag">Tutor review</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section border-b" id="paths">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Academic or General Training — practice the one you need</h2>
+      <p>Question types and topics differ between the two versions of IELTS. BUYE IELTS keeps them separate so your practice matches your actual test.</p>
+    </div>
+    <div class="paths">
+      <div class="path-card">
+        <h3>IELTS Academic</h3>
+        <div class="who">For university and professional registration</div>
+        <p class="desc">For applicants to universities and professional bodies, with academic-style reading passages and a Task 1 that asks you to describe a graph, chart, or diagram.</p>
+        <ul>
+          <li>Academic reading passages</li>
+          <li>Graph &amp; diagram Task 1</li>
+          <li>Formal essay topics</li>
+        </ul>
+      </div>
+      <div class="path-card">
+        <h3>IELTS General Training</h3>
+        <div class="who">For work and migration visas</div>
+        <p class="desc">For work, migration, and secondary education applicants, with everyday-context reading passages and a Task 1 letter-writing exercise.</p>
+        <ul>
+          <li>Workplace &amp; everyday passages</li>
+          <li>Letter-writing Task 1</li>
+          <li>General essay topics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section band-dark" id="institutes">
+  <div class="wrap">
+    <div class="inst-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:0;">
+          <h2>Running a coaching centre? Put your students on BUYE IELTS.</h2>
+          <p>Everything BUYE already uses for its own live English batches, packaged for coaching institutes and businesses training staff for overseas placement.</p>
+        </div>
+      </div>
+      <ul class="inst-list">
+        <li><b>Batch licences</b> — enrol a whole class or cohort at once</li>
+        <li><b>Progress dashboards</b> — track band-score movement per student</li>
+        <li><b>Custom mock exams</b> — build tests from your own question bank</li>
+        <li><b>Tutor review queue</b> — route Writing &amp; Speaking to your teachers</li>
+      </ul>
+    </div>
+    <div style="margin-top:40px;">
+      <a href="https://wa.me/919995863184?text=Hi%2C%20I%27m%20interested%20in%20BUYE%20IELTS%20for%20my%20coaching%20institute." class="btn btn-primary">Talk to us about institute plans</a>
+    </div>
+  </div>
+</section>
+
+<section class="section border-b" id="app">
+  <div class="wrap app-grid">
+    <div>
+      <div class="section-head" style="margin-bottom:0;">
+        <h2>Practice on the go</h2>
+        <p>A BUYE IELTS mobile app is on the way, so you can fit a Reading passage or a Listening set into a commute.</p>
+      </div>
+      <div class="app-badges">
+        <span class="badge-note">iOS — coming soon</span>
+        <span class="badge-note">Android — coming soon</span>
+      </div>
+    </div>
+    <div class="trf" style="background:var(--paper-dim); color:var(--ink-text); border:1px solid var(--line);">
+      <div style="font-family:'Source Serif 4',serif; font-size:1.2rem; color:var(--ink);">Want early access?</div>
+      <p style="margin-top:10px; color:var(--muted);">Leave your number on WhatsApp and we'll notify you the day the app opens for testing.</p>
+      <a href="https://wa.me/919995863184?text=Hi%2C%20please%20notify%20me%20when%20the%20BUYE%20IELTS%20app%20is%20ready." class="btn btn-primary" style="margin-top:18px; display:inline-block;">Message us on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Questions, answered</h2>
+      <p>Can't find what you're looking for? Reach us directly — contact details are in the footer.</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><h4>Is BUYE IELTS free to use?</h4><span class="faq-icon">+</span></div>
+        <div class="faq-a"><p>A starter set of practice questions across all four skills is free. Full-length mock tests, AI and tutor feedback, and unlimited practice sit under paid plans.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>Does it feel like the real IELTS exam?</h4><span class="faq-icon">+</span></div>
+        <div class="faq-a"><p>Mock tests follow the real timing, section order, and interface conventions of the computer-delivered IELTS test, so exam day itself holds no surprises.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>Who reviews my Writing and Speaking?</h4><span class="faq-icon">+</span></div>
+        <div class="faq-a"><p>Writing and Speaking responses are checked against the official IELTS band descriptors, with review from BUYE's own English tutors on paid plans.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>Can my coaching centre use this for our students?</h4><span class="faq-icon">+</span></div>
+        <div class="faq-a"><p>Yes — see the Institutes section above, or contact us directly to set up batch licences and a progress dashboard for your centre.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>Which version of the test can I practise?</h4><span class="faq-icon">+</span></div>
+        <div class="faq-a"><p>Both IELTS Academic and IELTS General Training are covered, with separate reading passages and Writing Task 1 exercises for each.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="logo"><img src="data:image/jpeg;base64,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" alt="BUYE logo"> BUYE IELTS</a>
+        <p class="about">Part of the BUYE group of businesses. Practice, feedback, and band scores for IELTS Academic and General Training.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#skills">Practice Test</a></li>
+          <li><a href="#paths">Mock Tests</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#app">Mobile App</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Test Type</h5>
+        <ul>
+          <li><a href="#paths">IELTS Academic</a></li>
+          <li><a href="#paths">IELTS General Training</a></li>
+          <li><a href="#institutes">For Institutes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li>info@buye.online</li>
+          <li>+91 999 586 3184</li>
+          <li>+91 877 886 3184</li>
+          <li>Kanyakumari, Tamil Nadu, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BUYE. All rights reserved.</span>
+      <span>buye.online</span>
+    </div>
+    <p class="disclaimer">BUYE IELTS is an independent test-preparation platform and is not affiliated with, endorsed by, or connected to IDP Education, Cambridge University Press &amp; Assessment, or the British Council.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      var item = q.parentElement;
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); i.querySelector('.faq-icon').textContent = '+'; });
+      if(!wasOpen){
+        item.classList.add('open');
+        item.querySelector('.faq-icon').textContent = '–';
+      }
+    });
+  });
+
+  var toggle = document.querySelector('.menu-toggle');
+  var primaryNav = document.querySelector('nav.primary');
+  toggle.addEventListener('click', function(){
+    var open = primaryNav.style.display === 'flex';
+    primaryNav.style.display = open ? 'none' : 'flex';
+    primaryNav.style.flexDirection = 'column';
+    primaryNav.style.gap = '16px';
+    primaryNav.style.position = 'absolute';
+    primaryNav.style.top = '68px';
+    primaryNav.style.left = '0';
+    primaryNav.style.right = '0';
+    primaryNav.style.background = 'var(--paper)';
+    primaryNav.style.padding = '20px 28px';
+    primaryNav.style.borderBottom = '1px solid var(--line)';
+  });
+</script>
+
+</body>
+</html>
