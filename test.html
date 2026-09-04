@@ -5,6 +5,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Take a test — BUYE IELTS</title>
 <link rel="stylesheet" href="assets/app.css">
+<style>
+  /* ---- Exam-mode additions (on top of app.css) ---- */
+  body.exam-mode header.appbar{ display:none; }
+  body.exam-mode main{ padding-top:0; }
+
+  .exam-bar{
+    position:sticky; top:0; z-index:60; background:var(--ink); color:var(--paper);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .exam-bar .wrap{
+    display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:16px; flex-wrap:wrap;
+  }
+  .exam-bar .title{font-family:'Source Serif 4',serif; font-weight:600; font-size:1rem;}
+  .exam-bar .title .part{color:var(--sage); font-weight:500; font-size:0.85rem; display:block; margin-top:2px;}
+  .exam-timer{
+    font-family:'IBM Plex Mono',monospace; font-size:1.15rem; font-weight:600;
+    background:rgba(255,255,255,0.08); padding:8px 16px; border-radius:8px; letter-spacing:0.03em;
+  }
+  .exam-timer.low{ color:#FFD3CC; background:rgba(225,74,59,0.25); }
+
+  .exam-layout{ display:grid; grid-template-columns:1fr; gap:0; }
+  .exam-layout.has-passage{ grid-template-columns:1fr 1fr; align-items:start; }
+  .passage-panel{
+    position:sticky; top:78px; align-self:start; max-height:calc(100vh - 160px); overflow-y:auto;
+    background:var(--paper-dim); border-right:1px solid var(--line); padding:28px 26px;
+  }
+  .passage-panel .kicker{ font-size:0.78rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px; }
+  .passage-panel p{ white-space:pre-wrap; line-height:1.75; }
+  .questions-panel{ padding:28px 26px; }
+  .questions-panel.full-width{ max-width:760px; margin:0 auto; }
+
+  .word-count{ font-size:0.82rem; color:var(--muted); margin-top:6px; text-align:right; }
+  .word-count.ok{ color:var(--emerald); }
+
+  .recorder{ border:1px solid var(--line); border-radius:12px; padding:18px; background:var(--paper-dim); }
+  .rec-status{ font-size:0.88rem; color:var(--muted); margin-left:4px; }
+  .rec-status.recording{ color:var(--red); font-weight:600; }
+  .rec-status.recording::before{ content:"●"; margin-right:6px; animation:pulse 1s infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+
+  .exam-nav{
+    position:sticky; bottom:0; z-index:55; background:var(--paper); border-top:1px solid var(--line);
+    padding:14px 24px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .exam-nav .dots{ display:flex; gap:8px; flex-wrap:wrap; flex:1; }
+  .navdot{
+    width:32px; height:32px; border-radius:50%; border:1.5px solid var(--line); background:var(--paper);
+    display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace;
+    font-size:0.8rem; font-weight:600; cursor:pointer; color:var(--ink-soft);
+  }
+  .navdot.answered{ background:var(--emerald); border-color:var(--emerald); color:var(--paper); }
+
+  @media (max-width:860px){
+    .exam-layout.has-passage{ grid-template-columns:1fr; }
+    .passage-panel{ position:static; max-height:none; border-right:none; border-bottom:1px solid var(--line); }
+  }
+</style>
 </head>
 <body>
 
@@ -19,41 +76,52 @@
   </div>
 </header>
 
+<!-- STEP 1: choose a test -->
 <main>
-  <div class="wrap">
+  <div class="wrap" id="pickStep">
+    <div class="page-head"><h1>Choose a practice test</h1><p>Pick a module to start. Once you begin, the clock runs exactly like the real exam — you can submit early any time.</p></div>
+    <div class="grid grid-2" id="testList">Loading…</div>
+  </div>
+</main>
 
-    <!-- STEP 1: choose a test -->
-    <div id="pickStep">
-      <div class="page-head"><h1>Choose a practice test</h1><p>Pick a module to start. You can submit any time — unanswered questions just score zero.</p></div>
-      <div class="grid grid-2" id="testList">Loading…</div>
+<!-- STEP 2: exam mode -->
+<div id="testStep" style="display:none;">
+  <div class="exam-bar">
+    <div class="wrap">
+      <div class="title" id="examTitleBox">—<span class="part" id="examMeta"></span></div>
+      <div class="exam-timer" id="examTimer">--:--</div>
+      <button class="btn btn-primary" onclick="confirmSubmit()">Submit test</button>
     </div>
-
-    <!-- STEP 2: answer questions -->
-    <div id="testStep" style="display:none;">
-      <div class="page-head">
-        <h1 id="testTitle"></h1>
-        <p id="testMeta" style="color:var(--muted);"></p>
-      </div>
-      <div id="questionList"></div>
-      <button class="btn btn-primary" onclick="submitTest()">Submit test</button>
+  </div>
+  <div class="exam-layout" id="examLayout">
+    <div class="passage-panel" id="passagePanel" style="display:none;">
+      <div class="kicker" id="passageKicker">Passage</div>
+      <div id="passageBody"></div>
     </div>
+    <div class="questions-panel" id="questionsPanel"></div>
+  </div>
+  <div class="exam-nav">
+    <div class="dots" id="navDots"></div>
+    <span style="font-size:0.85rem; color:var(--muted);" id="answeredCount"></span>
+  </div>
+</div>
 
-    <!-- STEP 3: results -->
-    <div id="resultStep" style="display:none;">
-      <div class="page-head"><h1>Your result</h1></div>
-      <div class="card" id="resultCard"></div>
-      <div style="margin-top:24px; display:flex; gap:14px;">
-        <a href="dashboard.html" class="btn btn-primary">Go to dashboard</a>
-        <a href="test.html" class="btn">Take another test</a>
-      </div>
+<!-- STEP 3: results -->
+<main>
+  <div class="wrap" id="resultStep" style="display:none;">
+    <div class="page-head"><h1>Your result</h1></div>
+    <div class="card" id="resultCard"></div>
+    <div style="margin-top:24px; display:flex; gap:14px;">
+      <a href="dashboard.html" class="btn btn-primary">Go to dashboard</a>
+      <a href="test.html" class="btn">Take another test</a>
     </div>
-
   </div>
 </main>
 
 <script src="assets/config.js"></script>
 <script>
-  let currentAttemptId = null, currentTestId = null, currentQuestions = [];
+  let currentAttemptId = null, currentTestId = null, currentModule = null, currentQuestions = [];
+  let timerInterval = null, examEndTime = null;
 
   if (requireAuth()) {
     document.getElementById('whoName').textContent = getName();
@@ -68,7 +136,7 @@
             const c = moduleColor(t.Module);
             return '<div class="card" style="border-top:4px solid ' + c + ';"><h3>' + t.Title + '</h3>' +
               '<p style="color:var(--muted); margin:6px 0 16px;">' + t.ExamType + ' · ' + t.Module + ' · ' + t.DurationMinutes + ' min</p>' +
-              '<button class="btn btn-primary" style="background:' + c + '; border-color:' + c + ';" onclick="startTest(\'' + t.TestID + '\',\'' + t.Title.replace(/'/g,"\\'") + '\')">Start</button></div>';
+              '<button class="btn btn-primary" style="background:' + c + '; border-color:' + c + ';" onclick="startTest(\'' + t.TestID + '\',\'' + t.Title.replace(/'/g,"\\'") + '\',\'' + t.Module + '\',' + t.DurationMinutes + ')">Start</button></div>';
           }).join('')
         : '<div class="card" style="grid-column:1/-1; color:var(--muted);">No tests published yet — check back soon.</div>';
     });
@@ -83,43 +151,221 @@
     return 'var(--ink)';
   }
 
-  function startTest(testId, title) {
+  function startTest(testId, title, module, durationMinutes) {
     currentTestId = testId;
+    currentModule = module;
     apiPost('startAttempt', { token: getToken(), testId: testId }).then(function (res) {
       if (!res.success) { alert(res.error); return; }
       currentAttemptId = res.data.attemptId;
       apiGet('getQuestions', { testId: testId }).then(function (qres) {
         if (!qres.success || !qres.data.length) { alert('No questions found for this test yet.'); return; }
         currentQuestions = qres.data;
-        renderTest(title, qres.data);
+        renderTest(title, module, durationMinutes, qres.data);
       });
     });
   }
 
-  function renderTest(title, questions) {
-    document.getElementById('pickStep').style.display = 'none';
+  function renderTest(title, module, durationMinutes, questions) {
+    document.body.classList.add('exam-mode');
+    document.getElementById('pickStep').parentElement.style.display = 'none';
     document.getElementById('testStep').style.display = 'block';
-    document.getElementById('testTitle').textContent = title;
-    document.getElementById('testMeta').textContent = questions.length + ' question(s)';
+    document.getElementById('examTitleBox').innerHTML = title + '<span class="part">' + module + ' · ' + questions.length + ' question(s)</span>';
 
-    document.getElementById('questionList').innerHTML = questions.map(function (q, i) {
+    // ---- Passage / audio panel (shared context, shown once) ----
+    const passageSource = questions.find(function (q) { return q.PassageOrAudioURL && q.PassageOrAudioURL.trim(); });
+    const layout = document.getElementById('examLayout');
+    const panel = document.getElementById('passagePanel');
+    if (passageSource) {
+      const p = passageSource.PassageOrAudioURL.trim();
+      const isAudio = /^https?:\/\/.+\.(mp3|wav|ogg|m4a)$/i.test(p);
+      const isUrl = /^https?:\/\//i.test(p);
+      document.getElementById('passageKicker').textContent = isAudio || isUrl ? 'Audio' : 'Passage';
+      document.getElementById('passageBody').innerHTML = isAudio
+        ? '<audio controls style="width:100%;" src="' + esc(p) + '"></audio>'
+        : isUrl
+          ? '<a href="' + esc(p) + '" target="_blank" class="btn btn-primary">Listen to audio</a>'
+          : '<p>' + esc(p) + '</p>';
+      panel.style.display = 'block';
+      layout.classList.add('has-passage');
+    } else {
+      panel.style.display = 'none';
+      layout.classList.remove('has-passage');
+    }
+
+    // ---- Questions ----
+    const isWriting = /writ/i.test(module || '');
+    const isSpeaking = /speak/i.test(module || '');
+    const qPanel = document.getElementById('questionsPanel');
+    qPanel.className = 'questions-panel' + (passageSource ? '' : ' full-width');
+    qPanel.innerHTML = questions.map(function (q, i) {
       let inputHtml;
       if (q.QuestionType === 'Multiple Choice' && (q.OptionA || q.OptionB || q.OptionC || q.OptionD)) {
         inputHtml = ['A', 'B', 'C', 'D'].map(function (letter) {
           const opt = q['Option' + letter];
           if (!opt) return '';
-          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + esc(opt) + '"> ' + esc(opt) + '</label>';
+          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + esc(opt) + '" onchange="markAnswered(' + i + ')"> ' + esc(opt) + '</label>';
         }).join('');
       } else if (q.QuestionType === 'True/False/Not Given') {
         inputHtml = ['True', 'False', 'Not Given'].map(function (v) {
-          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + v + '"> ' + v + '</label>';
+          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + v + '" onchange="markAnswered(' + i + ')"> ' + v + '</label>';
         }).join('');
+      } else if (isSpeaking) {
+        inputHtml =
+          '<div class="recorder">' +
+            '<button class="btn btn-primary" id="recBtn_' + q.QuestionID + '" onclick="startRecording(\'' + q.QuestionID + '\',' + i + ')">● Record answer</button>' +
+            '<button class="btn" id="stopBtn_' + q.QuestionID + '" style="display:none;" onclick="stopRecording(\'' + q.QuestionID + '\')">Stop</button>' +
+            '<span class="rec-status" id="recStatus_' + q.QuestionID + '"></span>' +
+            '<audio id="recPlayback_' + q.QuestionID + '" controls style="display:none; margin-top:12px; width:100%;"></audio>' +
+            '<input type="hidden" id="q_' + q.QuestionID + '_text" value="">' +
+          '</div>';
+      } else if (isWriting) {
+        inputHtml = '<textarea id="q_' + q.QuestionID + '_text" rows="9" placeholder="Type your response…" oninput="updateWordCount(\'' + q.QuestionID + '\'); markAnswered(' + i + ')"></textarea>' +
+          '<div class="word-count" id="wc_' + q.QuestionID + '">0 words</div>';
       } else {
-        inputHtml = '<input type="text" id="q_' + q.QuestionID + '_text" placeholder="Your answer">';
+        inputHtml = '<input type="text" id="q_' + q.QuestionID + '_text" placeholder="Your answer" oninput="markAnswered(' + i + ')">';
       }
-      return '<div class="q-card"><div class="qnum">Question ' + (i + 1) + '</div>' +
+      return '<div class="q-card" id="qcard_' + i + '"><div class="qnum">Question ' + (i + 1) + '</div>' +
         '<p style="margin:10px 0 14px;">' + esc(q.Prompt) + '</p>' + inputHtml + '</div>';
     }).join('');
+
+    // ---- Bottom navigator ----
+    document.getElementById('navDots').innerHTML = questions.map(function (q, i) {
+      return '<div class="navdot" id="dot_' + i + '" onclick="jumpTo(' + i + ')">' + (i + 1) + '</div>';
+    }).join('');
+    updateAnsweredCount();
+
+    // ---- Timer ----
+    examEndTime = Date.now() + durationMinutes * 60 * 1000;
+    clearInterval(timerInterval);
+    timerInterval = setInterval(tickTimer, 1000);
+    tickTimer();
+  }
+
+  function tickTimer() {
+    const remainingMs = examEndTime - Date.now();
+    const el = document.getElementById('examTimer');
+    if (remainingMs <= 0) {
+      clearInterval(timerInterval);
+      el.textContent = '00:00';
+      alert("Time's up — submitting your test now.");
+      submitTest();
+      return;
+    }
+    const totalSec = Math.floor(remainingMs / 1000);
+    const mm = String(Math.floor(totalSec / 60)).padStart(2, '0');
+    const ss = String(totalSec % 60).padStart(2, '0');
+    el.textContent = mm + ':' + ss;
+    el.classList.toggle('low', totalSec <= 60);
+  }
+
+  function jumpTo(i) {
+    const card = document.getElementById('qcard_' + i);
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function markAnswered(i) {
+    document.getElementById('dot_' + i).classList.add('answered');
+    updateAnsweredCount();
+  }
+
+  function updateAnsweredCount() {
+    const total = currentQuestions.length;
+    const answered = document.querySelectorAll('.navdot.answered').length;
+    document.getElementById('answeredCount').textContent = answered + ' of ' + total + ' answered';
+  }
+
+  function updateWordCount(questionId) {
+    const el = document.getElementById('q_' + questionId + '_text');
+    const words = el.value.trim().length ? el.value.trim().split(/\s+/).length : 0;
+    const wc = document.getElementById('wc_' + questionId);
+    wc.textContent = words + ' words';
+    wc.classList.toggle('ok', words >= 100);
+  }
+
+  // ---- Speaking: mic recording ----
+  const activeRecorders = {}; // questionId -> { recorder, chunks, stream }
+
+  function pickMimeType() {
+    const candidates = ['audio/webm', 'audio/mp4', 'audio/ogg'];
+    for (let i = 0; i < candidates.length; i++) {
+      if (window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(candidates[i])) return candidates[i];
+    }
+    return '';
+  }
+
+  function startRecording(questionId, index) {
+    if (!navigator.mediaDevices || !window.MediaRecorder) {
+      alert('Voice recording isn\'t supported in this browser. Try Chrome, Edge, or a recent Safari.');
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      const mimeType = pickMimeType();
+      const recorder = mimeType ? new MediaRecorder(stream, { mimeType: mimeType }) : new MediaRecorder(stream);
+      const chunks = [];
+      recorder.ondataavailable = function (e) { if (e.data.size > 0) chunks.push(e.data); };
+      recorder.onstop = function () { handleRecordingStop(questionId, index, chunks, recorder.mimeType || mimeType || 'audio/webm'); };
+      activeRecorders[questionId] = { recorder: recorder, stream: stream };
+      recorder.start();
+
+      document.getElementById('recBtn_' + questionId).style.display = 'none';
+      document.getElementById('stopBtn_' + questionId).style.display = 'inline-block';
+      const status = document.getElementById('recStatus_' + questionId);
+      status.textContent = 'Recording…';
+      status.classList.add('recording');
+    }).catch(function () {
+      alert('Microphone access was blocked. Please allow microphone permission and try again.');
+    });
+  }
+
+  function stopRecording(questionId) {
+    const entry = activeRecorders[questionId];
+    if (!entry) return;
+    entry.recorder.stop();
+    entry.stream.getTracks().forEach(function (t) { t.stop(); });
+    document.getElementById('stopBtn_' + questionId).style.display = 'none';
+    const status = document.getElementById('recStatus_' + questionId);
+    status.textContent = 'Uploading…';
+    status.classList.remove('recording');
+  }
+
+  function handleRecordingStop(questionId, index, chunks, mimeType) {
+    const blob = new Blob(chunks, { type: mimeType });
+    const localUrl = URL.createObjectURL(blob);
+    const playback = document.getElementById('recPlayback_' + questionId);
+    playback.src = localUrl;
+    playback.style.display = 'block';
+
+    const reader = new FileReader();
+    reader.onloadend = function () {
+      const base64Data = reader.result.split(',')[1];
+      apiPost('uploadRecording', { token: getToken(), base64Data: base64Data, mimeType: mimeType, questionId: questionId })
+        .then(function (res) {
+          const status = document.getElementById('recStatus_' + questionId);
+          const btn = document.getElementById('recBtn_' + questionId);
+          if (res.success) {
+            document.getElementById('q_' + questionId + '_text').value = res.data.url;
+            status.textContent = 'Saved ✓';
+            markAnswered(index);
+          } else {
+            status.textContent = 'Upload failed — try again.';
+          }
+          btn.textContent = '● Re-record';
+          btn.style.display = 'inline-block';
+        }).catch(function () {
+          document.getElementById('recStatus_' + questionId).textContent = 'Upload failed — check your connection.';
+          document.getElementById('recBtn_' + questionId).style.display = 'inline-block';
+        });
+    };
+    reader.readAsDataURL(blob);
+  }
+
+  function confirmSubmit() {
+    const total = currentQuestions.length;
+    const answered = document.querySelectorAll('.navdot.answered').length;
+    if (answered < total) {
+      if (!confirm('You have ' + (total - answered) + ' unanswered question(s). Submit anyway?')) return;
+    }
+    submitTest();
   }
 
   function submitTest() {
@@ -135,6 +381,7 @@
       return { questionId: q.QuestionID, answer: value };
     });
 
+    clearInterval(timerInterval);
     apiPost('submitTest', { token: getToken(), attemptId: currentAttemptId, testId: currentTestId, answers: answers }).then(function (res) {
       if (!res.success) { alert(res.error); return; }
       showResult(res.data);
@@ -142,6 +389,7 @@
   }
 
   function showResult(data) {
+    document.body.classList.remove('exam-mode');
     document.getElementById('testStep').style.display = 'none';
     document.getElementById('resultStep').style.display = 'block';
     document.getElementById('resultCard').innerHTML =
