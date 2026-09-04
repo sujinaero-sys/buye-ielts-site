@@ -165,6 +165,58 @@
     });
   }
 
+  function renderSupportMaterial(q) {
+    const rawUrl = q.SupportMaterialURL ? String(q.SupportMaterialURL).trim() : '';
+    if (!rawUrl || !/^https?:\/\//i.test(rawUrl)) return '';
+
+    const url = esc(rawUrl);
+    const type = q.SupportMaterialType ? String(q.SupportMaterialType).toLowerCase() : '';
+    const name = q.SupportMaterialName ? esc(String(q.SupportMaterialName)) : 'Question support material';
+    const alt = q.SupportMaterialAltText ? esc(String(q.SupportMaterialAltText)) : name;
+
+    const lowerUrl = rawUrl.toLowerCase();
+    const isImage = type === 'image' || type === 'chart' || /\.(png|jpe?g|gif|webp|svg)(\?.*)?$/i.test(lowerUrl);
+    const isPdf = type === 'pdf' || /\.pdf(\?.*)?$/i.test(lowerUrl);
+    const isAudio = type === 'audio' || /\.(mp3|wav|ogg|m4a|aac)(\?.*)?$/i.test(lowerUrl);
+    const isVideo = type === 'video' || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(lowerUrl);
+    const isTable = type === 'table';
+
+    let body = '';
+
+    if (isImage) {
+      body =
+        '<img src="' + url + '" alt="' + alt + '" ' +
+        'style="display:block;max-width:100%;height:auto;margin:10px auto;border-radius:8px;" ' +
+        'loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\';">' +
+        '<div style="display:none;color:var(--muted);">Unable to display this image. <a href="' + url + '" target="_blank" rel="noopener">Open material</a></div>';
+    } else if (isPdf) {
+      body =
+        '<iframe src="' + url + '" title="' + alt + '" ' +
+        'style="width:100%;height:520px;border:1px solid var(--border);border-radius:8px;" loading="lazy"></iframe>' +
+        '<div style="margin-top:8px;"><a href="' + url + '" target="_blank" rel="noopener" class="btn">Open PDF in new tab</a></div>';
+    } else if (isAudio) {
+      body =
+        '<audio controls style="width:100%;margin-top:8px;" src="' + url + '"></audio>';
+    } else if (isVideo) {
+      body =
+        '<video controls preload="metadata" style="display:block;width:100%;max-height:520px;border-radius:8px;margin-top:8px;" src="' + url + '"></video>';
+    } else if (isTable) {
+      body =
+        '<div style="overflow-x:auto;margin-top:8px;">' +
+          '<a href="' + url + '" target="_blank" rel="noopener" class="btn">Open table</a>' +
+        '</div>';
+    } else {
+      body =
+        '<a href="' + url + '" target="_blank" rel="noopener" class="btn btn-primary">Open support material</a>';
+    }
+
+    return (
+      '<div class="support-material" style="margin:16px 0;padding:14px;border:1px solid var(--border);border-radius:10px;background:rgba(0,0,0,0.02);">' +
+        '<div style="font-weight:700;margin-bottom:8px;">' + name + '</div>' +
+        body +
+      '</div>'
+    );
+  }
   function renderTest(title, module, durationMinutes, questions) {
     document.body.classList.add('exam-mode');
     document.getElementById('pickStep').parentElement.style.display = 'none';
@@ -175,18 +227,35 @@
     const passageSource = questions.find(function (q) { return q.PassageOrAudioURL && String(q.PassageOrAudioURL).trim(); });
     const layout = document.getElementById('examLayout');
     const panel = document.getElementById('passagePanel');
+    const isListening = /listen/i.test(module || '');
+
     if (passageSource) {
-      const p = String(passageSource.PassageOrAudioURL).trim();
-      const isAudio = /^https?:\/\/.+\.(mp3|wav|ogg|m4a)$/i.test(p);
+      const p = /listen/i.test(module) ? 'assets/listening-test-1.mp3' : String(passageSource.PassageOrAudioURL).trim();
       const isUrl = /^https?:\/\//i.test(p);
-      document.getElementById('passageKicker').textContent = isAudio || isUrl ? 'Audio' : 'Passage';
-      document.getElementById('passageBody').innerHTML = isAudio
-        ? '<audio controls style="width:100%;" src="' + esc(p) + '"></audio>'
-        : isUrl
-          ? '<a href="' + esc(p) + '" target="_blank" class="btn btn-primary">Listen to audio</a>'
-          : '<p>' + esc(p) + '</p>';
-      panel.style.display = 'block';
-      layout.classList.add('has-passage');
+      const isAudio = /\.(mp3|wav|ogg|m4a|aac)(\?.*)?$/i.test(p) || (isListening && isUrl);
+
+      if (isListening) {
+        if (isAudio) {
+          document.getElementById('passageKicker').textContent = 'Listening recording';
+          document.getElementById('passageBody').innerHTML =
+            '<div style="font-weight:600;margin-bottom:10px;">🔊 Listen carefully to the recording.</div>' +
+            '<audio controls preload="metadata" style="width:100%;" src="' + esc(p) + '"></audio>';
+          panel.style.display = 'block';
+          layout.classList.add('has-passage');
+        } else {
+          panel.style.display = 'none';
+          layout.classList.remove('has-passage');
+        }
+      } else {
+        document.getElementById('passageKicker').textContent = isAudio || isUrl ? 'Audio' : 'Passage';
+        document.getElementById('passageBody').innerHTML = isAudio
+          ? '<audio controls style="width:100%;" src="' + esc(p) + '"></audio>'
+          : isUrl
+            ? '<a href="' + esc(p) + '" target="_blank" class="btn btn-primary">Listen to audio</a>'
+            : '<p>' + esc(p) + '</p>';
+        panel.style.display = 'block';
+        layout.classList.add('has-passage');
+      }
     } else {
       panel.style.display = 'none';
       layout.classList.remove('has-passage');
@@ -225,7 +294,7 @@
         inputHtml = '<input type="text" id="q_' + q.QuestionID + '_text" placeholder="Your answer" oninput="markAnswered(' + i + ')">';
       }
       return '<div class="q-card" id="qcard_' + i + '"><div class="qnum">Question ' + (i + 1) + '</div>' +
-        '<p style="margin:10px 0 14px;">' + esc(q.Prompt) + '</p>' + inputHtml + '</div>';
+        '<p style="margin:10px 0 14px;">' + esc(q.Prompt) + '</p>' + renderSupportMaterial(q) + inputHtml + '</div>';
     }).join('');
 
     // ---- Bottom navigator ----
@@ -404,4 +473,8 @@
 </script>
 </body>
 </html>
+
+
+
+
 
