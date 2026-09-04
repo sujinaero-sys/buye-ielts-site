@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Take a test — BUYE IELTS</title>
+<title>Take a test â€” BUYE IELTS</title>
 <link rel="stylesheet" href="assets/app.css">
 <style>
   /* ---- Exam-mode additions (on top of app.css) ---- */
@@ -42,7 +42,7 @@
   .recorder{ border:1px solid var(--line); border-radius:12px; padding:18px; background:var(--paper-dim); }
   .rec-status{ font-size:0.88rem; color:var(--muted); margin-left:4px; }
   .rec-status.recording{ color:var(--red); font-weight:600; }
-  .rec-status.recording::before{ content:"●"; margin-right:6px; animation:pulse 1s infinite; }
+  .rec-status.recording::before{ content:"â—"; margin-right:6px; animation:pulse 1s infinite; }
   @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.25;} }
 
   .exam-nav{
@@ -79,8 +79,8 @@
 <!-- STEP 1: choose a test -->
 <main>
   <div class="wrap" id="pickStep">
-    <div class="page-head"><h1>Choose a practice test</h1><p>Pick a module to start. Once you begin, the clock runs exactly like the real exam — you can submit early any time.</p></div>
-    <div class="grid grid-2" id="testList">Loading…</div>
+    <div class="page-head"><h1>Choose a practice test</h1><p>Pick a module to start. Once you begin, the clock runs exactly like the real exam â€” you can submit early any time.</p></div>
+    <div class="grid grid-2" id="testList">Loadingâ€¦</div>
   </div>
 </main>
 
@@ -88,7 +88,7 @@
 <div id="testStep" style="display:none;">
   <div class="exam-bar">
     <div class="wrap">
-      <div class="title" id="examTitleBox">—<span class="part" id="examMeta"></span></div>
+      <div class="title" id="examTitleBox">â€”<span class="part" id="examMeta"></span></div>
       <div class="exam-timer" id="examTimer">--:--</div>
       <button class="btn btn-primary" onclick="confirmSubmit()">Submit test</button>
     </div>
@@ -135,10 +135,10 @@
         ? res.data.map(function (t) {
             const c = moduleColor(t.Module);
             return '<div class="card" style="border-top:4px solid ' + c + ';"><h3>' + t.Title + '</h3>' +
-              '<p style="color:var(--muted); margin:6px 0 16px;">' + t.ExamType + ' · ' + t.Module + ' · ' + t.DurationMinutes + ' min</p>' +
+              '<p style="color:var(--muted); margin:6px 0 16px;">' + t.ExamType + ' Â· ' + t.Module + ' Â· ' + t.DurationMinutes + ' min</p>' +
               '<button class="btn btn-primary" style="background:' + c + '; border-color:' + c + ';" onclick="startTest(\'' + t.TestID + '\',\'' + t.Title.replace(/'/g,"\\'") + '\',\'' + t.Module + '\',' + t.DurationMinutes + ')">Start</button></div>';
           }).join('')
-        : '<div class="card" style="grid-column:1/-1; color:var(--muted);">No tests published yet — check back soon.</div>';
+        : '<div class="card" style="grid-column:1/-1; color:var(--muted);">No tests published yet â€” check back soon.</div>';
     });
   }
 
@@ -169,14 +169,14 @@
     document.body.classList.add('exam-mode');
     document.getElementById('pickStep').parentElement.style.display = 'none';
     document.getElementById('testStep').style.display = 'block';
-    document.getElementById('examTitleBox').innerHTML = title + '<span class="part">' + module + ' · ' + questions.length + ' question(s)</span>';
+    document.getElementById('examTitleBox').innerHTML = title + '<span class="part">' + module + ' Â· ' + questions.length + ' question(s)</span>';
 
     // ---- Passage / audio panel (shared context, shown once) ----
-    const passageSource = questions.find(function (q) { return q.PassageOrAudioURL && q.PassageOrAudioURL.trim(); });
+    const passageSource = questions.find(function (q) { return q.PassageOrAudioURL && String(q.PassageOrAudioURL).trim(); });
     const layout = document.getElementById('examLayout');
     const panel = document.getElementById('passagePanel');
     if (passageSource) {
-      const p = passageSource.PassageOrAudioURL.trim();
+      const p = String(passageSource.PassageOrAudioURL).trim();
       const isAudio = /^https?:\/\/.+\.(mp3|wav|ogg|m4a)$/i.test(p);
       const isUrl = /^https?:\/\//i.test(p);
       document.getElementById('passageKicker').textContent = isAudio || isUrl ? 'Audio' : 'Passage';
@@ -212,14 +212,14 @@
       } else if (isSpeaking) {
         inputHtml =
           '<div class="recorder">' +
-            '<button class="btn btn-primary" id="recBtn_' + q.QuestionID + '" onclick="startRecording(\'' + q.QuestionID + '\',' + i + ')">● Record answer</button>' +
+            '<button class="btn btn-primary" id="recBtn_' + q.QuestionID + '" onclick="startRecording(\'' + q.QuestionID + '\',' + i + ')">â— Record answer</button>' +
             '<button class="btn" id="stopBtn_' + q.QuestionID + '" style="display:none;" onclick="stopRecording(\'' + q.QuestionID + '\')">Stop</button>' +
             '<span class="rec-status" id="recStatus_' + q.QuestionID + '"></span>' +
             '<audio id="recPlayback_' + q.QuestionID + '" controls style="display:none; margin-top:12px; width:100%;"></audio>' +
             '<input type="hidden" id="q_' + q.QuestionID + '_text" value="">' +
           '</div>';
       } else if (isWriting) {
-        inputHtml = '<textarea id="q_' + q.QuestionID + '_text" rows="9" placeholder="Type your response…" oninput="updateWordCount(\'' + q.QuestionID + '\'); markAnswered(' + i + ')"></textarea>' +
+        inputHtml = '<textarea id="q_' + q.QuestionID + '_text" rows="9" placeholder="Type your responseâ€¦" oninput="updateWordCount(\'' + q.QuestionID + '\'); markAnswered(' + i + ')"></textarea>' +
           '<div class="word-count" id="wc_' + q.QuestionID + '">0 words</div>';
       } else {
         inputHtml = '<input type="text" id="q_' + q.QuestionID + '_text" placeholder="Your answer" oninput="markAnswered(' + i + ')">';
@@ -247,7 +247,7 @@
     if (remainingMs <= 0) {
       clearInterval(timerInterval);
       el.textContent = '00:00';
-      alert("Time's up — submitting your test now.");
+      alert("Time's up â€” submitting your test now.");
       submitTest();
       return;
     }
@@ -310,7 +310,7 @@
       document.getElementById('recBtn_' + questionId).style.display = 'none';
       document.getElementById('stopBtn_' + questionId).style.display = 'inline-block';
       const status = document.getElementById('recStatus_' + questionId);
-      status.textContent = 'Recording…';
+      status.textContent = 'Recordingâ€¦';
       status.classList.add('recording');
     }).catch(function () {
       alert('Microphone access was blocked. Please allow microphone permission and try again.');
@@ -324,7 +324,7 @@
     entry.stream.getTracks().forEach(function (t) { t.stop(); });
     document.getElementById('stopBtn_' + questionId).style.display = 'none';
     const status = document.getElementById('recStatus_' + questionId);
-    status.textContent = 'Uploading…';
+    status.textContent = 'Uploadingâ€¦';
     status.classList.remove('recording');
   }
 
@@ -344,15 +344,15 @@
           const btn = document.getElementById('recBtn_' + questionId);
           if (res.success) {
             document.getElementById('q_' + questionId + '_text').value = res.data.url;
-            status.textContent = 'Saved ✓';
+            status.textContent = 'Saved âœ“';
             markAnswered(index);
           } else {
-            status.textContent = 'Upload failed — try again.';
+            status.textContent = 'Upload failed â€” try again.';
           }
-          btn.textContent = '● Re-record';
+          btn.textContent = 'â— Re-record';
           btn.style.display = 'inline-block';
         }).catch(function () {
-          document.getElementById('recStatus_' + questionId).textContent = 'Upload failed — check your connection.';
+          document.getElementById('recStatus_' + questionId).textContent = 'Upload failed â€” check your connection.';
           document.getElementById('recBtn_' + questionId).style.display = 'inline-block';
         });
     };
@@ -404,3 +404,4 @@
 </script>
 </body>
 </html>
+
