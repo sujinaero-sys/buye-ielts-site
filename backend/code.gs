@@ -39,10 +39,10 @@ const SCHEMAS = {
   Users:      ['UserID','Name','Email','Phone','PasswordHash','Salt','Role','CreatedAt','LastLogin'],
   Sessions:   ['Token','UserID','CreatedAt','ExpiresAt'],
   Tests:      ['TestID','Title','ExamType','Module','DurationMinutes','CreatedAt'],
-  Questions:  ['QuestionID','TestID','Module','QuestionType','Prompt','OptionA','OptionB','OptionC','OptionD','CorrectAnswer','Marks','PassageOrAudioURL'],
+  Questions:  ['QuestionID','TestID','Module','QuestionType','Prompt','OptionA','OptionB','OptionC','OptionD','CorrectAnswer','Marks','PassageOrAudioURL','SupportMaterialURL','SupportMaterialType','SupportMaterialName','SupportMaterialAltText'],
   Attempts:   ['AttemptID','UserID','TestID','StartedAt','SubmittedAt','Status'],
   Responses:  ['ResponseID','AttemptID','QuestionID','AnswerGiven','IsCorrect','MarksAwarded'],
-  Results:    ['ResultID','AttemptID','UserID','TestID','Module','RawScore','MaxScore','BandScore','CompletedAt']
+  Results:    ['ResultID','AttemptID','UserID','TestID','Module','RawScore','MaxScore','BandScore','CompletedAt','ReviewedBy','ReviewedAt']
 };
 
 // ============ SETUP ============
@@ -67,10 +67,10 @@ function setupDatabase() {
 // Run once, after editing the email/password below.
 function createFirstAdmin() {
   const result = registerUser({
-    name: 'Admin',
-    email: 'admin@buye.online',   // <-- change this
-    phone: '',
-    password: 'ChangeThisPassword123'  // <-- change this
+    name: 'SUJIN KUNJU KRISHNAN',
+    email: 'info@buye.online',   // <-- change this
+    phone: '+918778863184',
+    password: 'SGa9043@'  // <-- change this
   }, 'admin');
   Logger.log(result);
 }
@@ -87,6 +87,7 @@ function doGet(e) {
       case 'getDashboard':  result = getStudentDashboard(requireSession(e.parameter.token)); break;
       case 'adminOverview': result = getAdminOverview(requireAdmin(e.parameter.token)); break;
       case 'adminUsers':    result = getAllUsers(requireAdmin(e.parameter.token)); break;
+      case 'adminReviewQueue': result = getAdminReviewQueue(requireAdmin(e.parameter.token)); break;
       default: throw new Error('Unknown action: ' + action);
     }
     return jsonOutput({ success: true, data: result });
@@ -105,8 +106,11 @@ function doPost(e) {
       case 'login':            result = loginUser(body.email, body.password); break;
       case 'startAttempt':     result = startAttempt(requireSession(body.token), body.testId); break;
       case 'submitTest':       result = submitTest(requireSession(body.token), body.attemptId, body.testId, body.answers); break;
+      case 'uploadRecording':  result = uploadRecording(requireSession(body.token), body); break;
       case 'adminAddTest':     result = adminAddTest(requireAdmin(body.token), body); break;
       case 'adminAddQuestion': result = adminAddQuestion(requireAdmin(body.token), body); break;
+      case 'adminBulkAddQuestions': result = adminBulkAddQuestions(requireAdmin(body.token), body); break;
+      case 'adminSetManualScore': result = adminSetManualScore(requireAdmin(body.token), body); break;
       case 'adminDeleteQuestion': result = adminDeleteQuestion(requireAdmin(body.token), body.questionId); break;
       default: throw new Error('Unknown action: ' + action);
     }
@@ -255,7 +259,12 @@ function getQuestions(testId) {
         QuestionID: q.QuestionID, TestID: q.TestID, Module: q.Module,
         QuestionType: q.QuestionType, Prompt: q.Prompt,
         OptionA: q.OptionA, OptionB: q.OptionB, OptionC: q.OptionC, OptionD: q.OptionD,
-        Marks: q.Marks, PassageOrAudioURL: q.PassageOrAudioURL
+        Marks: q.Marks,
+        PassageOrAudioURL: q.PassageOrAudioURL,
+        SupportMaterialURL: q.SupportMaterialURL || '',
+        SupportMaterialType: q.SupportMaterialType || '',
+        SupportMaterialName: q.SupportMaterialName || '',
+        SupportMaterialAltText: q.SupportMaterialAltText || ''
       };
     });
 }
@@ -325,6 +334,32 @@ function scoreToBand_(raw, max) {
   return 4;
 }
 
+// ============ SPEAKING RECORDINGS (Google Drive) ============
+function getOrCreateRecordingsFolder_() {
+  const folderName = 'BUYE IELTS Speaking Recordings';
+  const folders = DriveApp.getFoldersByName(folderName);
+  if (folders.hasNext()) return folders.next();
+  return DriveApp.createFolder(folderName);
+}
+
+// body: { base64Data, mimeType, questionId }
+function uploadRecording(user, body) {
+  if (!body.base64Data) throw new Error('No audio data received.');
+  const folder = getOrCreateRecordingsFolder_();
+  const mimeType = body.mimeType || 'audio/webm';
+  const ext = mimeType.indexOf('webm') > -1 ? 'webm' : mimeType.indexOf('mp4') > -1 ? 'm4a' : mimeType.indexOf('ogg') > -1 ? 'ogg' : 'audio';
+  const fileName = 'speaking_' + user.UserID + '_' + (body.questionId || 'q') + '_' + Date.now() + '.' + ext;
+  const bytes = Utilities.base64Decode(body.base64Data);
+  const blob = Utilities.newBlob(bytes, mimeType, fileName);
+  const file = folder.createFile(blob);
+  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  return {
+    url: 'https://drive.google.com/uc?id=' + file.getId() + '&export=download',
+    viewUrl: file.getUrl(),
+    fileId: file.getId()
+  };
+}
+
 // ============ STUDENT DASHBOARD ============
 function getStudentDashboard(user) {
   const results = readAll_('Results').filter(function(r) { return r.UserID === user.UserID; });
@@ -360,17 +395,106 @@ function adminAddTest(admin, body) {
   return { testId: testId };
 }
 
+function getOrCreateQuestionMaterialsFolder_() {
+  const folderName = 'BUYE IELTS Question Materials';
+  const folders = DriveApp.getFoldersByName(folderName);
+  if (folders.hasNext()) return folders.next();
+
+  const folder = DriveApp.createFolder(folderName);
+  return folder;
+}
+
+function detectMaterialType_(mimeType, fileName, requestedType) {
+  if (requestedType) return String(requestedType).toLowerCase();
+
+  const mime = String(mimeType || '').toLowerCase();
+  const name = String(fileName || '').toLowerCase();
+
+  if (mime.indexOf('image/') === 0 || /\.(png|jpe?g|gif|webp|svg)$/i.test(name)) return 'image';
+  if (mime.indexOf('audio/') === 0 || /\.(mp3|wav|ogg|m4a|aac)$/i.test(name)) return 'audio';
+  if (mime.indexOf('video/') === 0 || /\.(mp4|webm|mov|m4v)$/i.test(name)) return 'video';
+  if (mime === 'application/pdf' || /\.pdf$/i.test(name)) return 'pdf';
+  return 'file';
+}
+
+function uploadQuestionMaterial_(admin, body) {
+  if (!body.supportMaterialBase64) {
+    return {
+      url: String(body.supportMaterialUrl || ''),
+      type: String(body.supportMaterialType || ''),
+      name: String(body.supportMaterialName || ''),
+      altText: String(body.supportMaterialAltText || '')
+    };
+  }
+
+  const base64 = String(body.supportMaterialBase64);
+  if (base64.length > 67 * 1024 * 1024) {
+    throw new Error('Support material is too large. Please keep files at 50 MB or smaller.');
+  }
+
+  const mimeType = String(body.supportMaterialMimeType || 'application/octet-stream');
+  const fileName = String(body.supportMaterialName || ('question-material-' + Date.now()));
+  const folder = getOrCreateQuestionMaterialsFolder_();
+  const bytes = Utilities.base64Decode(base64);
+  const blob = Utilities.newBlob(bytes, mimeType, fileName);
+  const file = folder.createFile(blob);
+
+  // Students need to be able to retrieve the material without signing into the
+  // administrator's Google account.
+  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+
+  return {
+    url: 'https://drive.google.com/uc?id=' + file.getId() + '&export=download',
+    viewUrl: file.getUrl(),
+    fileId: file.getId(),
+    type: detectMaterialType_(mimeType, fileName, body.supportMaterialType),
+    name: fileName,
+    altText: String(body.supportMaterialAltText || '')
+  };
+}
+
 function adminAddQuestion(admin, body) {
   const questionId = newId_('Q');
+  const material = uploadQuestionMaterial_(admin, body);
+
   appendRow_('Questions', {
     QuestionID: questionId, TestID: body.testId, Module: body.module,
     QuestionType: body.questionType, Prompt: body.prompt,
     OptionA: body.optionA || '', OptionB: body.optionB || '',
     OptionC: body.optionC || '', OptionD: body.optionD || '',
     CorrectAnswer: body.correctAnswer, Marks: body.marks || 1,
-    PassageOrAudioURL: body.passageOrAudioUrl || ''
+    PassageOrAudioURL: body.passageOrAudioUrl || '',
+    SupportMaterialURL: material.url || '',
+    SupportMaterialType: material.type || '',
+    SupportMaterialName: material.name || '',
+    SupportMaterialAltText: material.altText || ''
   });
-  return { questionId: questionId };
+  return { questionId: questionId, supportMaterial: material };
+}
+
+// body.testId, body.module, body.rows: [{questionType,prompt,optionA,optionB,optionC,optionD,correctAnswer,marks,passageOrAudioUrl}]
+function adminBulkAddQuestions(admin, body) {
+  if (!body.rows || !body.rows.length) throw new Error('No rows to add.');
+  const sh = sheet_('Questions');
+  const headers = SCHEMAS.Questions;
+  const startRow = sh.getLastRow() + 1;
+  const values = body.rows.map(function (r) {
+    const obj = {
+      QuestionID: newId_('Q'), TestID: body.testId, Module: body.module,
+      QuestionType: r.questionType, Prompt: r.prompt,
+      OptionA: r.optionA || '', OptionB: r.optionB || '',
+      OptionC: r.optionC || '', OptionD: r.optionD || '',
+      CorrectAnswer: r.correctAnswer || '', Marks: r.marks || 1,
+      PassageOrAudioURL: r.passageOrAudioUrl || '',
+      SupportMaterialURL: r.supportMaterialUrl || '',
+      SupportMaterialType: r.supportMaterialType || '',
+      SupportMaterialName: r.supportMaterialName || '',
+      SupportMaterialAltText: r.supportMaterialAltText || ''
+    };
+    return headers.map(function (h) { return obj[h] !== undefined ? obj[h] : ''; });
+  });
+  sh.getRange(startRow, 1, values.length, headers.length).setValues(values);
+  return { added: values.length };
 }
 
 function adminDeleteQuestion(admin, questionId) {
@@ -387,6 +511,50 @@ function getAllUsers(admin) {
   return readAll_('Users').map(function(u) {
     return { UserID: u.UserID, Name: u.Name, Email: u.Email, Role: u.Role, CreatedAt: u.CreatedAt, LastLogin: u.LastLogin };
   });
+}
+
+// Writing/Speaking responses awaiting a human-read band score.
+function getAdminReviewQueue(admin) {
+  const results = readAll_('Results').filter(function (r) { return /writ|speak/i.test(r.Module); });
+  const users = readAll_('Users');
+  const tests = readAll_('Tests');
+  const responses = readAll_('Responses');
+  const questions = readAll_('Questions');
+
+  const queue = results.map(function (r) {
+    const user = users.filter(function (u) { return u.UserID === r.UserID; })[0] || {};
+    const test = tests.filter(function (t) { return t.TestID === r.TestID; })[0] || {};
+    const items = responses.filter(function (res) { return res.AttemptID === r.AttemptID; }).map(function (res) {
+      const q = questions.filter(function (qq) { return qq.QuestionID === res.QuestionID; })[0] || {};
+      return { prompt: q.Prompt || '', questionType: q.QuestionType || '', answer: res.AnswerGiven };
+    });
+    return {
+      resultId: r.ResultID, module: r.Module, testTitle: test.Title || '',
+      studentName: user.Name || 'Unknown', studentEmail: user.Email || '',
+      completedAt: r.CompletedAt, currentBand: r.BandScore,
+      reviewed: !!r.ReviewedAt, reviewedBy: r.ReviewedBy || '', items: items
+    };
+  });
+  queue.sort(function (a, b) { return (a.reviewed === b.reviewed) ? 0 : (a.reviewed ? 1 : -1); });
+  return queue;
+}
+
+// body: { resultId, bandScore }
+function adminSetManualScore(admin, body) {
+  if (!body.resultId || body.bandScore === undefined || body.bandScore === '') throw new Error('resultId and bandScore are required.');
+  const sh = sheet_('Results');
+  const headers = SCHEMAS.Results;
+  const idCol = headers.indexOf('ResultID');
+  const values = sh.getDataRange().getValues();
+  for (let r = 1; r < values.length; r++) {
+    if (values[r][idCol] === body.resultId) {
+      sh.getRange(r + 1, headers.indexOf('BandScore') + 1).setValue(Number(body.bandScore));
+      sh.getRange(r + 1, headers.indexOf('ReviewedBy') + 1).setValue(admin.Name || admin.Email);
+      sh.getRange(r + 1, headers.indexOf('ReviewedAt') + 1).setValue(new Date());
+      return { updated: true };
+    }
+  }
+  throw new Error('Result not found.');
 }
 
 function getAdminOverview(admin) {
@@ -410,3 +578,5 @@ function getAdminOverview(admin) {
     moduleAverages: moduleAverages
   };
 }
+
+
