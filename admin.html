@@ -72,6 +72,28 @@
       </div>
     </div>
 
+    <h3 style="margin:40px 0 16px;">Bulk-add questions</h3>
+    <div class="card">
+      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:14px;">
+        Paste one question per line, fields separated by <code>|</code> in this order:<br>
+        <code>QuestionType|Prompt|OptionA|OptionB|OptionC|OptionD|CorrectAnswer|Marks|PassageOrTranscript</code><br>
+        Leave OptionA–D blank for True/False/Not Given or short-answer questions. Only put the shared
+        passage/transcript text in the <b>first</b> line — leave it blank on the rest.
+      </p>
+      <label for="bulkTest">Test</label>
+      <select id="bulkTest"></select>
+      <label for="bulkText">Questions (one per line)</label>
+      <textarea id="bulkText" style="min-height:220px; font-family:'IBM Plex Mono',monospace; font-size:0.85rem;" placeholder="Multiple Choice|How many books can a first-year student borrow?|3|5|10|15|5|1|"></textarea>
+      <button class="btn btn-primary btn-block" style="margin-top:20px;" onclick="bulkAddQuestions()">Add all questions</button>
+      <div class="msg" id="bulkMsg"></div>
+    </div>
+
+    <h3 style="margin:40px 0 16px;">Writing &amp; Speaking review</h3>
+    <p style="color:var(--muted); font-size:0.9rem; margin-bottom:16px;">
+      These modules can't be auto-marked — read or listen to each response and enter a band score by hand.
+    </p>
+    <div id="reviewQueue" style="margin-bottom:40px;">Loading…</div>
+
     <h3 style="margin:40px 0 16px;">Students</h3>
     <div class="card">
       <table id="usersTable">
@@ -89,6 +111,7 @@
     loadOverview();
     loadUsers();
     loadTestsIntoDropdown();
+    loadReviewQueue();
   }
 
   function loadOverview() {
@@ -117,12 +140,16 @@
     });
   }
 
+  let testsById = {};
   function loadTestsIntoDropdown() {
     apiGet('getTests').then(function (res) {
       if (!res.success) return;
-      const sel = document.getElementById('qTest');
-      sel.innerHTML = res.data.map(function (t) { return '<option value="' + t.TestID + '">' + t.Title + ' (' + t.Module + ')</option>'; }).join('')
+      testsById = {};
+      res.data.forEach(function (t) { testsById[t.TestID] = t; });
+      const optionsHtml = res.data.map(function (t) { return '<option value="' + t.TestID + '">' + t.Title + ' (' + t.Module + ')</option>'; }).join('')
         || '<option value="">Add a test first</option>';
+      document.getElementById('qTest').innerHTML = optionsHtml;
+      document.getElementById('bulkTest').innerHTML = optionsHtml;
     });
   }
 
@@ -141,7 +168,7 @@
     const testId = val('qTest');
     if (!testId) { showMsg('questionMsg', 'Add a test first.', true); return; }
     apiPost('adminAddQuestion', {
-      token: getToken(), testId: testId, module: document.getElementById('qTest').selectedOptions[0].textContent,
+      token: getToken(), testId: testId, module: testsById[testId] ? testsById[testId].Module : '',
       questionType: val('qType'), prompt: val('qPrompt'),
       optionA: val('qA'), optionB: val('qB'), optionC: val('qC'), optionD: val('qD'),
       correctAnswer: val('qCorrect'), marks: Number(val('qMarks'))
@@ -151,8 +178,78 @@
     });
   }
 
+  function bulkAddQuestions() {
+    const testId = val('bulkTest');
+    if (!testId) { showMsg('bulkMsg', 'Choose a test first.', true); return; }
+    const lines = document.getElementById('bulkText').value.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+    if (!lines.length) { showMsg('bulkMsg', 'Paste at least one question line.', true); return; }
+
+    const rows = lines.map(function (line) {
+      const parts = line.split('|').map(function (p) { return p.trim(); });
+      return {
+        questionType: parts[0] || '', prompt: parts[1] || '',
+        optionA: parts[2] || '', optionB: parts[3] || '', optionC: parts[4] || '', optionD: parts[5] || '',
+        correctAnswer: parts[6] || '', marks: Number(parts[7]) || 1, passageOrAudioUrl: parts[8] || ''
+      };
+    });
+
+    apiPost('adminBulkAddQuestions', { token: getToken(), testId: testId, module: testsById[testId] ? testsById[testId].Module : '', rows: rows })
+      .then(function (res) {
+        showMsg('bulkMsg', res.success ? (res.data.added + ' questions added.') : res.error, !res.success);
+        if (res.success) document.getElementById('bulkText').value = '';
+      });
+  }
+
+  function loadReviewQueue() {
+    apiGet('adminReviewQueue', { token: getToken() }).then(function (res) {
+      if (!res.success) { document.getElementById('reviewQueue').innerHTML = '<div class="card">' + res.error + '</div>'; return; }
+      const queue = res.data;
+      if (!queue.length) {
+        document.getElementById('reviewQueue').innerHTML = '<div class="card" style="color:var(--muted);">No Writing or Speaking submissions yet.</div>';
+        return;
+      }
+      document.getElementById('reviewQueue').innerHTML = queue.map(function (item, idx) {
+        const c = /speak/i.test(item.module) ? 'var(--purple)' : 'var(--rust)';
+        const itemsHtml = item.items.map(function (r) {
+          const isAudioLink = /^https?:\/\/.*drive\.google\.com/i.test(r.answer || '');
+          const answerHtml = !r.answer
+            ? '<span style="color:var(--muted);">No response submitted.</span>'
+            : isAudioLink
+              ? '<audio controls style="width:100%;" src="' + esc(r.answer) + '"></audio><div style="margin-top:6px;"><a href="' + esc(r.answer) + '" target="_blank" style="font-size:0.82rem; color:var(--muted);">Open recording in Drive ↗</a></div>'
+              : '<p style="white-space:pre-wrap; background:#fff; border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:6px;">' + esc(r.answer) + '</p>';
+          return '<div style="margin-bottom:16px;"><div style="font-weight:600; font-size:0.92rem;">' + esc(r.prompt) + '</div>' + answerHtml + '</div>';
+        }).join('');
+
+        return '<div class="card" style="border-top:4px solid ' + c + '; margin-bottom:18px;' + (item.reviewed ? ' opacity:0.72;' : '') + '">' +
+          '<div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:14px;">' +
+            '<div><h4>' + esc(item.studentName) + '</h4><span style="color:var(--muted); font-size:0.85rem;">' + esc(item.testTitle) + ' · ' + item.module + ' · ' + fmt(item.completedAt) + '</span></div>' +
+            (item.reviewed ? '<span class="badge" style="background:var(--emerald); border-color:var(--emerald); color:var(--paper);">Reviewed by ' + esc(item.reviewedBy) + '</span>' : '<span class="badge">Awaiting review</span>') +
+          '</div>' +
+          itemsHtml +
+          '<div style="display:flex; align-items:center; gap:12px; margin-top:10px; border-top:1px solid var(--line); padding-top:16px;">' +
+            '<label style="margin:0;">Band score</label>' +
+            '<input type="number" step="0.5" min="0" max="9" style="width:90px;" id="band_' + item.resultId + '" value="' + (item.currentBand || '') + '">' +
+            '<button class="btn btn-primary" onclick="saveManualScore(\'' + item.resultId + '\', ' + idx + ')">Save score</button>' +
+            '<span class="msg" id="reviewMsg_' + item.resultId + '" style="margin:0;"></span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    });
+  }
+
+  function saveManualScore(resultId, idx) {
+    const band = document.getElementById('band_' + resultId).value;
+    if (band === '') { alert('Enter a band score first.'); return; }
+    apiPost('adminSetManualScore', { token: getToken(), resultId: resultId, bandScore: band }).then(function (res) {
+      const msg = document.getElementById('reviewMsg_' + resultId);
+      if (res.success) { msg.textContent = 'Saved.'; msg.className = 'msg show ok'; loadReviewQueue(); loadOverview(); }
+      else { msg.textContent = res.error; msg.className = 'msg show error'; }
+    });
+  }
+
   function val(id) { return document.getElementById(id).value.trim(); }
   function fmt(d) { const dt = new Date(d); return isNaN(dt) || !d ? '—' : dt.toLocaleDateString(); }
+  function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
   function stat(value, label) { return '<div class="stat"><div class="value">' + value + '</div><div class="label">' + label + '</div></div>'; }
   function showMsg(id, text, isError) {
     const el = document.getElementById(id);
