@@ -5,6 +5,42 @@
 
 const API_URL = "https://script.google.com/macros/s/AKfycbzJ8lXzI-loqvk4csdwOqcxVEahQkWBXQjiPhJlgqL4v5K9z1pE81ei5q9HN2zieHsMkg/exec";
 
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("buye_theme", theme);
+}
+
+function initializeTheme() {
+  const saved = localStorage.getItem("buye_theme");
+  const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  applyTheme(saved || preferred);
+
+  const nav = document.querySelector(".appbar .wrap, .nav-wrap, .nav-row");
+  if (!nav || document.querySelector(".theme-toggle")) return;
+
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "theme-toggle";
+  toggle.setAttribute("aria-label", "Toggle dark mode");
+  toggle.addEventListener("click", function () {
+    applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+    updateThemeLabel(toggle);
+  });
+  nav.appendChild(toggle);
+  updateThemeLabel(toggle);
+}
+
+function updateThemeLabel(toggle) {
+  const dark = document.documentElement.getAttribute("data-theme") === "dark";
+  toggle.textContent = dark ? "☀ Light" : "☾ Dark";
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeTheme);
+} else {
+  initializeTheme();
+}
+
 function apiGet(action, params) {
   params = params || {};
 

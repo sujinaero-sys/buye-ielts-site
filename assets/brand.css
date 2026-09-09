@@ -1,0 +1,135 @@
+:root {
+  --brand-navy: #10175b;
+  --brand-navy-deep: #080d43;
+  --brand-teal: #18b981;
+  --brand-teal-dark: #07986b;
+  --brand-orange: #ff8b43;
+  --brand-cream: #fff8dc;
+  --brand-paper: #fffdf4;
+  --brand-ink: #121735;
+  --brand-muted: #626981;
+  --brand-line: rgba(16, 23, 91, .12);
+  --brand-shadow: 0 22px 60px rgba(16, 23, 91, .12);
+  --brand-radius: 20px;
+  --brand-field: #ffffff;
+}
+
+[data-theme="dark"] {
+  --brand-navy: #d9e0ff;
+  --brand-navy-deep: #080d2c;
+  --brand-teal: #43d9a5;
+  --brand-teal-dark: #2fc48f;
+  --brand-orange: #ffad70;
+  --brand-cream: #202642;
+  --brand-paper: #10152d;
+  --brand-ink: #f2f4ff;
+  --brand-muted: #aeb6d2;
+  --brand-line: rgba(220, 228, 255, .16);
+  --brand-shadow: 0 22px 60px rgba(0, 0, 0, .28);
+  --brand-field: #191f3b;
+  --paper: #10152d;
+  --paper-dim: #191f3b;
+  --ink: #f2f4ff;
+  --ink-soft: #d9e0ff;
+  --ink-text: #eef1ff;
+  --muted: #aeb6d2;
+  --line: rgba(220, 228, 255, .16);
+  --line-dark: rgba(220, 228, 255, .22);
+  --sage: #aeb6d2;
+  --emerald: #43d9a5;
+  --emerald-deep: #2fc48f;
+  --rust: #ffad70;
+}
+
+html { color-scheme: light; }
+html[data-theme="dark"] { color-scheme: dark; }
+
+body {
+  background: var(--brand-paper);
+  color: var(--brand-ink);
+  font-family: "Inter", system-ui, sans-serif;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  letter-spacing: -.035em;
+}
+
+.wrap { max-width: 1160px; }
+
+header.appbar {
+  background: color-mix(in srgb, var(--brand-paper) 88%, transparent);
+  color: var(--brand-navy);
+  border-bottom: 1px solid var(--brand-line);
+  backdrop-filter: blur(16px);
+}
+
+.appbar .wrap { min-height: 76px; padding: 14px 24px; }
+.appbar .logo { color: var(--brand-navy); font-family: "Inter", system-ui, sans-serif; }
+.appbar .logo img { width: 42px; height: 42px; border-radius: 13px; }
+.appbar nav { gap: 20px; }
+.appbar nav a { color: var(--brand-muted); }
+.appbar nav a:hover { color: var(--brand-navy); }
+.appbar .who { color: var(--brand-muted); }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--brand-line);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--brand-navy);
+  font: 600 .78rem "Inter", system-ui, sans-serif;
+  cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--brand-teal); color: var(--brand-teal-dark); }
+.nav-wrap .theme-toggle { margin-left: 4px; }
+
+main { color: var(--brand-ink); }
+.page-head p, .section-head p, .card p, .stat .label, label, th { color: var(--brand-muted); }
+.card, .q-card, .stat {
+  background: color-mix(in srgb, var(--brand-paper) 92%, var(--brand-cream));
+  border-color: var(--brand-line);
+  border-radius: var(--brand-radius);
+  box-shadow: 0 8px 30px rgba(16, 23, 91, .04);
+}
+.card:hover { box-shadow: var(--brand-shadow); }
+
+input, select, textarea {
+  background: var(--brand-field);
+  color: var(--brand-ink);
+  border-color: var(--brand-line);
+  border-radius: 12px;
+}
+input::placeholder, textarea::placeholder { color: var(--brand-muted); }
+
+.btn {
+  border-radius: 999px;
+  border-color: var(--brand-navy);
+  color: var(--brand-navy);
+  font-family: "Inter", system-ui, sans-serif;
+}
+.btn-primary { background: var(--brand-navy); border-color: var(--brand-navy); color: var(--brand-paper); }
+.btn-primary:hover { background: var(--brand-navy-deep); border-color: var(--brand-navy-deep); }
+.btn-rust { background: var(--brand-orange); border-color: var(--brand-orange); color: var(--brand-navy-deep); }
+
+.tabs { border-color: var(--brand-line); }
+.tab { color: var(--brand-muted); }
+.tab.active { color: var(--brand-navy); border-bottom-color: var(--brand-orange); }
+table th, table td { border-color: var(--brand-line); }
+.bar { background: var(--brand-line); }
+.bar span { background: var(--brand-orange); }
+.msg.error { background: rgba(225, 74, 59, .14); }
+.msg.ok { background: rgba(24, 185, 129, .14); }
+
+footer {
+  background: var(--brand-navy-deep);
+  color: var(--brand-muted);
+}
+
+@media (max-width: 760px) {
+  .theme-toggle { padding: 7px 10px; }
+}
