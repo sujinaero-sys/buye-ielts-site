@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Hinchingbrooke Park map</title>
+  <desc id="desc">A clear color map showing the lake, gates, paths, refreshments, and lettered locations A to I.</desc>
+  <rect width="1200" height="760" fill="#f7fbff"/>
+  <rect x="34" y="34" width="1132" height="692" rx="18" fill="#fff" stroke="#17324d" stroke-width="6"/>
+  <path d="M205 120 C130 165 128 280 205 315 C245 333 268 290 255 239 C246 196 278 159 205 120Z" fill="#8fd3e8" stroke="#237c9b" stroke-width="6"/>
+  <path d="M270 176 C370 155 482 176 544 244 C604 311 578 382 518 411 C453 441 344 410 309 345 C273 278 314 231 270 176Z" fill="#d8f0d0" stroke="#4d8b57" stroke-width="7"/>
+  <path d="M250 238 C367 224 475 267 519 319 C550 356 513 396 456 398 C375 400 315 355 302 303 C293 266 273 254 250 238Z" fill="#9edcf0" stroke="#237c9b" stroke-width="6"/>
+  <path d="M84 520 C210 446 302 458 406 498 C503 536 594 574 710 531 C829 487 911 421 1110 462" fill="none" stroke="#e0a54a" stroke-width="18" stroke-linecap="round"/>
+  <path d="M230 650 C352 564 444 523 585 535 C748 548 850 602 1070 577" fill="none" stroke="#e0a54a" stroke-width="18" stroke-linecap="round"/>
+  <path d="M420 122 C470 194 504 234 565 286 C655 363 742 361 852 320 C918 295 1000 260 1090 222" fill="none" stroke="#e0a54a" stroke-width="18" stroke-linecap="round"/>
+  <path d="M570 540 C620 449 646 382 690 322 C735 259 797 183 875 116" fill="none" stroke="#e0a54a" stroke-width="18" stroke-linecap="round"/>
+  <path d="M742 520 C790 472 862 449 956 455" fill="none" stroke="#e0a54a" stroke-width="18" stroke-linecap="round"/>
+  <g fill="#17324d" font-family="Arial, sans-serif" font-size="34" font-weight="700">
+    <text x="110" y="92">Lake</text>
+    <text x="944" y="92">East gate</text>
+    <text x="72" y="602">West gate</text>
+    <text x="506" y="675">Refreshments</text>
+  </g>
+  <g fill="#fff" stroke="#17324d" stroke-width="5" font-family="Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle">
+    <circle cx="165" cy="210" r="28"/><text x="165" y="220">A</text>
+    <circle cx="338" cy="190" r="28"/><text x="338" y="200">B</text>
+    <circle cx="470" cy="294" r="28"/><text x="470" y="304">C</text>
+    <circle cx="770" cy="145" r="28"/><text x="770" y="155">D</text>
+    <circle cx="220" cy="360" r="28"/><text x="220" y="370">E</text>
+    <circle cx="620" cy="245" r="28"/><text x="620" y="255">F</text>
+    <circle cx="852" cy="270" r="28"/><text x="852" y="280">G</text>
+    <circle cx="958" cy="390" r="28"/><text x="958" y="400">H</text>
+    <circle cx="730" cy="575" r="28"/><text x="730" y="585">I</text>
+  </g>
+</svg>
