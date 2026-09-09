@@ -87,6 +87,7 @@
   .tec-trigger:hover{ background:#fff1f1; }
   .catalog-filter{ width:auto; border:1px solid #ef5350; border-radius:999px; background:#fff; color:#e94d50; padding:8px 16px; font:600 .85rem 'IBM Plex Sans',sans-serif; }
   .catalog-list{ display:grid; gap:12px; }
+  .catalog-error{ padding:12px 14px; border:1px solid var(--danger); border-radius:10px; background:var(--danger-bg); color:var(--danger); }
   .catalog-card{ position:relative; min-height:96px; border:1px solid #cbd4df; border-radius:8px; padding:16px 168px 16px 14px; background:#fff; }
   .catalog-card h2{ font-family:'IBM Plex Sans',sans-serif; font-size:1.05rem; color:#062d5b; margin:0 0 14px; }
   .catalog-card .meta{ color:#274b75; font-size:.95rem; }
@@ -480,7 +481,11 @@
       return;
     }
     const firstTest = availableTests[0];
-    if (firstTest) startTest(firstTest.TestID, firstTest.Title, firstTest.Module, Number(firstTest.DurationMinutes || 30));
+    if (!firstTest) {
+      showCatalogError('No published test is available yet.');
+      return;
+    }
+    startTest(firstTest.TestID, firstTest.Title, firstTest.Module, Number(firstTest.DurationMinutes || 30));
   }
 
   function openCustomModal() {
@@ -504,11 +509,25 @@
     }
     const test = availableTests.find(function (item) { return selected.indexOf(item.Module) > -1; });
     if (!test) {
-      alert('No published test is available for the selected module yet.');
+      showCatalogError('No published test is available for the selected module yet.');
       return;
     }
     closeCustomModal();
     startTest(test.TestID, 'Custom Mock Test - ' + selected.join(', '), test.Module, Number(test.DurationMinutes || 30));
+  }
+
+  function showCatalogError(message) {
+    const list = document.getElementById('testList');
+    if (list) list.insertAdjacentHTML('afterbegin', '<div class="catalog-error" role="alert">' + esc(message) + '</div>');
+  }
+
+  function setCatalogLoading(isLoading) {
+    const list = document.getElementById('testList');
+    if (!list) return;
+    list.setAttribute('aria-busy', isLoading ? 'true' : 'false');
+    document.querySelectorAll('.catalog-action, .resume-action, #customOverlay button').forEach(function (button) {
+      button.disabled = isLoading;
+    });
   }
 
   function toggleExamAudio() {
@@ -547,11 +566,16 @@
     currentTestId = testId;
     currentModule = module;
     paperMode = /listen/i.test(module || '');
+    setCatalogLoading(true);
     apiPost('startAttempt', { token: getToken(), testId: testId }).then(function (res) {
-      if (!res.success) { alert(res.error); return; }
+      if (!res.success || !res.data || !res.data.attemptId) {
+        throw new Error(res.error || 'The attempt could not be created.');
+      }
       currentAttemptId = res.data.attemptId;
-      apiGet('getQuestions', { testId: testId }).then(function (qres) {
-        if (!qres.success || !qres.data.length) { alert('No questions found for this test yet.'); return; }
+      return apiGet('getQuestions', { testId: testId }).then(function (qres) {
+        if (!qres.success || !qres.data || !qres.data.length) {
+          throw new Error(qres.error || 'No questions found for this test yet.');
+        }
         currentQuestions = normalizeTestQuestions(testId, qres.data);
         if (/listen/i.test(module || '') && currentQuestions.length !== 40) {
           throw new Error(title + ' must contain exactly 40 questions, received ' + currentQuestions.length + '.');
@@ -559,7 +583,9 @@
         renderTest(title, module, durationMinutes, currentQuestions);
       });
     }).catch(function (error) {
-      alert('Unable to start this test: ' + error.message);
+      showCatalogError('Unable to start ' + title + ': ' + error.message);
+    }).finally(function () {
+      setCatalogLoading(false);
     });
   }
 
