@@ -20,6 +20,8 @@
   }
   .exam-bar .title{font-family:'Source Serif 4',serif; font-weight:600; font-size:1rem;}
   .exam-bar .title .part{color:var(--sage); font-weight:500; font-size:0.85rem; display:block; margin-top:2px;}
+  .exam-bar .status{font-size:0.78rem; color:rgba(255,255,255,0.72); display:block; margin-top:3px;}
+  .exam-actions{display:flex; align-items:center; gap:10px; margin-left:auto;}
   .exam-timer{
     font-family:'IBM Plex Mono',monospace; font-size:1.15rem; font-weight:600;
     background:rgba(255,255,255,0.08); padding:8px 16px; border-radius:8px; letter-spacing:0.03em;
@@ -57,6 +59,9 @@
     font-size:0.8rem; font-weight:600; cursor:pointer; color:var(--ink-soft);
   }
   .navdot.answered{ background:var(--emerald); border-color:var(--emerald); color:var(--paper); }
+  .navdot.current{ outline:3px solid rgba(43,125,125,0.25); outline-offset:2px; }
+  .navdot.flagged{ border-color:var(--rust); color:var(--rust); }
+  .exam-warning{display:none;max-width:1100px;margin:0 auto;padding:10px 24px;background:#fff4d6;color:#6e4b00;border-bottom:1px solid #e7c76c;font-size:0.88rem;}
 
   @media (max-width:860px){
     .exam-layout.has-passage{ grid-template-columns:1fr; }
@@ -89,11 +94,14 @@
 <div id="testStep" style="display:none;">
   <div class="exam-bar">
     <div class="wrap">
-      <div class="title" id="examTitleBox">—<span class="part" id="examMeta"></span></div>
-      <div class="exam-timer" id="examTimer">--:--</div>
-      <button class="btn btn-primary" onclick="confirmSubmit()">Submit test</button>
+      <div class="title" id="examTitleBox">—<span class="part" id="examMeta"></span><span class="status">Practice exam mode</span></div>
+      <div class="exam-actions">
+        <div class="exam-timer" id="examTimer">--:--</div>
+        <button class="btn btn-primary" onclick="confirmSubmit()">Submit test</button>
+      </div>
     </div>
   </div>
+  <div class="exam-warning" id="examWarning" role="status"></div>
   <div class="exam-layout" id="examLayout">
     <div class="passage-panel" id="passagePanel" style="display:none;">
       <div class="kicker" id="passageKicker">Passage</div>
@@ -122,11 +130,111 @@
 <script src="assets/config.js"></script>
 <script>
   let currentAttemptId = null, currentTestId = null, currentModule = null, currentQuestions = [];
-  let timerInterval = null, examEndTime = null;
+  let timerInterval = null, examEndTime = null, hasSubmitted = false;
 
-  if (requireAuth()) {
+  const demoMode = new URLSearchParams(window.location.search).get('demo');
+  if (demoMode === 'listening2') {
+    startListeningTestTwo();
+  } else if (demoMode === 'listening3') {
+    startListeningTestThree();
+  } else if (demoMode === 'listening') {
+    startListeningDemo();
+  } else if (requireAuth()) {
     document.getElementById('whoName').textContent = getName();
     loadTests();
+  }
+
+  function startListeningDemo() {
+    currentTestId = 'local-listening-demo';
+    currentModule = 'Listening';
+    currentAttemptId = 'local-demo-attempt';
+    apiGet('getQuestions', { testId: 'T_3f505c57' }).then(function (res) {
+      if (!res.success || !res.data || res.data.length !== 40) {
+        throw new Error('Expected 40 Listening questions, received ' + ((res.data && res.data.length) || 0) + '.');
+      }
+
+      currentQuestions = res.data.map(function (question) {
+        const copy = Object.assign({}, question);
+        copy.PassageOrAudioURL = 'assets/listening-test-1.mp3';
+        return copy;
+      });
+      renderTest('BUYE IELTS Practice Test 1', 'Listening', 30, currentQuestions);
+      const warning = document.getElementById('examWarning');
+      warning.textContent = 'Local preview only — answers are not submitted and no live account or data is used.';
+      warning.style.display = 'block';
+      document.querySelector('.exam-bar .status').textContent = 'Local preview · 40-question Listening test';
+    }).catch(function (error) {
+      document.getElementById('testStep').style.display = 'none';
+      document.getElementById('pickStep').parentElement.style.display = 'block';
+      document.getElementById('testList').innerHTML =
+        '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load the 40-question preview: ' +
+        esc(error.message) + '</div>';
+    });
+  }
+
+  function startListeningTestTwo() {
+    currentTestId = 'local-listening-test-2';
+    currentModule = 'Listening';
+    currentAttemptId = 'local-test-2-attempt';
+    apiGet('getQuestions', { testId: 'T_7c2d4a91' }).then(function (res) {
+      if (!res.success || !res.data || !res.data.length) {
+        throw new Error('Test 2 questions were not available.');
+      }
+      currentQuestions = res.data.filter(function (question) {
+        return String(question.QuestionID || '') !== 'Q_27c6b3e2';
+      }).map(function (question) {
+        const copy = Object.assign({}, question);
+        copy.PassageOrAudioURL = 'assets/listening-test-2.mp3';
+        if (['Q17', 'Q18', 'Q19', 'Q20'].indexOf(String(copy.QuestionID)) !== -1) {
+          copy.SupportMaterialURL = 'content/staging/listening/test-2/hinchingbrooke-park-map-color.svg';
+          copy.SupportMaterialType = 'image';
+          copy.SupportMaterialName = 'Hinchingbrooke Park Map (staging color version)';
+          copy.SupportMaterialAltText = 'Color map of Hinchingbrooke Park showing the lake, gates, paths, refreshments, and locations A to I.';
+        }
+        return copy;
+      });
+      renderTest('BUYE IELTS Practice Test 2', 'Listening', 30, currentQuestions);
+      const warning = document.getElementById('examWarning');
+      warning.textContent = 'Local staging preview only — Test 2 answers are not submitted.';
+      warning.style.display = 'block';
+      document.querySelector('.exam-bar .status').textContent = 'Local staging · Test 2 media check';
+    }).catch(function (error) {
+      document.getElementById('testStep').style.display = 'none';
+      document.getElementById('pickStep').parentElement.style.display = 'block';
+      document.getElementById('testList').innerHTML =
+        '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load Test 2: ' +
+        esc(error.message) + '</div>';
+    });
+  }
+
+  function startListeningTestThree() {
+    currentTestId = 'local-listening-test-3';
+    currentModule = 'Listening';
+    currentAttemptId = 'local-test-3-attempt';
+    fetch('content/staging/listening/test-3/questions.json').then(function (response) {
+      if (!response.ok) throw new Error('Question file returned HTTP ' + response.status + '.');
+      return response.json();
+    }).then(function (questions) {
+      if (!Array.isArray(questions) || questions.length !== 40) {
+        throw new Error('Test 3 must contain exactly 40 questions.');
+      }
+      currentQuestions = questions.map(function (question) {
+        const copy = Object.assign({}, question);
+        copy.PassageOrAudioURL = 'content/staging/listening/test-3/audio.mp3.mp3';
+        return copy;
+      });
+      renderTest('BUYE IELTS Practice Test 3', 'Listening', 30, currentQuestions);
+      const warning = document.getElementById('examWarning');
+      warning.textContent = 'Local staging preview only — Test 3 answers are not submitted.';
+      warning.style.display = 'block';
+      document.querySelector('.exam-bar .status').textContent = 'Local staging · Test 3 · 40 questions';
+    }).catch(function (error) {
+      document.getElementById('testStep').style.display = 'none';
+      document.getElementById('pickStep').parentElement.style.display = 'block';
+      document.getElementById('testList').innerHTML =
+        '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load Test 3: ' +
+        esc(error.message) + '</div>';
+    });
   }
 
   function loadTests() {
@@ -168,7 +276,8 @@
 
   function renderSupportMaterial(q) {
     const rawUrl = q.SupportMaterialURL ? String(q.SupportMaterialURL).trim() : '';
-    if (!rawUrl || !/^https?:\/\//i.test(rawUrl)) return '';
+    const isRelativeUrl = /^(assets|content)\//i.test(rawUrl);
+    if (!rawUrl || (!/^https?:\/\//i.test(rawUrl) && !isRelativeUrl)) return '';
 
     const url = esc(rawUrl);
     const type = q.SupportMaterialType ? String(q.SupportMaterialType).toLowerCase() : '';
@@ -222,7 +331,7 @@
     document.body.classList.add('exam-mode');
     document.getElementById('pickStep').parentElement.style.display = 'none';
     document.getElementById('testStep').style.display = 'block';
-    document.getElementById('examTitleBox').innerHTML = title + '<span class="part">' + module + ' · ' + questions.length + ' question(s)</span>';
+    document.getElementById('examTitleBox').innerHTML = title + '<span class="part">' + module + ' · ' + questions.length + ' question(s)</span><span class="status">Practice exam mode</span>';
 
     // ---- Passage / audio panel (shared context, shown once) ----
     const passageSource = questions.find(function (q) { return q.PassageOrAudioURL && String(q.PassageOrAudioURL).trim(); });
@@ -231,7 +340,7 @@
     const isListening = /listen/i.test(module || '');
 
     if (passageSource) {
-      const p = /listen/i.test(module) ? (String(currentTestId || '').trim() === 'T_7c2d4a91' ? 'assets/listening-test-2.mp3' : 'assets/listening-test-1.mp3') : String(passageSource.PassageOrAudioURL).trim();
+      const p = String(passageSource.PassageOrAudioURL).trim();
       const isUrl = /^https?:\/\//i.test(p);
       const isAudio = /\.(mp3|wav|ogg|m4a|aac)(\?.*)?$/i.test(p) || (isListening && isUrl);
 
@@ -239,7 +348,7 @@
         if (isAudio) {
           document.getElementById('passageKicker').textContent = 'Listening recording';
           document.getElementById('passageBody').innerHTML =
-            '<div style="font-weight:600;margin-bottom:10px;">?? Listen carefully to the recording.</div>' +
+           '<div style="font-weight:600;margin-bottom:10px;">Listen carefully to the recording.</div>' +
             '<audio controls preload="metadata" style="width:100%;" src="' + esc(p) + '"></audio>';
           panel.style.display = 'block';
           layout.classList.add('has-passage');
@@ -247,6 +356,7 @@
           panel.style.display = 'none';
           layout.classList.remove('has-passage');
         }
+        configureListeningAudio();
       } else {
         document.getElementById('passageKicker').textContent = isAudio || isUrl ? 'Audio' : 'Passage';
         document.getElementById('passageBody').innerHTML = isAudio
@@ -269,15 +379,18 @@
     qPanel.className = 'questions-panel' + (passageSource ? '' : ' full-width');
     qPanel.innerHTML = questions.map(function (q, i) {
       let inputHtml;
-      if (q.QuestionType === 'Multiple Choice' && (q.OptionA || q.OptionB || q.OptionC || q.OptionD)) {
+      const questionType = String(q.QuestionType || '').toLowerCase();
+      const isMultipleChoice = questionType === 'multiple choice' || questionType === 'mcq';
+      const isTrueFalse = questionType === 'true/false/not given' || questionType === 'true false not given';
+      if (isMultipleChoice && (q.OptionA || q.OptionB || q.OptionC || q.OptionD)) {
         inputHtml = ['A', 'B', 'C', 'D'].map(function (letter) {
           const opt = q['Option' + letter];
           if (!opt) return '';
-          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + esc(opt) + '" onchange="markAnswered(' + i + ')"> ' + esc(opt) + '</label>';
+          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + esc(opt) + '" onchange="recordAnswer(' + i + ')"> ' + esc(opt) + '</label>';
         }).join('');
-      } else if (q.QuestionType === 'True/False/Not Given') {
+      } else if (isTrueFalse) {
         inputHtml = ['True', 'False', 'Not Given'].map(function (v) {
-          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + v + '" onchange="markAnswered(' + i + ')"> ' + v + '</label>';
+          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + v + '" onchange="recordAnswer(' + i + ')"> ' + v + '</label>';
         }).join('');
       } else if (isSpeaking) {
         inputHtml =
@@ -289,19 +402,21 @@
             '<input type="hidden" id="q_' + q.QuestionID + '_text" value="">' +
           '</div>';
       } else if (isWriting) {
-        inputHtml = '<textarea id="q_' + q.QuestionID + '_text" rows="9" placeholder="Type your response…" oninput="updateWordCount(\'' + q.QuestionID + '\'); markAnswered(' + i + ')"></textarea>' +
+        inputHtml = '<textarea id="q_' + q.QuestionID + '_text" rows="9" placeholder="Type your response…" oninput="updateWordCount(\'' + q.QuestionID + '\'); recordAnswer(' + i + ')"></textarea>' +
           '<div class="word-count" id="wc_' + q.QuestionID + '">0 words</div>';
       } else {
-        inputHtml = '<input type="text" id="q_' + q.QuestionID + '_text" placeholder="Your answer" oninput="markAnswered(' + i + ')">';
+        inputHtml = '<input type="text" id="q_' + q.QuestionID + '_text" placeholder="Your answer" oninput="recordAnswer(' + i + ')">';
       }
       return '<div class="q-card" id="qcard_' + i + '"><div class="qnum">Question ' + (i + 1) + '</div>' +
         '<p style="margin:10px 0 14px;">' + esc(q.Prompt) + '</p>' + renderSupportMaterial(q) + inputHtml + '</div>';
     }).join('');
+    restoreDraftAnswers();
 
     // ---- Bottom navigator ----
     document.getElementById('navDots').innerHTML = questions.map(function (q, i) {
       return '<div class="navdot" id="dot_' + i + '" onclick="jumpTo(' + i + ')">' + (i + 1) + '</div>';
     }).join('');
+    if (questions.length) document.getElementById('dot_0').classList.add('current');
     updateAnsweredCount();
 
     // ---- Timer ----
@@ -330,12 +445,49 @@
 
   function jumpTo(i) {
     const card = document.getElementById('qcard_' + i);
-    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (card) {
+      document.querySelectorAll('.navdot.current').forEach(function (dot) { dot.classList.remove('current'); });
+      const dot = document.getElementById('dot_' + i);
+      if (dot) dot.classList.add('current');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   function markAnswered(i) {
     document.getElementById('dot_' + i).classList.add('answered');
     updateAnsweredCount();
+  }
+
+  function draftKey() {
+    return 'buye_exam_draft_' + String(currentTestId || '').replace(/[^a-z0-9_-]/gi, '_');
+  }
+
+  function recordAnswer(i) {
+    markAnswered(i);
+    const q = currentQuestions[i];
+    if (!q) return;
+    const checked = document.querySelector('input[name="q_' + q.QuestionID + '"]:checked');
+    const text = document.getElementById('q_' + q.QuestionID + '_text');
+    const value = checked ? checked.value : (text ? text.value : '');
+    const draft = JSON.parse(localStorage.getItem(draftKey()) || '{}');
+    draft[q.QuestionID] = value;
+    localStorage.setItem(draftKey(), JSON.stringify(draft));
+  }
+
+  function restoreDraftAnswers() {
+    const draft = JSON.parse(localStorage.getItem(draftKey()) || '{}');
+    currentQuestions.forEach(function (q, i) {
+      const value = draft[q.QuestionID];
+      if (!value) return;
+      const options = document.querySelectorAll('input[name="q_' + q.QuestionID + '"]');
+      options.forEach(function (option) { option.checked = option.value === value; });
+      const text = document.getElementById('q_' + q.QuestionID + '_text');
+      if (text) {
+        text.value = value;
+        if (/writ/i.test(currentModule || '')) updateWordCount(q.QuestionID);
+      }
+      markAnswered(i);
+    });
   }
 
   function updateAnsweredCount() {
@@ -438,10 +590,38 @@
     submitTest();
   }
 
+  function configureListeningAudio() {
+    if (!/listen/i.test(currentModule || '')) return;
+    document.querySelectorAll('#passagePanel audio').forEach(function (audio) {
+      let lastAllowedTime = 0;
+      audio.addEventListener('timeupdate', function () { lastAllowedTime = audio.currentTime; });
+      audio.addEventListener('seeking', function () {
+        if (audio.currentTime > lastAllowedTime + 1.5) audio.currentTime = lastAllowedTime;
+      });
+      audio.addEventListener('ratechange', function () { audio.playbackRate = 1; });
+    });
+  }
+
+  window.addEventListener('beforeunload', function (event) {
+    if (document.body.classList.contains('exam-mode') && !hasSubmitted) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
+  });
+
   function submitTest() {
+    if (hasSubmitted) return;
+    if (currentAttemptId === 'local-demo-attempt' || currentAttemptId === 'local-test-3-attempt') {
+      alert('This is a local preview. Answers are not submitted.');
+      return;
+    }
+    hasSubmitted = true;
     const answers = currentQuestions.map(function (q) {
       let value = '';
-      if (q.QuestionType === 'Multiple Choice' || q.QuestionType === 'True/False/Not Given') {
+      const questionType = String(q.QuestionType || '').toLowerCase();
+      const isMultipleChoice = questionType === 'multiple choice' || questionType === 'mcq';
+      const isTrueFalse = questionType === 'true/false/not given' || questionType === 'true false not given';
+      if (isMultipleChoice || isTrueFalse) {
         const checked = document.querySelector('input[name="q_' + q.QuestionID + '"]:checked');
         value = checked ? checked.value : '';
       } else {
@@ -453,7 +633,8 @@
 
     clearInterval(timerInterval);
     apiPost('submitTest', { token: getToken(), attemptId: currentAttemptId, testId: currentTestId, answers: answers }).then(function (res) {
-      if (!res.success) { alert(res.error); return; }
+      if (!res.success) { hasSubmitted = false; alert(res.error); return; }
+      localStorage.removeItem(draftKey());
       showResult(res.data);
     });
   }
@@ -474,9 +655,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
