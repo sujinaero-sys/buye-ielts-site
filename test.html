@@ -138,6 +138,30 @@
   .exam-tools{ display:flex; align-items:center; gap:8px; }
   .exam-tool{ width:34px; height:34px; border:1px solid #cbd4df; border-radius:50%; background:#fff; color:#062d5b; cursor:pointer; }
   .exam-tool:hover{ border-color:#ef5350; color:#ef5350; }
+  [data-theme="dark"] .exam-bar{ background:var(--brand-paper); color:var(--brand-ink); border-color:var(--brand-line); }
+  [data-theme="dark"] .exam-bar .title .part{ color:var(--brand-orange); }
+  [data-theme="dark"] .exam-bar .status{ color:var(--brand-muted); }
+  [data-theme="dark"] .exam-tool,
+  [data-theme="dark"] .exam-theme-toggle{ background:var(--brand-field); color:var(--brand-ink); border-color:var(--brand-line); }
+  [data-theme="dark"] .exam-gate{ background:var(--brand-paper); color:var(--brand-ink); }
+  [data-theme="dark"] .gate-card h1,
+  [data-theme="dark"] .gate-card h2{ color:var(--brand-ink); }
+  [data-theme="dark"] .paper-mode .passage-panel,
+  [data-theme="dark"] .paper-mode .questions-panel{ background:var(--brand-paper); color:var(--brand-ink); }
+  [data-theme="dark"] .exam-paper{ background:var(--brand-field); border-color:var(--brand-line); color:var(--brand-ink); }
+  [data-theme="dark"] .paper-intro,
+  [data-theme="dark"] .paper-section,
+  [data-theme="dark"] .paper-question{ border-color:var(--brand-line); }
+  [data-theme="dark"] .paper-question .prompt,
+  [data-theme="dark"] .paper-section h2,
+  [data-theme="dark"] .paper-section > p{ color:var(--brand-ink); }
+  [data-theme="dark"] .paper-answer,
+  [data-theme="dark"] .paper-options label,
+  [data-theme="dark"] .question-note{ background:var(--brand-field); color:var(--brand-ink); border-color:var(--brand-line); }
+  [data-theme="dark"] .paper-options label:hover{ background:var(--brand-cream); }
+  [data-theme="dark"] .exam-nav{ background:var(--brand-paper); border-color:var(--brand-line); }
+  [data-theme="dark"] .exam-nav::before,
+  [data-theme="dark"] .nav-legend{ color:var(--brand-muted); }
   .exam-gate{ min-height:calc(100vh - 78px); display:none; align-items:center; justify-content:center; padding:44px 20px 90px; background:#fff; color:#062d5b; }
   .exam-gate.active{ display:flex; }
   .gate-card{ width:min(980px,100%); text-align:center; }
@@ -243,22 +267,6 @@
       <div><span class="tec-kicker">Speaking &amp; Writing</span><h2 id="tecTitle">IELTS Evaluation by Certified Trainers</h2></div>
     </div>
 
-    <div class="resume-overlay" id="resumeOverlay" role="presentation" aria-hidden="true" onclick="closeResumeModal(event)">
-      <section class="resume-modal" role="dialog" aria-modal="true" aria-labelledby="resumeTitle">
-        <header class="resume-header"><span id="resumeTitle">Free Mock Test</span><button class="resume-close" type="button" aria-label="Close resume options" onclick="closeResumeModal()">×</button></header>
-        <h2>Choose a test type to begin</h2>
-        <article class="resume-choice">
-          <div class="resume-choice-icon" aria-hidden="true">▣</div>
-          <div><h3>Full Test</h3><p>Practice all four IELTS modules together in one full-length mock test</p></div>
-          <button class="resume-action" type="button" onclick="selectResumeMode('full')">Resume »</button>
-        </article>
-        <article class="resume-choice">
-          <div class="resume-choice-icon" aria-hidden="true">▤</div>
-          <div><h3>Custom Mock Test</h3><p>Create your own mock test by selecting one or more modules to focus on specific skills and improve targeted areas.</p></div>
-          <button class="resume-action" type="button" onclick="selectResumeMode('custom')">Resume »</button>
-        </article>
-      </section>
-    </div>
     <p class="lead">Receive expert feedback from certified IELTS examiners with results delivered in just 24-48 hours.</p>
     <div class="tec-benefits">
       <div class="tec-benefit"><span class="tec-icon">◎</span><span>Trusted by thousands of users worldwide</span></div>
@@ -271,6 +279,22 @@
       <hr>
       <div class="tec-credit-stats"><div class="tec-credit-stat"><span class="tec-credit-value">1</span><span>Evaluation = 1 TEC</span></div><div class="tec-credit-stat"><span class="tec-credit-value">0</span><span>Your Credits = 0 TEC</span></div></div>
     </div>
+  </section>
+</div>
+<div class="resume-overlay" id="resumeOverlay" role="presentation" aria-hidden="true" onclick="closeResumeModal(event)">
+  <section class="resume-modal" role="dialog" aria-modal="true" aria-labelledby="resumeTitle">
+    <header class="resume-header"><span id="resumeTitle">Free Mock Test</span><button class="resume-close" type="button" aria-label="Close resume options" onclick="closeResumeModal()">×</button></header>
+    <h2>Choose a test type to begin</h2>
+    <article class="resume-choice">
+      <div class="resume-choice-icon" aria-hidden="true">▣</div>
+      <div><h3>Full Test</h3><p>Practice all four IELTS modules together in one full-length mock test</p></div>
+      <button class="resume-action" type="button" onclick="selectResumeMode('full')">Resume »</button>
+    </article>
+    <article class="resume-choice">
+      <div class="resume-choice-icon" aria-hidden="true">▤</div>
+      <div><h3>Custom Mock Test</h3><p>Create your own mock test by selecting one or more modules to focus on specific skills and improve targeted areas.</p></div>
+      <button class="resume-action" type="button" onclick="selectResumeMode('custom')">Resume »</button>
+    </article>
   </section>
 </div>
 
@@ -319,6 +343,7 @@
           <button class="exam-tool" type="button" title="Toggle audio" aria-label="Toggle audio" onclick="toggleExamAudio()">🔊</button>
           <button class="exam-tool" type="button" title="Fullscreen" aria-label="Fullscreen" onclick="toggleFullscreen()">⛶</button>
           <button class="exam-tool" type="button" title="Review answers" aria-label="Review answers" onclick="toggleReviewPanel()">☷</button>
+          <button class="exam-tool exam-theme-toggle" type="button" title="Toggle dark mode" aria-label="Toggle dark mode" onclick="toggleExamTheme()">☾</button>
         </div>
         <div class="exam-progress" aria-hidden="true"><span id="examProgress"></span></div>
         <div class="exam-timer" id="examTimer">--:--</div>
@@ -490,6 +515,13 @@
     document.querySelectorAll('#passagePanel audio').forEach(function (audio) {
       audio.muted = !audio.muted;
     });
+  }
+
+  function toggleExamTheme() {
+    const nextTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme);
+    const toggle = document.querySelector('.exam-theme-toggle');
+    if (toggle) toggle.textContent = nextTheme === 'dark' ? '☀' : '☾';
   }
 
   function toggleFullscreen() {
