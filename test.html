@@ -12,19 +12,22 @@
   body.exam-mode main{ padding-top:0; }
 
   .exam-bar{
-    position:sticky; top:0; z-index:60; background:var(--ink); color:var(--paper);
+    position:sticky; top:0; z-index:60; background:#fff; color:#062d5b;
     border-bottom:1px solid var(--line-dark);
   }
   .exam-bar .wrap{
     display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:16px; flex-wrap:wrap;
   }
-  .exam-bar .title{font-family:'Source Serif 4',serif; font-weight:600; font-size:1rem;}
-  .exam-bar .title .part{color:var(--sage); font-weight:500; font-size:0.85rem; display:block; margin-top:2px;}
-  .exam-bar .status{font-size:0.78rem; color:rgba(255,255,255,0.72); display:block; margin-top:3px;}
+  .exam-bar .title{font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:1rem;}
+  .exam-bar .title .part{color:#ef5350; font-weight:500; font-size:0.85rem; display:block; margin-top:2px;}
+  .exam-bar .status{font-size:0.78rem; color:#6a7890; display:block; margin-top:3px;}
   .exam-actions{display:flex; align-items:center; gap:10px; margin-left:auto;}
+  .exam-progress{ height:3px; background:#edf1f4; }
+  .exam-progress span{ display:block; height:100%; width:0; background:#2b7d7d; transition:width .2s ease; }
+  .exam-save{ color:#2b7d7d; font-size:.75rem; white-space:nowrap; }
   .exam-timer{
-    font-family:'IBM Plex Mono',monospace; font-size:1.15rem; font-weight:600;
-    background:rgba(255,255,255,0.08); padding:8px 16px; border-radius:8px; letter-spacing:0.03em;
+    font-family:'IBM Plex Mono',monospace; font-size:1.15rem; font-weight:600; color:#ef5350;
+    background:#fff; padding:8px 16px; border-radius:8px; letter-spacing:0.03em;
   }
   .exam-timer.low{ color:#FFD3CC; background:rgba(225,74,59,0.25); }
 
@@ -36,8 +39,126 @@
   }
   .passage-panel .kicker{ font-size:0.78rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px; }
   .passage-panel p{ white-space:pre-wrap; line-height:1.75; }
+  .paper-mode .passage-panel{ background:#edf1f1; }
+  .paper-mode .questions-panel{ background:#e9eeee; padding:20px; }
+  .exam-paper{ max-width:900px; margin:0 auto; background:#fff; border:1px solid #cbd4d4; box-shadow:0 4px 16px rgba(14,31,42,0.08); padding:28px clamp(18px,4vw,48px); }
+  .paper-intro{ border-bottom:2px solid #1f3038; padding-bottom:16px; margin-bottom:22px; }
+  .paper-intro h1{ font-family:'Source Serif 4',serif; font-size:1.35rem; margin:0 0 6px; }
+  .paper-intro p{ margin:0; color:var(--muted); font-size:0.88rem; }
+  .paper-section{ border-top:2px solid #1f3038; padding-top:16px; margin-top:26px; }
+  .paper-section h2{ display:flex; align-items:center; justify-content:space-between; gap:12px; font-family:'Source Serif 4',serif; font-size:1.05rem; margin:0 0 4px; }
+  .paper-section h2::after{ content:'LIVE ANSWER SHEET'; color:#6a7890; font:600 .65rem 'IBM Plex Sans',sans-serif; letter-spacing:.08em; white-space:nowrap; }
+  .paper-section > p{ color:var(--muted); font-size:0.86rem; margin:0 0 14px; }
+  .paper-question{ padding:12px 0; border-bottom:1px solid #d7dfdf; }
+  .paper-question .qnum{ display:inline-block; min-width:32px; color:var(--rust); font-family:'IBM Plex Mono',monospace; font-weight:700; }
+  .paper-question .question-kind{ display:inline-block; margin:0 8px 5px 0; color:#6a7890; font-size:.7rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; }
+  .paper-question{ position:relative; }
+  .paper-question .question-tools{ float:right; display:flex; gap:5px; }
+  .paper-question .question-tool{ border:1px solid #d5dee5; border-radius:999px; background:#fff; color:#6a7890; padding:4px 8px; font-size:.68rem; cursor:pointer; }
+  .paper-question .question-tool:hover{ border-color:#2b7d7d; color:#0c4a4a; background:#eef9f9; }
+  .question-note{ display:none; clear:both; margin:8px 0 0 32px; width:min(420px,calc(100% - 32px)); min-height:46px; padding:8px; border:1px solid #d5dee5; border-radius:7px; font:inherit; resize:vertical; }
+  .question-note.open{ display:block; }
+  .paper-question .prompt{ display:inline; line-height:1.65; }
+  .paper-answer{ display:inline-block; width:108px; min-width:72px; margin:0 5px; border:1.5px solid #8ba2bc; border-radius:7px; background:#fff; padding:3px 8px; font:inherit; vertical-align:middle; }
+  .paper-answer:focus{ outline:0; border-bottom-color:var(--emerald); background:#f1f8f6; }
+  .paper-options{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 14px; margin:12px 0 0 32px; max-width:720px; }
+  .paper-options label{ position:relative; display:grid; grid-template-columns:20px 30px minmax(0,1fr); gap:10px; align-items:center; cursor:pointer; min-height:52px; padding:9px 12px; border:1px solid #d5dee5; border-radius:10px; background:#fff; color:#193653; font-size:.92rem; line-height:1.35; box-shadow:0 2px 6px rgba(19,50,77,.04); transition:border-color .15s ease,background .15s ease,box-shadow .15s ease,transform .15s ease; }
+  .paper-options label:hover{ border-color:#83aeb0; background:#f8fcfc; box-shadow:0 4px 12px rgba(19,50,77,.08); transform:translateY(-1px); }
+  .paper-options label:has(input:checked){ border-color:#2b7d7d; background:#eef8f6; box-shadow:0 0 0 2px rgba(43,125,125,.12); }
+  .paper-options input{ width:16px; height:16px; margin:0; accent-color:#2b7d7d; }
+  .paper-options .option-letter{ display:grid; place-items:center; width:28px; height:28px; border:1px solid #b9cbd5; border-radius:7px; color:#587087; font:700 .78rem 'IBM Plex Mono',monospace; background:#f5f8fa; }
+  .paper-options label:has(input:checked) .option-letter{ border-color:#2b7d7d; background:#2b7d7d; color:#fff; }
+  .paper-options .option-copy{ min-width:0; }
+  .paper-question .support-material{ margin:14px 0 4px 32px !important; padding:12px !important; background:#f8fbfb !important; }
+  .paper-question .support-material img{ width:auto; max-width:560px; max-height:260px; object-fit:contain; }
+  .paper-part-nav{ display:flex; gap:16px; width:100%; overflow-x:auto; padding:0 0 4px; }
+  .paper-part{ flex:1 0 250px; border:1px solid #ef5350; border-radius:9px; padding:10px 12px; }
+  .paper-part-title{ font-weight:600; color:#062d5b; margin-right:8px; }
+  .paper-part .navdot{ display:inline-flex; width:30px; height:30px; margin:0 3px; }
+  .paper-mode .q-card{ display:none; }
   .questions-panel{ padding:28px 26px; }
   .questions-panel.full-width{ max-width:760px; margin:0 auto; }
+  .catalog-page{ background:#fff; min-height:calc(100vh - 76px); padding:28px 0 70px; }
+  .catalog-tabs{ display:flex; border-bottom:1px solid #ef5350; margin-bottom:20px; }
+  .catalog-tab{ min-width:148px; padding:14px 24px; border:1px solid #ef5350; border-bottom:0; color:#ef5350; background:#fff; font-weight:600; text-align:center; }
+  .catalog-tab.active{ color:#fff; background:#e94d50; }
+  .catalog-toolbar{ display:flex; justify-content:flex-end; gap:10px; margin-bottom:18px; }
+  .tec-trigger{ border:1px solid #ef5350; border-radius:999px; background:#fff; color:#e94d50; padding:8px 16px; font:600 .85rem 'IBM Plex Sans',sans-serif; cursor:pointer; }
+  .tec-trigger:hover{ background:#fff1f1; }
+  .catalog-filter{ width:auto; border:1px solid #ef5350; border-radius:999px; background:#fff; color:#e94d50; padding:8px 16px; font:600 .85rem 'IBM Plex Sans',sans-serif; }
+  .catalog-list{ display:grid; gap:12px; }
+  .catalog-card{ position:relative; min-height:96px; border:1px solid #cbd4df; border-radius:8px; padding:16px 168px 16px 14px; background:#fff; }
+  .catalog-card h2{ font-family:'IBM Plex Sans',sans-serif; font-size:1.05rem; color:#062d5b; margin:0 0 14px; }
+  .catalog-card .meta{ color:#274b75; font-size:.95rem; }
+  .catalog-card .meta strong{ margin:0 18px 0 10px; color:#102f57; }
+  .catalog-badges{ position:absolute; top:12px; right:14px; display:flex; gap:8px; }
+  .catalog-badge{ border:1px solid #ef5350; border-radius:6px; color:#e94d50; padding:4px 9px; font-size:.75rem; }
+  .catalog-action{ position:absolute; right:14px; bottom:12px; min-width:104px; padding:7px 18px; border:1px solid #062d5b; border-radius:999px; background:#fff; color:#062d5b; font-weight:600; cursor:pointer; }
+  .catalog-action:hover{ background:#062d5b; color:#fff; }
+  .tec-overlay{ position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center; padding:18px; background:rgba(3,20,43,.48); }
+  .tec-overlay.open{ display:flex; }
+  .tec-modal{ position:relative; width:min(500px,100%); max-height:calc(100vh - 36px); overflow:auto; border-radius:14px; background:#fff; box-shadow:0 24px 70px rgba(0,0,0,.25); padding:28px; color:#062d5b; }
+  .tec-close{ position:absolute; top:12px; right:12px; width:29px; height:29px; border:0; border-radius:50%; background:#e94d50; color:#fff; font-size:1.25rem; line-height:1; cursor:pointer; }
+  .tec-heading{ display:flex; align-items:center; gap:18px; padding:8px 34px 20px 8px; }
+  .tec-avatar{ width:82px; height:82px; border-radius:50%; background:linear-gradient(145deg,#ffe5df,#f7b9b4); display:grid; place-items:center; font-size:2.5rem; flex:none; }
+  .tec-kicker{ display:inline-block; border-radius:999px; background:#fff0f0; color:#e94d50; padding:4px 12px; font-size:.75rem; font-weight:600; }
+  .tec-modal h2{ margin:8px 0 0; color:#ef5350; font-family:'IBM Plex Sans',sans-serif; font-size:1.3rem; line-height:1.25; }
+  .tec-modal .lead{ margin:8px 0 20px; line-height:1.55; }
+  .tec-benefits{ display:grid; gap:16px; margin-bottom:20px; }
+  .tec-benefit{ display:flex; align-items:flex-start; gap:12px; font-weight:600; line-height:1.4; }
+  .tec-icon{ width:32px; height:32px; border-radius:6px; display:grid; place-items:center; background:#062d5b; color:#fff; flex:none; }
+  .tec-callout{ border-radius:10px; background:#fff0f0; color:#d9363e; padding:14px 16px; margin-bottom:20px; font-size:.85rem; }
+  .tec-credit-box{ border-radius:12px; background:#eef2f6; padding:18px; font-size:.84rem; line-height:1.45; }
+  .tec-credit-box hr{ border:0; border-top:1px solid #d5dce4; margin:12px 0; }
+  .tec-credit-stats{ display:flex; gap:20px; }
+  .tec-credit-stat{ display:flex; align-items:center; gap:8px; font-weight:600; }
+  .tec-credit-value{ width:25px; height:25px; border-radius:7px; display:grid; place-items:center; background:#c9cdd2; color:#173453; }
+  .tec-credit-stat:last-child .tec-credit-value{ background:#d5f6e2; color:#07834f; }
+  .resume-overlay{ position:fixed; inset:0; z-index:105; display:none; align-items:center; justify-content:center; background:rgba(3,20,43,.45); }
+  .resume-overlay.open{ display:flex; }
+  .resume-modal{ width:min(594px,100%); min-height:420px; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 24px 70px rgba(0,0,0,.25); color:#062d5b; }
+  .resume-header{ display:flex; justify-content:space-between; align-items:center; padding:14px 16px; background:#062d5b; color:#fff; font-size:1rem; font-weight:600; }
+  .resume-close{ width:27px; height:27px; border:0; border-radius:50%; background:#fff; color:#062d5b; font-size:1.1rem; cursor:pointer; }
+  .resume-modal h2{ margin:20px 0; text-align:center; color:#062d5b; font-family:'IBM Plex Sans',sans-serif; font-size:1.25rem; }
+  .resume-choice{ display:grid; grid-template-columns:88px 1fr auto; align-items:center; gap:14px; margin:0 16px 20px; padding:24px 20px; border-radius:9px; background:#fff5f5; }
+  .resume-choice-icon{ width:68px; height:68px; display:grid; place-items:center; color:#e94d50; font-size:2.4rem; }
+  .resume-choice h3{ margin:0 0 4px; color:#062d5b; font-family:'IBM Plex Sans',sans-serif; font-size:1.2rem; }
+  .resume-choice p{ margin:0; color:#274b75; line-height:1.45; font-size:.9rem; }
+  .resume-choice .resume-action{ border:0; border-radius:999px; padding:10px 17px; background:#e94d50; color:#fff; font-weight:600; cursor:pointer; white-space:nowrap; }
+  .resume-choice .resume-action:hover{ background:#c9363d; }
+  .custom-overlay{ position:fixed; inset:0; z-index:106; display:none; align-items:center; justify-content:center; background:rgba(3,20,43,.45); }
+  .custom-overlay.open{ display:flex; }
+  .custom-modal{ width:min(520px,100%); border-radius:10px; background:#fff; padding:26px; color:#062d5b; box-shadow:0 24px 70px rgba(0,0,0,.25); }
+  .custom-modal h2{ margin:0 0 8px; color:#062d5b; font-family:'IBM Plex Sans',sans-serif; }
+  .custom-modal p{ color:#536b86; margin-bottom:18px; }
+  .module-picker{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:22px; }
+  .module-picker label{ display:flex; align-items:center; gap:9px; margin:0; padding:12px; border:1px solid #cbd4df; border-radius:8px; color:#062d5b; cursor:pointer; }
+  .module-picker input{ width:auto; }
+  .custom-actions{ display:flex; justify-content:flex-end; gap:10px; }
+  .exam-tools{ display:flex; align-items:center; gap:8px; }
+  .exam-tool{ width:34px; height:34px; border:1px solid #cbd4df; border-radius:50%; background:#fff; color:#062d5b; cursor:pointer; }
+  .exam-tool:hover{ border-color:#ef5350; color:#ef5350; }
+  .exam-gate{ min-height:calc(100vh - 78px); display:none; align-items:center; justify-content:center; padding:44px 20px 90px; background:#fff; color:#062d5b; }
+  .exam-gate.active{ display:flex; }
+  .gate-card{ width:min(980px,100%); text-align:center; }
+  .gate-timer{ position:fixed; top:12px; left:50%; transform:translateX(-50%); color:#ef5350; font-weight:600; font-size:1.05rem; }
+  .gate-icon{ width:70px; height:70px; margin:0 auto 18px; border:3px solid #ef5350; border-radius:50%; display:grid; place-items:center; color:#ef5350; font-size:2.1rem; }
+  .gate-card h1{ color:#062d5b; font-family:'IBM Plex Sans',sans-serif; font-size:1.8rem; margin-bottom:20px; }
+  .gate-card h2{ color:#ef5350; font-family:'IBM Plex Sans',sans-serif; font-size:1.35rem; margin-bottom:28px; }
+  .gate-copy{ text-align:left; max-width:900px; margin:0 auto 28px; font-size:1.05rem; }
+  .gate-list{ display:grid; gap:16px; margin:0 auto 34px; max-width:900px; text-align:left; }
+  .gate-list li{ list-style:none; display:flex; align-items:center; gap:18px; }
+  .gate-list li::before{ content:'✓'; width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background:#ef5350; color:#fff; font-weight:700; flex:none; }
+  .gate-button{ min-width:140px; border:0; border-radius:999px; padding:11px 28px; background:#e94d50; color:#fff; font-weight:600; cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,.16); }
+  .gate-button:hover{ background:#c9363d; }
+  .audio-check{ width:min(540px,100%); margin:0 auto 26px; padding:14px; border-radius:12px; background:#fff0f0; }
+  .audio-check audio{ width:100%; }
+  .exam-mode .exam-nav{ background:#fff; }
+  body:not(.exam-mode) header.appbar{ background:#fff; color:#062d5b; border-bottom:1px solid #edf0f4; }
+  body:not(.exam-mode) .appbar .wrap{ min-height:78px; }
+  body:not(.exam-mode) .appbar nav a{ color:#062d5b; }
+  body:not(.exam-mode) .appbar nav a.active{ color:#e94d50; font-weight:600; }
+  @media (max-width:600px){ .catalog-toolbar{ justify-content:flex-start; flex-wrap:wrap; } .catalog-card{ padding-right:14px; padding-bottom:58px; } .catalog-badges{ position:static; margin-bottom:10px; } .catalog-action{ right:14px; } .paper-options{ grid-template-columns:1fr; margin-left:0; } .paper-section h2::after{ display:none; } .exam-nav::before{ width:100%; } .paper-question .support-material img{ max-width:100%; max-height:220px; } }
 
   .word-count{ font-size:0.82rem; color:var(--muted); margin-top:6px; text-align:right; }
   .word-count.ok{ color:var(--emerald); }
@@ -53,6 +174,11 @@
     padding:14px 24px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
   }
   .exam-nav .dots{ display:flex; gap:8px; flex-wrap:wrap; flex:1; }
+  .exam-nav::before{ content:'Review answers'; color:#062d5b; font-size:.78rem; font-weight:600; margin-right:4px; }
+  .nav-legend{ display:flex; gap:10px; width:100%; color:#6a7890; font-size:.7rem; }
+  .nav-legend span{ display:inline-flex; align-items:center; gap:4px; }
+  .nav-legend i{ width:10px; height:10px; border-radius:50%; border:1px solid #cbd4df; background:#fff; display:inline-block; }
+  .nav-legend .done{ background:#2b7d7d; border-color:#2b7d7d; }
   .navdot{
     width:32px; height:32px; border-radius:50%; border:1.5px solid var(--line); background:var(--paper);
     display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace;
@@ -60,7 +186,6 @@
   }
   .navdot.answered{ background:var(--emerald); border-color:var(--emerald); color:var(--paper); }
   .navdot.current{ outline:3px solid rgba(43,125,125,0.25); outline-offset:2px; }
-  .navdot.flagged{ border-color:var(--rust); color:var(--rust); }
   .exam-warning{display:none;max-width:1100px;margin:0 auto;padding:10px 24px;background:#fff4d6;color:#6e4b00;border-bottom:1px solid #e7c76c;font-size:0.88rem;}
 
   @media (max-width:860px){
@@ -80,22 +205,122 @@
       <a href="#" onclick="logout(); return false;">Log out</a>
     </nav>
   </div>
+
 </header>
 
+<div class="custom-overlay" id="customOverlay" role="presentation" aria-hidden="true" onclick="closeCustomModal(event)">
+  <section class="custom-modal" role="dialog" aria-modal="true" aria-labelledby="customTitle">
+    <h2 id="customTitle">Custom Mock Test</h2>
+    <p>Select one or more modules. Your selected sections will run in one timed attempt.</p>
+    <div class="module-picker">
+      <label><input type="checkbox" value="Listening"> Listening</label>
+      <label><input type="checkbox" value="Reading"> Reading</label>
+      <label><input type="checkbox" value="Writing"> Writing</label>
+      <label><input type="checkbox" value="Speaking"> Speaking</label>
+    </div>
+    <div class="custom-actions"><button class="btn" type="button" onclick="closeCustomModal()">Cancel</button><button class="gate-button" type="button" onclick="startCustomMock()">Start Custom Test</button></div>
+  </section>
+</div>
+
 <!-- STEP 1: choose a test -->
-<main>
+<main class="catalog-page">
   <div class="wrap" id="pickStep">
-    <div class="page-head"><h1>Choose a practice test</h1><p>Pick a module to start. Once you begin, the clock runs exactly like the real exam — you can submit early any time.</p></div>
-    <div class="grid grid-2" id="testList">Loading…</div>
+    <div class="catalog-tabs"><div class="catalog-tab active">Mock Test</div><a class="catalog-tab" href="dashboard.html">Score</a></div>
+    <div class="catalog-toolbar">
+      <button class="tec-trigger" type="button" onclick="openTecModal()">TEC x 0</button>
+      <select class="catalog-filter" id="moduleFilter" aria-label="Filter by module"><option value="">All modules</option></select>
+      <select class="catalog-filter" id="examFilter" aria-label="Filter by exam type"><option value="">All types</option></select>
+    </div>
+    <div class="catalog-list" id="testList">Loading...</div>
   </div>
 </main>
 
+<div class="tec-overlay" id="tecOverlay" role="presentation" aria-hidden="true" onclick="closeTecModal(event)">
+  <section class="tec-modal" role="dialog" aria-modal="true" aria-labelledby="tecTitle">
+    <button class="tec-close" type="button" aria-label="Close TEC information" onclick="closeTecModal()">×</button>
+    <div class="tec-heading">
+      <div class="tec-avatar" aria-hidden="true">👩</div>
+      <div><span class="tec-kicker">Speaking &amp; Writing</span><h2 id="tecTitle">IELTS Evaluation by Certified Trainers</h2></div>
+    </div>
+
+    <div class="resume-overlay" id="resumeOverlay" role="presentation" aria-hidden="true" onclick="closeResumeModal(event)">
+      <section class="resume-modal" role="dialog" aria-modal="true" aria-labelledby="resumeTitle">
+        <header class="resume-header"><span id="resumeTitle">Free Mock Test</span><button class="resume-close" type="button" aria-label="Close resume options" onclick="closeResumeModal()">×</button></header>
+        <h2>Choose a test type to begin</h2>
+        <article class="resume-choice">
+          <div class="resume-choice-icon" aria-hidden="true">▣</div>
+          <div><h3>Full Test</h3><p>Practice all four IELTS modules together in one full-length mock test</p></div>
+          <button class="resume-action" type="button" onclick="selectResumeMode('full')">Resume »</button>
+        </article>
+        <article class="resume-choice">
+          <div class="resume-choice-icon" aria-hidden="true">▤</div>
+          <div><h3>Custom Mock Test</h3><p>Create your own mock test by selecting one or more modules to focus on specific skills and improve targeted areas.</p></div>
+          <button class="resume-action" type="button" onclick="selectResumeMode('custom')">Resume »</button>
+        </article>
+      </section>
+    </div>
+    <p class="lead">Receive expert feedback from certified IELTS examiners with results delivered in just 24-48 hours.</p>
+    <div class="tec-benefits">
+      <div class="tec-benefit"><span class="tec-icon">◎</span><span>Trusted by thousands of users worldwide</span></div>
+      <div class="tec-benefit"><span class="tec-icon">⌁</span><span>Reviewed by experienced professionals familiar with actual IELTS marking standards</span></div>
+      <div class="tec-benefit"><span class="tec-icon">▥</span><span>Feedback includes insights on all key scoring areas</span></div>
+    </div>
+    <div class="tec-callout">★ &nbsp; Enhance your Speaking &amp; Writing skills with an accurate evaluation.</div>
+    <div class="tec-credit-box">
+      <p>📝 TEC (Trainer's Evaluation Credit) is used to request a manual evaluation by certified IELTS trainers.</p>
+      <hr>
+      <div class="tec-credit-stats"><div class="tec-credit-stat"><span class="tec-credit-value">1</span><span>Evaluation = 1 TEC</span></div><div class="tec-credit-stat"><span class="tec-credit-value">0</span><span>Your Credits = 0 TEC</span></div></div>
+    </div>
+  </section>
+</div>
+
 <!-- STEP 2: exam mode -->
 <div id="testStep" style="display:none;">
+  <div class="exam-gate active" id="instructionGate">
+    <div class="gate-card">
+      <div class="gate-timer" id="gateTimer">◷ 00:06</div>
+      <h1>General Instructions</h1><h2>Listening Part</h2>
+      <ul class="gate-list">
+        <li>This section of the test is divided into four parts.</li>
+        <li>A timer will be active to show the remaining time.</li>
+        <li>Use a properly functioning headset to listen to questions.</li>
+        <li>Click <strong>SUBMIT</strong> after completing the exam.</li>
+        <li>Before submission, you can review and change your responses if needed.</li>
+      </ul>
+      <button class="gate-button" type="button" onclick="showAudioGate()">Next</button>
+    </div>
+  </div>
+  <div class="exam-gate" id="audioGate">
+    <div class="gate-card">
+      <div class="gate-icon">✓</div><h1>General Instructions</h1>
+      <p class="gate-copy">Your Listening section is about to begin. For the best experience and accurate assessment, please ensure the following:</p>
+      <ul class="gate-list">
+        <li>Use a high-quality headset with clear audio output.</li>
+        <li>Make sure your volume is set to a comfortable level.</li>
+        <li>Sit in a quiet environment to avoid any distractions.</li>
+        <li>Do not pause or replay the audio. It will play only once, just like in the real test.</li>
+      </ul>
+      <button class="gate-button" type="button" onclick="showAudioTest()">Start Listening</button>
+    </div>
+  </div>
+  <div class="exam-gate" id="audioTestGate">
+    <div class="gate-card">
+      <div class="gate-icon">♪</div><h1>Test Your Audio</h1>
+      <div class="audio-check"><audio id="audioSample" controls preload="metadata"></audio></div>
+      <p class="gate-copy">Click to play the sample audio and ensure your sound is working properly.</p>
+      <button class="gate-button" type="button" onclick="beginExam()">Start Exam</button>
+    </div>
+  </div>
   <div class="exam-bar">
     <div class="wrap">
-      <div class="title" id="examTitleBox">—<span class="part" id="examMeta"></span><span class="status">Practice exam mode</span></div>
+      <div class="title" id="examTitleBox">—<span class="part" id="examMeta"></span><span class="status">Practice exam mode</span><span class="exam-save" id="examSaveStatus">All changes saved</span></div>
       <div class="exam-actions">
+        <div class="exam-tools">
+          <button class="exam-tool" type="button" title="Toggle audio" aria-label="Toggle audio" onclick="toggleExamAudio()">🔊</button>
+          <button class="exam-tool" type="button" title="Fullscreen" aria-label="Fullscreen" onclick="toggleFullscreen()">⛶</button>
+          <button class="exam-tool" type="button" title="Review answers" aria-label="Review answers" onclick="toggleReviewPanel()">☷</button>
+        </div>
+        <div class="exam-progress" aria-hidden="true"><span id="examProgress"></span></div>
         <div class="exam-timer" id="examTimer">--:--</div>
         <button class="btn btn-primary" onclick="confirmSubmit()">Submit test</button>
       </div>
@@ -110,6 +335,7 @@
     <div class="questions-panel" id="questionsPanel"></div>
   </div>
   <div class="exam-nav">
+    <div class="nav-legend"><span><i></i> Not answered</span><span><i class="done"></i> Answered</span><span>Use Notes or Highlight on a question</span></div>
     <div class="dots" id="navDots"></div>
     <span style="font-size:0.85rem; color:var(--muted);" id="answeredCount"></span>
   </div>
@@ -130,11 +356,14 @@
 <script src="assets/config.js"></script>
 <script>
   let currentAttemptId = null, currentTestId = null, currentModule = null, currentQuestions = [];
+  let paperMode = false;
   let timerInterval = null, examEndTime = null, hasSubmitted = false;
 
   const demoMode = new URLSearchParams(window.location.search).get('demo');
   if (demoMode === 'listening2') {
     startListeningTestTwo();
+  } else if (demoMode === 'listening1') {
+    startListeningDemo();
   } else if (demoMode === 'listening3') {
     startListeningTestThree();
   } else if (demoMode === 'listening') {
@@ -148,6 +377,7 @@
     currentTestId = 'local-listening-demo';
     currentModule = 'Listening';
     currentAttemptId = 'local-demo-attempt';
+    paperMode = new URLSearchParams(window.location.search).get('paper') === '1';
     apiGet('getQuestions', { testId: 'T_3f505c57' }).then(function (res) {
       if (!res.success || !res.data || res.data.length !== 40) {
         throw new Error('Expected 40 Listening questions, received ' + ((res.data && res.data.length) || 0) + '.');
@@ -162,7 +392,7 @@
       const warning = document.getElementById('examWarning');
       warning.textContent = 'Local preview only — answers are not submitted and no live account or data is used.';
       warning.style.display = 'block';
-      document.querySelector('.exam-bar .status').textContent = 'Local preview · 40-question Listening test';
+      document.querySelector('.exam-bar .status').textContent = 'Local preview · Test 1 · 40 questions';
     }).catch(function (error) {
       document.getElementById('testStep').style.display = 'none';
       document.getElementById('pickStep').parentElement.style.display = 'block';
@@ -176,6 +406,7 @@
     currentTestId = 'local-listening-test-2';
     currentModule = 'Listening';
     currentAttemptId = 'local-test-2-attempt';
+    paperMode = new URLSearchParams(window.location.search).get('paper') === '1';
     apiGet('getQuestions', { testId: 'T_7c2d4a91' }).then(function (res) {
       if (!res.success || !res.data || !res.data.length) {
         throw new Error('Test 2 questions were not available.');
@@ -193,11 +424,14 @@
         }
         return copy;
       });
+      if (currentQuestions.length !== 40) {
+        throw new Error('Test 2 must contain exactly 40 questions, received ' + currentQuestions.length + '.');
+      }
       renderTest('BUYE IELTS Practice Test 2', 'Listening', 30, currentQuestions);
       const warning = document.getElementById('examWarning');
       warning.textContent = 'Local staging preview only — Test 2 answers are not submitted.';
       warning.style.display = 'block';
-      document.querySelector('.exam-bar .status').textContent = 'Local staging · Test 2 media check';
+      document.querySelector('.exam-bar .status').textContent = 'Local staging · Test 2 · 40 questions';
     }).catch(function (error) {
       document.getElementById('testStep').style.display = 'none';
       document.getElementById('pickStep').parentElement.style.display = 'block';
@@ -211,6 +445,7 @@
     currentTestId = 'local-listening-test-3';
     currentModule = 'Listening';
     currentAttemptId = 'local-test-3-attempt';
+    paperMode = new URLSearchParams(window.location.search).get('paper') === '1';
     fetch('content/staging/listening/test-3/questions.json').then(function (response) {
       if (!response.ok) throw new Error('Question file returned HTTP ' + response.status + '.');
       return response.json();
@@ -237,18 +472,51 @@
     });
   }
 
+  let availableTests = [];
   function loadTests() {
     apiGet('getTests').then(function (res) {
       if (!res.success) return;
-      document.getElementById('testList').innerHTML = res.data.length
-        ? res.data.map(function (t) {
-            const c = moduleColor(t.Module);
-            return '<div class="card" style="border-top:4px solid ' + c + ';"><h3>' + t.Title + '</h3>' +
-              '<p style="color:var(--muted); margin:6px 0 16px;">' + t.ExamType + ' · ' + t.Module + ' · ' + t.DurationMinutes + ' min</p>' +
-              '<button class="btn btn-primary" style="background:' + c + '; border-color:' + c + ';" onclick="startTest(\'' + t.TestID + '\',\'' + t.Title.replace(/'/g,"\\'") + '\',\'' + t.Module + '\',' + t.DurationMinutes + ')">Start</button></div>';
-          }).join('')
-        : '<div class="card" style="grid-column:1/-1; color:var(--muted);">No tests published yet — check back soon.</div>';
+      availableTests = res.data || [];
+      populateCatalogFilters();
+      renderCatalog();
     });
+  }
+
+  function populateCatalogFilters() {
+    const modules = {};
+    const types = {};
+    availableTests.forEach(function (test) {
+      if (test.Module) modules[test.Module] = true;
+      if (test.ExamType) types[test.ExamType] = true;
+    });
+    document.getElementById('moduleFilter').innerHTML = '<option value="">All modules</option>' +
+      Object.keys(modules).sort().map(function (module) { return '<option value="' + esc(module) + '">' + esc(module) + '</option>'; }).join('');
+    document.getElementById('examFilter').innerHTML = '<option value="">All types</option>' +
+      Object.keys(types).sort().map(function (type) { return '<option value="' + esc(type) + '">' + esc(type) + '</option>'; }).join('');
+    document.getElementById('moduleFilter').onchange = renderCatalog;
+    document.getElementById('examFilter').onchange = renderCatalog;
+  }
+
+  function renderCatalog() {
+    const moduleFilter = document.getElementById('moduleFilter').value;
+    const examFilter = document.getElementById('examFilter').value;
+    const tests = availableTests.filter(function (test) {
+      return (!moduleFilter || test.Module === moduleFilter) && (!examFilter || test.ExamType === examFilter);
+    });
+    document.getElementById('testList').innerHTML = tests.length
+      ? tests.map(function (t) {
+          const title = esc(t.Title || 'Practice test');
+          const examType = esc(t.ExamType || 'Practice');
+          const module = esc(t.Module || 'General');
+          const safeTitle = String(t.Title || 'Practice test').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+          const safeModule = String(t.Module || 'General').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+          const action = availableTests.indexOf(t) === 0 ? 'openResumeModal()' : "startTest('" + esc(t.TestID) + "','" + safeTitle + "','" + safeModule + "'," + Number(t.DurationMinutes || 30) + ')';
+          const actionLabel = availableTests.indexOf(t) === 0 ? 'Resume' : 'Start';
+          return '<article class="catalog-card"><div class="catalog-badges"><span class="catalog-badge">' + examType + '</span><span class="catalog-badge">' + module + '</span></div>' +
+            '<h2>' + title + '</h2><div class="meta">Approx Time <strong>' + esc(t.DurationMinutes || 30) + ' minutes</strong></div>' +
+            '<button class="catalog-action" onclick="' + action + '">' + actionLabel + '</button></article>';
+        }).join('')
+      : '<div class="catalog-card">No tests published yet - check back soon.</div>';
   }
 
   function moduleColor(module) {
@@ -259,6 +527,97 @@
     if (m.indexOf('speak') > -1) return 'var(--purple)';
     return 'var(--ink)';
   }
+
+  function openTecModal() {
+    const overlay = document.getElementById('tecOverlay');
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.querySelector('.tec-close').focus();
+  }
+
+  function closeTecModal(event) {
+    if (event && event.target !== event.currentTarget) return;
+    const overlay = document.getElementById('tecOverlay');
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  function openResumeModal() {
+    const overlay = document.getElementById('resumeOverlay');
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.querySelector('.resume-close').focus();
+  }
+
+  function closeResumeModal(event) {
+    if (event && event.target !== event.currentTarget) return;
+    const overlay = document.getElementById('resumeOverlay');
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  function selectResumeMode(mode) {
+    closeResumeModal();
+    if (mode === 'custom') {
+      openCustomModal();
+      return;
+    }
+    const firstTest = availableTests[0];
+    if (firstTest) startTest(firstTest.TestID, firstTest.Title, firstTest.Module, Number(firstTest.DurationMinutes || 30));
+  }
+
+  function openCustomModal() {
+    const overlay = document.getElementById('customOverlay');
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeCustomModal(event) {
+    if (event && event.target !== event.currentTarget) return;
+    const overlay = document.getElementById('customOverlay');
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  function startCustomMock() {
+    const selected = Array.from(document.querySelectorAll('#customOverlay input:checked')).map(function (input) { return input.value; });
+    if (!selected.length) {
+      alert('Select at least one module to continue.');
+      return;
+    }
+    const test = availableTests.find(function (item) { return selected.indexOf(item.Module) > -1; });
+    if (!test) {
+      alert('No published test is available for the selected module yet.');
+      return;
+    }
+    closeCustomModal();
+    startTest(test.TestID, 'Custom Mock Test - ' + selected.join(', '), test.Module, Number(test.DurationMinutes || 30));
+  }
+
+  function toggleExamAudio() {
+    document.querySelectorAll('#passagePanel audio').forEach(function (audio) {
+      audio.muted = !audio.muted;
+    });
+  }
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(function () {});
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+
+  function toggleReviewPanel() {
+    const nav = document.querySelector('.exam-nav');
+    nav.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') closeTecModal();
+    if (event.key === 'Escape') closeResumeModal();
+    if (event.key === 'Escape') closeCustomModal();
+  });
 
   function startTest(testId, title, module, durationMinutes) {
     currentTestId = testId;
@@ -329,15 +688,23 @@
   }
   function renderTest(title, module, durationMinutes, questions) {
     document.body.classList.add('exam-mode');
+    document.getElementById('instructionGate').classList.add('active');
+    document.getElementById('audioGate').classList.remove('active');
+    document.getElementById('audioTestGate').classList.remove('active');
+    document.querySelector('.exam-bar').style.display = 'none';
+    document.querySelector('.exam-nav').style.display = 'none';
+    document.getElementById('examLayout').style.display = 'none';
+    document.getElementById('examLayout').classList.toggle('paper-mode', paperMode);
     document.getElementById('pickStep').parentElement.style.display = 'none';
     document.getElementById('testStep').style.display = 'block';
-    document.getElementById('examTitleBox').innerHTML = title + '<span class="part">' + module + ' · ' + questions.length + ' question(s)</span><span class="status">Practice exam mode</span>';
+    document.getElementById('examTitleBox').innerHTML = title + '<span class="part">' + module + ' · ' + questions.length + ' question(s)</span><span class="status">Practice exam mode</span><span class="exam-save" id="examSaveStatus">All changes saved</span>';
 
     // ---- Passage / audio panel (shared context, shown once) ----
     const passageSource = questions.find(function (q) { return q.PassageOrAudioURL && String(q.PassageOrAudioURL).trim(); });
     const layout = document.getElementById('examLayout');
     const panel = document.getElementById('passagePanel');
     const isListening = /listen/i.test(module || '');
+    if (!isListening) beginExam();
 
     if (passageSource) {
       const p = String(passageSource.PassageOrAudioURL).trim();
@@ -377,17 +744,27 @@
     const isSpeaking = /speak/i.test(module || '');
     const qPanel = document.getElementById('questionsPanel');
     qPanel.className = 'questions-panel' + (passageSource ? '' : ' full-width');
-    qPanel.innerHTML = questions.map(function (q, i) {
+    const renderQuestion = function (q, i) {
       let inputHtml;
+      const paperQuestion = paperMode && isListening;
       const questionType = String(q.QuestionType || '').toLowerCase();
       const isMultipleChoice = questionType === 'multiple choice' || questionType === 'mcq';
       const isTrueFalse = questionType === 'true/false/not given' || questionType === 'true false not given';
+      const answerInput = function (suffix) {
+        const inputId = 'q_' + q.QuestionID + '_text' + (suffix || '');
+        return '<input class="paper-answer" type="text" id="' + inputId + '" aria-label="Answer for question ' + (i + 1) + '" oninput="recordAnswer(' + i + ')">';
+      };
+      const questionKind = isMultipleChoice ? 'Choose one answer' : isTrueFalse ? 'Choose True, False or Not Given' : isWriting ? 'Write your response' : isSpeaking ? 'Record your response' : 'Type your answer';
+      let promptHtml = esc(q.Prompt || '')
+        .replace(/\s+[-–—]{2,}\s+/g, ' ')
+        .replace(/\s+[-–—]\s+/g, ' ');
       if (isMultipleChoice && (q.OptionA || q.OptionB || q.OptionC || q.OptionD)) {
-        inputHtml = ['A', 'B', 'C', 'D'].map(function (letter) {
+        const optionClass = paperQuestion ? 'paper-options' : 'option-list';
+        inputHtml = '<div class="' + optionClass + '">' + ['A', 'B', 'C', 'D'].map(function (letter) {
           const opt = q['Option' + letter];
           if (!opt) return '';
-          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + esc(opt) + '" onchange="recordAnswer(' + i + ')"> ' + esc(opt) + '</label>';
-        }).join('');
+          return '<label><input type="radio" name="q_' + q.QuestionID + '" value="' + letter + '" onchange="recordAnswer(' + i + ')"><span class="option-letter">' + letter + '</span><span class="option-copy">' + esc(opt) + '</span></label>';
+        }).join('') + '</div>';
       } else if (isTrueFalse) {
         inputHtml = ['True', 'False', 'Not Given'].map(function (v) {
           return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + v + '" onchange="recordAnswer(' + i + ')"> ' + v + '</label>';
@@ -405,25 +782,83 @@
         inputHtml = '<textarea id="q_' + q.QuestionID + '_text" rows="9" placeholder="Type your response…" oninput="updateWordCount(\'' + q.QuestionID + '\'); recordAnswer(' + i + ')"></textarea>' +
           '<div class="word-count" id="wc_' + q.QuestionID + '">0 words</div>';
       } else {
-        inputHtml = '<input type="text" id="q_' + q.QuestionID + '_text" placeholder="Your answer" oninput="recordAnswer(' + i + ')">';
+        if (paperQuestion && /_{2,}/.test(q.Prompt || '')) {
+          let blankNumber = 0;
+          promptHtml = promptHtml.replace(/_{2,}/g, function () {
+            blankNumber += 1;
+            return answerInput(blankNumber === 1 ? '' : '_' + blankNumber);
+          }).replace(/\s+[-–—]{2,}\s+/g, ' ');
+          inputHtml = '';
+        } else {
+          inputHtml = paperQuestion ? answerInput('') : '<input type="text" id="q_' + q.QuestionID + '_text" aria-label="Answer for question ' + (i + 1) + '" oninput="recordAnswer(' + i + ')">';
+        }
       }
-      return '<div class="q-card" id="qcard_' + i + '"><div class="qnum">Question ' + (i + 1) + '</div>' +
-        '<p style="margin:10px 0 14px;">' + esc(q.Prompt) + '</p>' + renderSupportMaterial(q) + inputHtml + '</div>';
-    }).join('');
+      if (paperQuestion && !isMultipleChoice && !isSpeaking && !isWriting && !/_{2,}/.test(q.Prompt || '')) {
+        promptHtml += ' ' + answerInput('');
+      }
+      const questionClass = paperQuestion ? 'paper-question' : 'q-card';
+      return '<div class="' + questionClass + '" id="qcard_' + i + '"><div class="question-tools"><button class="question-tool" type="button" onclick="toggleNote(' + i + ')">Notes</button></div><span class="qnum">' + (i + 1) + '.</span><span class="question-kind">' + questionKind + '</span><span class="prompt">' +
+        promptHtml + '</span>' + inputHtml + '<textarea class="question-note" id="note_' + i + '" aria-label="Notes for question ' + (i + 1) + '" placeholder="Add a private note" oninput="saveQuestionNote(' + i + ', this.value)"></textarea>' + renderSupportMaterial(q) + '</div>';
+    };
+    if (paperMode && isListening) {
+      const sections = [
+        [0, 10, 'Part 1', 'Questions 1-10. Complete the notes and choose the correct answers.'],
+        [10, 20, 'Part 2', 'Questions 11-20. Complete the notes and table.'],
+        [20, 30, 'Part 3', 'Questions 21-30. Choose the correct answer and complete the notes.'],
+        [30, questions.length, 'Part 4', 'Questions 31-40. Choose the correct answer and complete the notes.']
+      ];
+      qPanel.innerHTML = '<div class="exam-paper"><div class="paper-intro"><h1>Listening question paper</h1><p>Enter your answers in the numbered spaces while you listen.</p></div>' +
+        sections.map(function (section) {
+         return '<section class="paper-section"><h2><span>' + section[2] + '</span><span>Questions ' + (section[0] + 1) + '-' + section[1] + '</span></h2><p>' + section[3] + '</p>' +
+           questions.slice(section[0], section[1]).map(function (q, offset) { return renderQuestion(q, section[0] + offset); }).join('') + '</section>';
+        }).join('') + '</div>';
+    } else {
+      qPanel.innerHTML = questions.map(renderQuestion).join('');
+    }
     restoreDraftAnswers();
 
     // ---- Bottom navigator ----
-    document.getElementById('navDots').innerHTML = questions.map(function (q, i) {
-      return '<div class="navdot" id="dot_' + i + '" onclick="jumpTo(' + i + ')">' + (i + 1) + '</div>';
-    }).join('');
-    if (questions.length) document.getElementById('dot_0').classList.add('current');
+    const parts = [[0, 10, 'Part 1'], [10, 20, 'Part 2'], [20, 30, 'Part 3'], [30, questions.length, 'Part 4']];
+    document.getElementById('navDots').innerHTML = '<div class="paper-part-nav">' + parts.map(function (part) {
+      return '<div class="paper-part"><span class="paper-part-title">' + part[2] + '</span>' +
+        questions.slice(part[0], part[1]).map(function (q, offset) {
+          const i = part[0] + offset;
+          return '<div class="navdot" id="dot_' + i + '" onclick="jumpTo(' + i + ')">' + (i + 1) + '</div>';
+        }).join('') + '</div>';
+    }).join('') + '</div>';
+    const firstDot = document.getElementById('dot_0');
+    if (firstDot) firstDot.classList.add('current');
     updateAnsweredCount();
 
     // ---- Timer ----
-    examEndTime = Date.now() + durationMinutes * 60 * 1000;
+    window.examDurationMinutes = durationMinutes;
+  }
+
+  function showAudioGate() {
+    document.getElementById('instructionGate').classList.remove('active');
+    document.getElementById('audioGate').classList.add('active');
+  }
+
+  function showAudioTest() {
+    document.getElementById('audioGate').classList.remove('active');
+    document.getElementById('audioTestGate').classList.add('active');
+    const source = currentQuestions.find(function (q) { return q.PassageOrAudioURL; });
+    if (source) document.getElementById('audioSample').src = source.PassageOrAudioURL;
+  }
+
+  function beginExam() {
+    document.getElementById('instructionGate').classList.remove('active');
+    document.getElementById('audioGate').classList.remove('active');
+    document.getElementById('audioTestGate').classList.remove('active');
+    document.querySelector('.exam-bar').style.display = '';
+    document.querySelector('.exam-nav').style.display = 'flex';
+    document.getElementById('examLayout').style.display = 'grid';
+    examEndTime = Date.now() + (window.examDurationMinutes || 30) * 60 * 1000;
     clearInterval(timerInterval);
     timerInterval = setInterval(tickTimer, 1000);
     tickTimer();
+    const audio = document.querySelector('#passagePanel audio');
+    if (audio) audio.play().catch(function () {});
   }
 
   function tickTimer() {
@@ -454,8 +889,23 @@
   }
 
   function markAnswered(i) {
-    document.getElementById('dot_' + i).classList.add('answered');
+    const dot = document.getElementById('dot_' + i);
+    if (dot) dot.classList.add('answered');
     updateAnsweredCount();
+    updateExamProgress();
+  }
+
+  function toggleNote(i) {
+    const note = document.getElementById('note_' + i);
+    if (!note) return;
+    note.classList.toggle('open');
+    if (note.classList.contains('open')) note.focus();
+  }
+
+  function saveQuestionNote(i, value) {
+    const notes = JSON.parse(localStorage.getItem(draftKey() + '_notes') || '{}');
+    notes[currentQuestions[i] ? currentQuestions[i].QuestionID : i] = value;
+    localStorage.setItem(draftKey() + '_notes', JSON.stringify(notes));
   }
 
   function draftKey() {
@@ -472,11 +922,20 @@
     const draft = JSON.parse(localStorage.getItem(draftKey()) || '{}');
     draft[q.QuestionID] = value;
     localStorage.setItem(draftKey(), JSON.stringify(draft));
+    const status = document.getElementById('examSaveStatus');
+    if (status) {
+      status.textContent = 'Saved just now';
+      clearTimeout(window.examSaveTimeout);
+      window.examSaveTimeout = setTimeout(function () { status.textContent = 'All changes saved'; }, 1200);
+    }
   }
 
   function restoreDraftAnswers() {
     const draft = JSON.parse(localStorage.getItem(draftKey()) || '{}');
+    const notes = JSON.parse(localStorage.getItem(draftKey() + '_notes') || '{}');
     currentQuestions.forEach(function (q, i) {
+      const note = document.getElementById('note_' + i);
+      if (note && notes[q.QuestionID]) note.value = notes[q.QuestionID];
       const value = draft[q.QuestionID];
       if (!value) return;
       const options = document.querySelectorAll('input[name="q_' + q.QuestionID + '"]');
@@ -494,6 +953,13 @@
     const total = currentQuestions.length;
     const answered = document.querySelectorAll('.navdot.answered').length;
     document.getElementById('answeredCount').textContent = answered + ' of ' + total + ' answered';
+  }
+
+  function updateExamProgress() {
+    const total = currentQuestions.length;
+    const answered = document.querySelectorAll('.navdot.answered').length;
+    const progress = document.getElementById('examProgress');
+    if (progress && total) progress.style.width = (answered / total * 100) + '%';
   }
 
   function updateWordCount(questionId) {
