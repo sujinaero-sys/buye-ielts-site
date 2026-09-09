@@ -411,19 +411,7 @@
       if (!res.success || !res.data || !res.data.length) {
         throw new Error('Test 2 questions were not available.');
       }
-      currentQuestions = res.data.filter(function (question) {
-        return String(question.QuestionID || '') !== 'Q_27c6b3e2';
-      }).map(function (question) {
-        const copy = Object.assign({}, question);
-        copy.PassageOrAudioURL = 'assets/listening-test-2.mp3';
-        if (['Q17', 'Q18', 'Q19', 'Q20'].indexOf(String(copy.QuestionID)) !== -1) {
-          copy.SupportMaterialURL = 'content/staging/listening/test-2/hinchingbrooke-park-map-color.svg';
-          copy.SupportMaterialType = 'image';
-          copy.SupportMaterialName = 'Hinchingbrooke Park Map (staging color version)';
-          copy.SupportMaterialAltText = 'Color map of Hinchingbrooke Park showing the lake, gates, paths, refreshments, and locations A to I.';
-        }
-        return copy;
-      });
+      currentQuestions = normalizeListeningTestTwo(res.data);
       if (currentQuestions.length !== 40) {
         throw new Error('Test 2 must contain exactly 40 questions, received ' + currentQuestions.length + '.');
       }
@@ -438,6 +426,22 @@
       document.getElementById('testList').innerHTML =
         '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load Test 2: ' +
         esc(error.message) + '</div>';
+    });
+  }
+
+  function normalizeListeningTestTwo(questions) {
+    return questions.filter(function (question) {
+      return String(question.QuestionID || '') !== 'Q_27c6b3e2';
+    }).map(function (question) {
+      const copy = Object.assign({}, question);
+      copy.PassageOrAudioURL = 'assets/listening-test-2.mp3';
+      if (['Q17', 'Q18', 'Q19', 'Q20'].indexOf(String(copy.QuestionID)) !== -1) {
+        copy.SupportMaterialURL = 'content/staging/listening/test-2/hinchingbrooke-park-map-color.svg';
+        copy.SupportMaterialType = 'image';
+        copy.SupportMaterialName = 'Hinchingbrooke Park Map (staging color version)';
+        copy.SupportMaterialAltText = 'Color map of Hinchingbrooke Park showing the lake, gates, paths, refreshments, and locations A to I.';
+      }
+      return copy;
     });
   }
 
@@ -627,8 +631,8 @@
       currentAttemptId = res.data.attemptId;
       apiGet('getQuestions', { testId: testId }).then(function (qres) {
         if (!qres.success || !qres.data.length) { alert('No questions found for this test yet.'); return; }
-        currentQuestions = qres.data;
-        renderTest(title, module, durationMinutes, qres.data);
+        currentQuestions = testId === 'T_7c2d4a91' ? normalizeListeningTestTwo(qres.data) : qres.data;
+        renderTest(title, module, durationMinutes, currentQuestions);
       });
     });
   }
