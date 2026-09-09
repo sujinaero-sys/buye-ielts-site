@@ -359,121 +359,9 @@
   let paperMode = false;
   let timerInterval = null, examEndTime = null, hasSubmitted = false;
 
-  const demoMode = new URLSearchParams(window.location.search).get('demo');
-  if (demoMode === 'listening2') {
-    startListeningTestTwo();
-  } else if (demoMode === 'listening1') {
-    startListeningDemo();
-  } else if (demoMode === 'listening3') {
-    startListeningTestThree();
-  } else if (demoMode === 'listening') {
-    startListeningDemo();
-  } else if (requireAuth()) {
+  if (requireAuth()) {
     document.getElementById('whoName').textContent = getName();
     loadTests();
-  }
-
-  function startListeningDemo() {
-    currentTestId = 'local-listening-demo';
-    currentModule = 'Listening';
-    currentAttemptId = 'local-demo-attempt';
-    paperMode = new URLSearchParams(window.location.search).get('paper') === '1';
-    apiGet('getQuestions', { testId: 'T_3f505c57' }).then(function (res) {
-      if (!res.success || !res.data || res.data.length !== 40) {
-        throw new Error('Expected 40 Listening questions, received ' + ((res.data && res.data.length) || 0) + '.');
-      }
-
-      currentQuestions = res.data.map(function (question) {
-        const copy = Object.assign({}, question);
-        copy.PassageOrAudioURL = 'assets/listening-test-1.mp3';
-        return copy;
-      });
-      renderTest('BUYE IELTS Practice Test 1', 'Listening', 30, currentQuestions);
-      const warning = document.getElementById('examWarning');
-      warning.textContent = 'Local preview only — answers are not submitted and no live account or data is used.';
-      warning.style.display = 'block';
-      document.querySelector('.exam-bar .status').textContent = 'Local preview · Test 1 · 40 questions';
-    }).catch(function (error) {
-      document.getElementById('testStep').style.display = 'none';
-      document.getElementById('pickStep').parentElement.style.display = 'block';
-      document.getElementById('testList').innerHTML =
-        '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load the 40-question preview: ' +
-        esc(error.message) + '</div>';
-    });
-  }
-
-  function startListeningTestTwo() {
-    currentTestId = 'local-listening-test-2';
-    currentModule = 'Listening';
-    currentAttemptId = 'local-test-2-attempt';
-    paperMode = new URLSearchParams(window.location.search).get('paper') === '1';
-    apiGet('getQuestions', { testId: 'T_7c2d4a91' }).then(function (res) {
-      if (!res.success || !res.data || !res.data.length) {
-        throw new Error('Test 2 questions were not available.');
-      }
-      currentQuestions = normalizeListeningTestTwo(res.data);
-      if (currentQuestions.length !== 40) {
-        throw new Error('Test 2 must contain exactly 40 questions, received ' + currentQuestions.length + '.');
-      }
-      renderTest('BUYE IELTS Practice Test 2', 'Listening', 30, currentQuestions);
-      const warning = document.getElementById('examWarning');
-      warning.textContent = 'Local staging preview only — Test 2 answers are not submitted.';
-      warning.style.display = 'block';
-      document.querySelector('.exam-bar .status').textContent = 'Local staging · Test 2 · 40 questions';
-    }).catch(function (error) {
-      document.getElementById('testStep').style.display = 'none';
-      document.getElementById('pickStep').parentElement.style.display = 'block';
-      document.getElementById('testList').innerHTML =
-        '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load Test 2: ' +
-        esc(error.message) + '</div>';
-    });
-  }
-
-  function normalizeListeningTestTwo(questions) {
-    return questions.filter(function (question) {
-      return String(question.QuestionID || '') !== 'Q_27c6b3e2';
-    }).map(function (question) {
-      const copy = Object.assign({}, question);
-      copy.PassageOrAudioURL = 'assets/listening-test-2.mp3';
-      if (['Q17', 'Q18', 'Q19', 'Q20'].indexOf(String(copy.QuestionID)) !== -1) {
-        copy.SupportMaterialURL = 'content/staging/listening/test-2/hinchingbrooke-park-map-color.svg';
-        copy.SupportMaterialType = 'image';
-        copy.SupportMaterialName = 'Hinchingbrooke Park Map (staging color version)';
-        copy.SupportMaterialAltText = 'Color map of Hinchingbrooke Park showing the lake, gates, paths, refreshments, and locations A to I.';
-      }
-      return copy;
-    });
-  }
-
-  function startListeningTestThree() {
-    currentTestId = 'local-listening-test-3';
-    currentModule = 'Listening';
-    currentAttemptId = 'local-test-3-attempt';
-    paperMode = new URLSearchParams(window.location.search).get('paper') === '1';
-    fetch('content/staging/listening/test-3/questions.json').then(function (response) {
-      if (!response.ok) throw new Error('Question file returned HTTP ' + response.status + '.');
-      return response.json();
-    }).then(function (questions) {
-      if (!Array.isArray(questions) || questions.length !== 40) {
-        throw new Error('Test 3 must contain exactly 40 questions.');
-      }
-      currentQuestions = questions.map(function (question) {
-        const copy = Object.assign({}, question);
-        copy.PassageOrAudioURL = 'content/staging/listening/test-3/audio.mp3.mp3';
-        return copy;
-      });
-      renderTest('BUYE IELTS Practice Test 3', 'Listening', 30, currentQuestions);
-      const warning = document.getElementById('examWarning');
-      warning.textContent = 'Local staging preview only — Test 3 answers are not submitted.';
-      warning.style.display = 'block';
-      document.querySelector('.exam-bar .status').textContent = 'Local staging · Test 3 · 40 questions';
-    }).catch(function (error) {
-      document.getElementById('testStep').style.display = 'none';
-      document.getElementById('pickStep').parentElement.style.display = 'block';
-      document.getElementById('testList').innerHTML =
-        '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load Test 3: ' +
-        esc(error.message) + '</div>';
-    });
   }
 
   let availableTests = [];
@@ -626,14 +514,42 @@
   function startTest(testId, title, module, durationMinutes) {
     currentTestId = testId;
     currentModule = module;
+    paperMode = /listen/i.test(module || '');
     apiPost('startAttempt', { token: getToken(), testId: testId }).then(function (res) {
       if (!res.success) { alert(res.error); return; }
       currentAttemptId = res.data.attemptId;
       apiGet('getQuestions', { testId: testId }).then(function (qres) {
         if (!qres.success || !qres.data.length) { alert('No questions found for this test yet.'); return; }
-        currentQuestions = testId === 'T_7c2d4a91' ? normalizeListeningTestTwo(qres.data) : qres.data;
+        currentQuestions = normalizeTestQuestions(testId, qres.data);
+        if (/listen/i.test(module || '') && currentQuestions.length !== 40) {
+          throw new Error(title + ' must contain exactly 40 questions, received ' + currentQuestions.length + '.');
+        }
         renderTest(title, module, durationMinutes, currentQuestions);
       });
+    }).catch(function (error) {
+      alert('Unable to start this test: ' + error.message);
+    });
+  }
+
+  function normalizeTestQuestions(testId, questions) {
+    return questions.filter(function (question) {
+      return testId !== 'T_7c2d4a91' || String(question.QuestionID || '') !== 'Q_27c6b3e2';
+    }).map(function (question) {
+      const copy = Object.assign({}, question);
+      if (testId === 'T_3f505c57') {
+        copy.PassageOrAudioURL = 'assets/listening-test-1.mp3';
+      } else if (testId === 'T_7c2d4a91') {
+        copy.PassageOrAudioURL = 'assets/listening-test-2.mp3';
+        if (['Q17', 'Q18', 'Q19', 'Q20'].indexOf(String(copy.QuestionID)) !== -1) {
+          copy.SupportMaterialURL = 'content/staging/listening/test-2/hinchingbrooke-park-map-color.svg';
+          copy.SupportMaterialType = 'image';
+          copy.SupportMaterialName = 'Hinchingbrooke Park Map';
+          copy.SupportMaterialAltText = 'Colour map of Hinchingbrooke Park showing the lake, gates, paths, refreshments, and locations A to I.';
+        }
+      } else if (testId === 'T_60377c6e') {
+        copy.PassageOrAudioURL = 'content/staging/listening/test-3/audio.mp3.mp3';
+      }
+      return copy;
     });
   }
 
