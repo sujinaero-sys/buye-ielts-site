@@ -361,7 +361,7 @@
     <div class="questions-panel" id="questionsPanel"></div>
   </div>
   <div class="exam-nav">
-    <div class="nav-legend"><span><i></i> Not answered</span><span><i class="done"></i> Answered</span><span>Use Notes or Highlight on a question</span></div>
+    <div class="nav-legend"><span><i></i> Not answered</span><span><i class="done"></i> Answered</span><span>Use Notes on a question</span></div>
     <div class="dots" id="navDots"></div>
     <span style="font-size:0.85rem; color:var(--muted);" id="answeredCount"></span>
   </div>
@@ -385,9 +385,43 @@
   let paperMode = false;
   let timerInterval = null, examEndTime = null, hasSubmitted = false;
 
-  if (requireAuth()) {
+  const demoMode = new URLSearchParams(window.location.search).get('demo');
+  if (demoMode === 'listening4') {
+    startListeningTestFour();
+  } else if (requireAuth()) {
     document.getElementById('whoName').textContent = getName();
     loadTests();
+  }
+
+  function startListeningTestFour() {
+    currentTestId = 'local-listening-test-4';
+    currentModule = 'Listening';
+    currentAttemptId = 'local-test-4-attempt';
+    paperMode = new URLSearchParams(window.location.search).get('paper') === '1';
+    fetch('content/staging/listening/test-4/questions.json').then(function (response) {
+      if (!response.ok) throw new Error('Test 4 question file returned HTTP ' + response.status + '.');
+      return response.json();
+    }).then(function (questions) {
+      if (!Array.isArray(questions) || questions.length !== 40) {
+        throw new Error('Test 4 must contain exactly 40 questions.');
+      }
+      currentQuestions = questions.map(function (question) {
+        const copy = Object.assign({}, question);
+        copy.PassageOrAudioURL = 'content/staging/listening/test-4/narration.wav';
+        return copy;
+      });
+      renderTest('BUYE IELTS Practice Test 4', 'Listening', 30, currentQuestions);
+      const warning = document.getElementById('examWarning');
+      warning.textContent = 'Preview only — Test 4 answers are not submitted.';
+      warning.style.display = 'block';
+      document.querySelector('.exam-bar .status').textContent = 'Preview · Test 4 · 40 questions';
+    }).catch(function (error) {
+      document.getElementById('testStep').style.display = 'none';
+      document.getElementById('pickStep').parentElement.style.display = 'block';
+      document.getElementById('testList').innerHTML =
+        '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load Test 4: ' +
+        esc(error.message) + '</div>';
+    });
   }
 
   let availableTests = [];
@@ -1055,7 +1089,7 @@
 
   function submitTest() {
     if (hasSubmitted) return;
-    if (currentAttemptId === 'local-demo-attempt' || currentAttemptId === 'local-test-3-attempt') {
+    if (String(currentAttemptId || '').indexOf('local-') === 0) {
       alert('This is a local preview. Answers are not submitted.');
       return;
     }
