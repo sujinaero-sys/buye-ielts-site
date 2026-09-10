@@ -73,6 +73,7 @@
   .paper-question .support-material img{ width:auto; max-width:560px; max-height:260px; object-fit:contain; }
   .paper-part-nav{ display:flex; gap:16px; width:100%; overflow-x:auto; padding:0 0 4px; }
   .paper-part{ flex:1 0 250px; border:1px solid #ef5350; border-radius:9px; padding:10px 12px; }
+  .paper-part.active{ border-color:#062d5b; box-shadow:0 0 0 2px rgba(6,45,91,.12); }
   .paper-part-title{ font-weight:600; color:#062d5b; margin-right:8px; }
   .paper-part .navdot{ display:inline-flex; width:30px; height:30px; margin:0 3px; }
   .paper-mode .q-card{ display:none; }
@@ -384,6 +385,7 @@
   let currentAttemptId = null, currentTestId = null, currentModule = null, currentQuestions = [];
   let paperMode = false;
   let timerInterval = null, examEndTime = null, hasSubmitted = false;
+  let questionScrollHandler = null;
 
   const demoMode = new URLSearchParams(window.location.search).get('demo');
   if (demoMode === 'listening4') {
@@ -840,7 +842,8 @@
         }).join('') + '</div>';
     }).join('') + '</div>';
     const firstDot = document.getElementById('dot_0');
-    if (firstDot) firstDot.classList.add('current');
+    if (firstDot) setCurrentQuestion(0, false);
+    setupQuestionScrollTracking();
     updateAnsweredCount();
 
     // ---- Timer ----
@@ -894,11 +897,39 @@
   function jumpTo(i) {
     const card = document.getElementById('qcard_' + i);
     if (card) {
-      document.querySelectorAll('.navdot.current').forEach(function (dot) { dot.classList.remove('current'); });
-      const dot = document.getElementById('dot_' + i);
-      if (dot) dot.classList.add('current');
+      setCurrentQuestion(i, true);
       card.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  }
+
+  function setCurrentQuestion(i, revealNavigation) {
+    document.querySelectorAll('.navdot.current').forEach(function (dot) { dot.classList.remove('current'); });
+    const dot = document.getElementById('dot_' + i);
+    if (!dot) return;
+    dot.classList.add('current');
+    document.querySelectorAll('.paper-part.active').forEach(function (part) { part.classList.remove('active'); });
+    const part = dot.closest('.paper-part');
+    if (part) part.classList.add('active');
+    if (revealNavigation) dot.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+
+  function setupQuestionScrollTracking() {
+    if (questionScrollHandler) window.removeEventListener('scroll', questionScrollHandler);
+    let scheduled = false;
+    questionScrollHandler = function () {
+      if (scheduled) return;
+      scheduled = true;
+      window.requestAnimationFrame(function () {
+        scheduled = false;
+        const cards = Array.prototype.slice.call(document.querySelectorAll('[id^="qcard_"]'));
+        const activeCard = cards.reduce(function (closest, card) {
+          const distance = Math.abs(card.getBoundingClientRect().top - 145);
+          return !closest || distance < closest.distance ? { card: card, distance: distance } : closest;
+        }, null);
+        if (activeCard) setCurrentQuestion(Number(activeCard.card.id.replace('qcard_', '')), true);
+      });
+    };
+    window.addEventListener('scroll', questionScrollHandler, { passive: true });
   }
 
   function markAnswered(i) {
