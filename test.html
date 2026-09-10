@@ -398,7 +398,7 @@
     currentModule = 'Listening';
     currentAttemptId = 'local-test-4-attempt';
     paperMode = new URLSearchParams(window.location.search).get('paper') === '1';
-    fetch('content/staging/listening/test-4/questions.json').then(function (response) {
+    fetch('content/staging/listening/test-4/questions.json?release=full-source-20260910').then(function (response) {
       if (!response.ok) throw new Error('Test 4 question file returned HTTP ' + response.status + '.');
       return response.json();
     }).then(function (questions) {
@@ -407,7 +407,7 @@
       }
       currentQuestions = questions.map(function (question) {
         const copy = Object.assign({}, question);
-        copy.PassageOrAudioURL = 'content/staging/listening/test-4/narration.wav';
+        copy.PassageOrAudioURL = 'content/staging/listening/test-4/7_we.mp3';
         return copy;
       });
       renderTest('BUYE IELTS Practice Test 4', 'Listening', 30, currentQuestions);
@@ -772,10 +772,11 @@
         .replace(/\s+[-–—]\s+/g, ' ');
       if (isMultipleChoice && (q.OptionA || q.OptionB || q.OptionC || q.OptionD)) {
         const optionClass = paperQuestion ? 'paper-options' : 'option-list';
-        inputHtml = '<div class="' + optionClass + '">' + ['A', 'B', 'C', 'D'].map(function (letter) {
+        inputHtml = '<div class="' + optionClass + '">' + ['A', 'B', 'C', 'D', 'E', 'F', 'G'].map(function (letter) {
           const opt = q['Option' + letter];
           if (!opt) return '';
-          return '<label><input type="radio" name="q_' + q.QuestionID + '" value="' + letter + '" onchange="recordAnswer(' + i + ')"><span class="option-letter">' + letter + '</span><span class="option-copy">' + esc(opt) + '</span></label>';
+          const optionText = String(opt).replace(new RegExp('^' + letter + '\\s+'), '');
+          return '<label><input type="radio" name="q_' + q.QuestionID + '" value="' + letter + '" onchange="recordAnswer(' + i + ')"><span class="option-letter">' + letter + '</span><span class="option-copy">' + esc(optionText) + '</span></label>';
         }).join('') + '</div>';
       } else if (isTrueFalse) {
         inputHtml = ['True', 'False', 'Not Given'].map(function (v) {
