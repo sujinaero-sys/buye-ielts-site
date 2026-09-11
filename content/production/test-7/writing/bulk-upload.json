@@ -1,0 +1,28 @@
+{
+  "module": "Writing",
+  "durationMinutes": 60,
+  "rows": [
+    {
+      "questionType": "Essay",
+      "prompt": "The bar chart below shows the percentage of electricity generated from renewable sources in four European countries in 2015 and 2023.",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Essay",
+      "prompt": "Some people believe that governments should make all public transportation free of charge. Others argue that passengers should pay for their journeys. Discuss both views and give your opinion.",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    }
+  ]
+}

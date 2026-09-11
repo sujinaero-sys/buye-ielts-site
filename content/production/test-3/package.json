@@ -1,0 +1,939 @@
+{
+  "testId": "T03",
+  "title": "BUYE IELTS Practice Test 3",
+  "examType": "Academic",
+  "generatedAt": "2026-09-11T05:27:48.716159+00:00",
+  "qaStatus": "verified",
+  "modules": {
+    "Listening": {
+      "durationMinutes": 30,
+      "questions": [
+        {
+          "questionId": "L03-01",
+          "questionType": "Short Answer",
+          "prompt": "The new member's surname is spelled ____.",
+          "correctAnswer": "Devereaux",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L03-02",
+          "questionType": "Short Answer",
+          "prompt": "The membership category chosen is ____.",
+          "correctAnswer": "student",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L03-03",
+          "questionType": "Short Answer",
+          "prompt": "Proof of address must be dated within the last ____ months.",
+          "correctAnswer": "3",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L03-04",
+          "questionType": "Short Answer",
+          "prompt": "The maximum number of books that can be borrowed at once is ____.",
+          "correctAnswer": "8",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L03-05",
+          "questionType": "Short Answer",
+          "prompt": "Loan periods for standard books last ____ weeks.",
+          "correctAnswer": "4",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L03-06",
+          "questionType": "Short Answer",
+          "prompt": "Overdue fines are charged at ____ pence per day.",
+          "correctAnswer": "20",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L03-07",
+          "questionType": "Short Answer",
+          "prompt": "The library's study rooms can be booked via the ____ desk.",
+          "correctAnswer": "information",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L03-08",
+          "questionType": "Short Answer",
+          "prompt": "The new card will be ready for collection after ____ days.",
+          "correctAnswer": "2",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L03-09",
+          "questionType": "Short Answer",
+          "prompt": "The member's email address ends in ____.",
+          "correctAnswer": "ac.uk",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L03-10",
+          "questionType": "Short Answer",
+          "prompt": "Replacement cards cost £____.",
+          "correctAnswer": "3",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L03-11",
+          "questionType": "Short Answer",
+          "prompt": "The community garden site covers ____ plots.",
+          "correctAnswer": "24",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L03-12",
+          "questionType": "Short Answer",
+          "prompt": "Plot rental costs £____ per year.",
+          "correctAnswer": "35",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L03-13",
+          "questionType": "Short Answer",
+          "prompt": "Water access is provided from a shared ____.",
+          "correctAnswer": "tank",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L03-14",
+          "questionType": "Short Answer",
+          "prompt": "Applications close on the last day of ____.",
+          "correctAnswer": "April",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L03-15",
+          "questionType": "Short Answer",
+          "prompt": "New plot holders receive a free bag of ____.",
+          "correctAnswer": "compost",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L03-16",
+          "questionType": "Short Answer",
+          "prompt": "The scheme is coordinated by the ____ association.",
+          "correctAnswer": "residents",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L03-17",
+          "questionType": "Multiple Choice",
+          "prompt": "According to the announcement, priority for plots is given to",
+          "optionA": "local residents",
+          "optionB": "first-time applicants",
+          "optionC": "families with children",
+          "optionD": "retired residents",
+          "correctAnswer": "local residents",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L03-18",
+          "questionType": "Multiple Choice",
+          "prompt": "Plot holders are required to attend",
+          "optionA": "a monthly meeting",
+          "optionB": "an induction session",
+          "optionC": "a gardening exam",
+          "optionD": "a volunteer day each week",
+          "correctAnswer": "an induction session",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L03-19",
+          "questionType": "Multiple Choice",
+          "prompt": "The announcement states that unused plots will be",
+          "optionA": "sold to developers",
+          "optionB": "reassigned after six months",
+          "optionC": "left empty",
+          "optionD": "converted to parking",
+          "correctAnswer": "reassigned after six months",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L03-20",
+          "questionType": "Multiple Choice",
+          "prompt": "Tools can be borrowed from the",
+          "optionA": "site office",
+          "optionB": "residents' association",
+          "optionC": "local hardware shop",
+          "optionD": "council depot",
+          "correctAnswer": "site office",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L03-21",
+          "questionType": "Short Answer",
+          "prompt": "Ben's internship lasted ____ weeks.",
+          "correctAnswer": "10",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L03-22",
+          "questionType": "Short Answer",
+          "prompt": "Aisha's internship was based at a company with ____ employees.",
+          "correctAnswer": "200",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L03-23",
+          "questionType": "Short Answer",
+          "prompt": "Ben was supervised by a ____ manager.",
+          "correctAnswer": "senior",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L03-24",
+          "questionType": "Short Answer",
+          "prompt": "Aisha's weekly report was due every ____.",
+          "correctAnswer": "Friday",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L03-25",
+          "questionType": "Short Answer",
+          "prompt": "Ben's favourite task involved analysing ____ data.",
+          "correctAnswer": "customer",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L03-26",
+          "questionType": "Short Answer",
+          "prompt": "Aisha will share her experience at a careers ____ next term.",
+          "correctAnswer": "fair",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L03-27",
+          "questionType": "Multiple Choice",
+          "prompt": "Ben's internship was mainly based in the",
+          "optionA": "marketing department",
+          "optionB": "finance department",
+          "optionC": "research department",
+          "optionD": "customer service team",
+          "correctAnswer": "research department",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L03-28",
+          "questionType": "Multiple Choice",
+          "prompt": "Aisha found the most challenging part of her internship was",
+          "optionA": "the long hours",
+          "optionB": "presenting to senior staff",
+          "optionC": "the commute",
+          "optionD": "learning new software",
+          "correctAnswer": "presenting to senior staff",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L03-29",
+          "questionType": "Multiple Choice",
+          "prompt": "Both agree that their internships improved their",
+          "optionA": "technical writing",
+          "optionB": "time management",
+          "optionC": "public speaking",
+          "optionD": "teamwork skills",
+          "correctAnswer": "teamwork skills",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L03-30",
+          "questionType": "Multiple Choice",
+          "prompt": "Ben plans to apply the experience by",
+          "optionA": "changing his degree subject",
+          "optionB": "applying for a graduate role at the same company",
+          "optionC": "starting his own business",
+          "optionD": "taking a gap year",
+          "correctAnswer": "applying for a graduate role at the same company",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L03-31",
+          "questionType": "Short Answer",
+          "prompt": "The earliest known writing system developed in ____.",
+          "correctAnswer": "Mesopotamia",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L03-32",
+          "questionType": "Short Answer",
+          "prompt": "Early writing was primarily used for ____ records.",
+          "correctAnswer": "trade",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L03-33",
+          "questionType": "Short Answer",
+          "prompt": "Cuneiform script was written on tablets made of ____.",
+          "correctAnswer": "clay",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L03-34",
+          "questionType": "Short Answer",
+          "prompt": "The lecturer dates the earliest full sentences in writing to around ____ BCE.",
+          "correctAnswer": "2600",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L03-35",
+          "questionType": "Short Answer",
+          "prompt": "Alphabetic writing systems reduced the number of symbols needed to fewer than ____.",
+          "correctAnswer": "30",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L03-36",
+          "questionType": "Short Answer",
+          "prompt": "The spread of alphabets was greatly helped by trade across the ____ Sea.",
+          "correctAnswer": "Mediterranean",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L03-37",
+          "questionType": "Short Answer",
+          "prompt": "Movable type printing was developed in ____ during the eleventh century.",
+          "correctAnswer": "China",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L03-38",
+          "questionType": "Short Answer",
+          "prompt": "The Gutenberg press, introduced in Europe, dramatically increased ____ rates.",
+          "correctAnswer": "literacy",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L03-39",
+          "questionType": "Short Answer",
+          "prompt": "The lecturer notes that digital text has changed reading habits within the last ____ years.",
+          "correctAnswer": "20",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L03-40",
+          "questionType": "Short Answer",
+          "prompt": "The lecture ends by discussing the future role of ____ language processing.",
+          "correctAnswer": "natural",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        }
+      ],
+      "transcript": "[Part 1]\nYou will hear a conversation between a librarian and a new member registering for a library card. First you have some time to look at questions 1 to 10. The new member's surname is spelled Devereaux. The membership category chosen is student. Proof of address must be dated within the last 3 months. The maximum number of books that can be borrowed at once is 8. Loan periods for standard books last 4 weeks. Overdue fines are charged at 20 pence per day. The library's study rooms can be booked via the information desk. The new card will be ready for collection after 2 days. The member's email address ends in ac.uk. Replacement cards cost £3.\n\n[Part 2]\nYou will hear an announcement about a new community garden scheme. First you have some time to look at questions 11 to 20. The community garden site covers 24 plots. Plot rental costs £35 per year. Water access is provided from a shared tank. Applications close on the last day of April. New plot holders receive a free bag of compost. The scheme is coordinated by the residents association. Priority for the new plots is given to local residents living within the borough boundary. All plot holders are required to attend a single induction session before receiving their keys. Any plot left unused will be reassigned to another applicant after six months, the coordinator explained. Shared tools are kept in the site office and can be borrowed by any registered plot holder.\n\n[Part 3]\nYou will hear two students, Ben and Aisha, discussing their recent internships. First you have some time to look at questions 21 to 30. Ben's internship lasted 10 weeks. Aisha's internship was based at a company with 200 employees. Ben was supervised by a senior manager. Aisha's weekly report was due every Friday. Ben's favourite task involved analysing customer data. Aisha will share her experience at a careers fair next term. Ben explained that his internship was based mainly in the research department, helping with data analysis. Aisha admitted the most challenging part for her was presenting findings to senior staff each week. Both agreed that, above all, the internships had improved their teamwork skills through daily collaboration. Ben said he now plans to apply for a graduate role at the same company after finishing his degree.\n\n[Part 4]\nYou will hear part of a lecture on the development of written language. First you have some time to look at questions 31 to 40. The earliest known writing system developed in Mesopotamia. Early writing was primarily used for trade records. Cuneiform script was written on tablets made of clay. The lecturer dates the earliest full sentences in writing to around 2600 BCE. Alphabetic writing systems reduced the number of symbols needed to fewer than 30. The spread of alphabets was greatly helped by trade across the Mediterranean Sea. Movable type printing was developed in China during the eleventh century. The Gutenberg press, introduced in Europe, dramatically increased literacy rates. The lecturer notes that digital text has changed reading habits within the last 20 years. The lecture ends by discussing the future role of natural language processing."
+    },
+    "Reading": {
+      "durationMinutes": 60,
+      "questions": [
+        {
+          "questionId": "R03-01",
+          "questionType": "Short Answer",
+          "prompt": "Coffee cultivation is believed to have originated in the highlands of ____.",
+          "correctAnswer": "Ethiopia",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-02",
+          "questionType": "Short Answer",
+          "prompt": "Coffee was first cultivated as a crop on the Arabian Peninsula around the ____ century.",
+          "correctAnswer": "fifteenth",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-03",
+          "questionType": "Short Answer",
+          "prompt": "Coffeehouses first appeared in cities such as ____ before spreading to Europe.",
+          "correctAnswer": "Mecca",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-04",
+          "questionType": "Short Answer",
+          "prompt": "European traders introduced coffee cultivation to colonies in ____ during the seventeenth century.",
+          "correctAnswer": "Java",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-05",
+          "questionType": "Short Answer",
+          "prompt": "Brazil became the world's largest coffee producer by the ____ century.",
+          "correctAnswer": "nineteenth",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-06",
+          "questionType": "Short Answer",
+          "prompt": "Today, coffee is grown commercially in over ____ countries.",
+          "correctAnswer": "70",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-07",
+          "questionType": "Multiple Choice",
+          "prompt": "According to the passage, coffeehouses in early Arabian cities served mainly as places for",
+          "optionA": "religious ceremonies",
+          "optionB": "social and intellectual gathering",
+          "optionC": "agricultural trading",
+          "optionD": "government meetings",
+          "correctAnswer": "social and intellectual gathering",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-08",
+          "questionType": "Multiple Choice",
+          "prompt": "The passage suggests Brazil's rise as the leading producer was linked to",
+          "optionA": "favourable climate and large-scale plantations",
+          "optionB": "government bans on rival producers",
+          "optionC": "a shortage of coffee in Europe",
+          "optionD": "new brewing techniques",
+          "correctAnswer": "favourable climate and large-scale plantations",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-09",
+          "questionType": "True/False/Not Given",
+          "prompt": "Coffee cultivation began in Brazil before spreading elsewhere.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-10",
+          "questionType": "True/False/Not Given",
+          "prompt": "Coffeehouses existed in Arabian cities before they appeared in Europe.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-11",
+          "questionType": "True/False/Not Given",
+          "prompt": "Coffee is currently grown in fewer than ten countries.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-12",
+          "questionType": "True/False/Not Given",
+          "prompt": "European colonists introduced coffee cultivation to Java.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-13",
+          "questionType": "True/False/Not Given",
+          "prompt": "Modern coffee prices are set by a single international body.",
+          "correctAnswer": "Not Given",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R03-14",
+          "questionType": "Short Answer",
+          "prompt": "Dense city centres can be up to ____ degrees warmer than nearby countryside at night.",
+          "correctAnswer": "7",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-15",
+          "questionType": "Short Answer",
+          "prompt": "Dark surfaces such as asphalt absorb and re-emit ____ energy.",
+          "correctAnswer": "thermal",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-16",
+          "questionType": "Short Answer",
+          "prompt": "One common mitigation strategy involves painting rooftops a lighter ____.",
+          "correctAnswer": "colour",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-17",
+          "questionType": "Short Answer",
+          "prompt": "Urban tree cover has been shown to reduce local temperatures by up to ____ degrees.",
+          "correctAnswer": "4",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-18",
+          "questionType": "Short Answer",
+          "prompt": "A pilot scheme in one city planted ____ trees along major roads.",
+          "correctAnswer": "10000",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-19",
+          "questionType": "Short Answer",
+          "prompt": "Green roofs also help reduce a building's demand for ____.",
+          "correctAnswer": "cooling",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-20",
+          "questionType": "Short Answer",
+          "prompt": "Permeable paving allows rainwater to be absorbed rather than causing ____.",
+          "correctAnswer": "runoff",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-21",
+          "questionType": "Multiple Choice",
+          "prompt": "The main cause of the urban heat island effect described in the passage is",
+          "optionA": "increased rainfall",
+          "optionB": "dark surfaces absorbing thermal energy",
+          "optionC": "higher altitude",
+          "optionD": "reduced traffic",
+          "correctAnswer": "dark surfaces absorbing thermal energy",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-22",
+          "questionType": "Multiple Choice",
+          "prompt": "According to the passage, urban trees help by",
+          "optionA": "blocking wind",
+          "optionB": "reducing local temperatures",
+          "optionC": "absorbing noise",
+          "optionD": "increasing rainfall",
+          "correctAnswer": "reducing local temperatures",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-23",
+          "questionType": "Multiple Choice",
+          "prompt": "Permeable paving is mentioned as a way to",
+          "optionA": "reduce noise pollution",
+          "optionB": "prevent rainwater runoff",
+          "optionC": "lower construction costs",
+          "optionD": "increase parking space",
+          "correctAnswer": "prevent rainwater runoff",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-24",
+          "questionType": "True/False/Not Given",
+          "prompt": "Rural areas are typically warmer at night than dense city centres.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-25",
+          "questionType": "True/False/Not Given",
+          "prompt": "Lighter rooftop colours are used to reduce heat absorption.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-26",
+          "questionType": "True/False/Not Given",
+          "prompt": "All cities have implemented tree-planting schemes to reduce heat.",
+          "correctAnswer": "Not Given",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-27",
+          "questionType": "True/False/Not Given",
+          "prompt": "Green roofs can reduce a building's cooling needs.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R03-28",
+          "questionType": "Short Answer",
+          "prompt": "Researchers commonly use a card-based gambling task involving ____ decks.",
+          "correctAnswer": "four",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-29",
+          "questionType": "Short Answer",
+          "prompt": "Brain imaging studies frequently highlight activity in the ____ cortex during risky choices.",
+          "correctAnswer": "prefrontal",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-30",
+          "questionType": "Short Answer",
+          "prompt": "One study recorded decision times across ____ trials per participant.",
+          "correctAnswer": "100",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-31",
+          "questionType": "Short Answer",
+          "prompt": "Participants with damage to this brain region showed poorer ____ decision-making.",
+          "correctAnswer": "long-term",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-32",
+          "questionType": "Short Answer",
+          "prompt": "The researchers propose that emotional signals help guide decisions through a process called somatic ____.",
+          "correctAnswer": "marking",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-33",
+          "questionType": "Multiple Choice",
+          "prompt": "The passage suggests that the prefrontal cortex is particularly involved in",
+          "optionA": "basic motor control",
+          "optionB": "decision-making under risk",
+          "optionC": "long-term memory storage",
+          "optionD": "visual processing",
+          "correctAnswer": "decision-making under risk",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-34",
+          "questionType": "Multiple Choice",
+          "prompt": "According to the passage, damage to this brain region is linked to",
+          "optionA": "improved short-term memory",
+          "optionB": "poorer long-term decision-making",
+          "optionC": "faster reaction times",
+          "optionD": "better emotional regulation",
+          "correctAnswer": "poorer long-term decision-making",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-35",
+          "questionType": "True/False/Not Given",
+          "prompt": "The gambling task used in these studies involves more than ten decks of cards.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-36",
+          "questionType": "True/False/Not Given",
+          "prompt": "Damage to the prefrontal cortex has no effect on decision-making.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-37",
+          "questionType": "True/False/Not Given",
+          "prompt": "The somatic marker theory involves emotional signals guiding decisions.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-38",
+          "questionType": "True/False/Not Given",
+          "prompt": "All participants in the studies were diagnosed with a medical condition.",
+          "correctAnswer": "Not Given",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-39",
+          "questionType": "True/False/Not Given",
+          "prompt": "This research has no practical applications outside the laboratory.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R03-40",
+          "questionType": "True/False/Not Given",
+          "prompt": "Financial planning is mentioned as one practical application of this research.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        }
+      ],
+      "passages": [
+        {
+          "passageNumber": 1,
+          "title": "The Story of Coffee Cultivation",
+          "text": "Coffee is now one of the most widely traded agricultural products in the world, yet its cultivation began in a relatively small region and spread only gradually across continents over several centuries. Coffee cultivation is believed to have originated in the highlands of Ethiopia. Coffee was first cultivated as a crop on the Arabian Peninsula around the fifteenth century. Coffeehouses first appeared in cities such as Mecca before spreading to Europe. European traders introduced coffee cultivation to colonies in Java during the seventeenth century. Brazil became the world's largest coffee producer by the nineteenth century. Today, coffee is grown commercially in over 70 countries. Early coffeehouses functioned largely as places for social and intellectual gathering, where news and ideas were exchanged. Brazil's rise was closely linked to its favourable climate and the establishment of large-scale plantations across vast areas of suitable land. Coffee cultivation is believed to have originated in the highlands of Ethiopia, not Brazil. Coffeehouses first appeared in cities such as Mecca before spreading to Europe. Today, coffee is grown commercially in over 70 countries, far more than ten. European traders introduced coffee cultivation to colonies in Java during the seventeenth century. Brazil became the world's largest coffee producer by the nineteenth century.",
+          "wordCount": 205
+        },
+        {
+          "passageNumber": 2,
+          "title": "How Cities Manage Urban Heat",
+          "text": "As global temperatures rise, city planners are increasingly focused on the urban heat island effect, a phenomenon in which built-up areas become significantly warmer than surrounding rural land. Dense city centres can be up to 7 degrees warmer than nearby countryside at night. Dark surfaces such as asphalt absorb and re-emit thermal energy. One common mitigation strategy involves painting rooftops a lighter colour. Urban tree cover has been shown to reduce local temperatures by up to 4 degrees. A pilot scheme in one city planted 10000 trees along major roads. Green roofs also help reduce a building's demand for cooling. Permeable paving allows rainwater to be absorbed rather than causing runoff. Dark surfaces such as asphalt absorb and re-emit thermal energy, which is identified as the main cause of the urban heat island effect. Urban tree cover has been shown to reduce local temperatures by up to 4 degrees, providing meaningful relief in hot weather. Permeable paving allows rainwater to be absorbed rather than causing runoff, addressing both heat and drainage concerns. Dense city centres can be up to 7 degrees warmer than nearby countryside at night. One common mitigation strategy involves painting rooftops a lighter colour. A pilot scheme in one city planted 10000 trees along major roads. Green roofs also help reduce a building's demand for cooling.",
+          "wordCount": 219
+        },
+        {
+          "passageNumber": 3,
+          "title": "The Neuroscience of Decision-Making Under Uncertainty",
+          "text": "Understanding how the human brain makes decisions when outcomes are uncertain has become a major focus of cognitive neuroscience, with implications ranging from financial planning to medical diagnosis. Researchers commonly use a card-based gambling task involving four decks. Brain imaging studies frequently highlight activity in the prefrontal cortex during risky choices. One study recorded decision times across 100 trials per participant. Participants with damage to this brain region showed poorer long-term decision-making. The researchers propose that emotional signals help guide decisions through a process called somatic marking. Brain imaging studies frequently highlight activity in the prefrontal cortex during risky choices, pointing to its role in decision-making under risk. Participants with damage to this brain region showed poorer long-term decision-making across repeated trials. Researchers commonly use a card-based gambling task involving four decks. Participants with damage to this brain region showed poorer long-term decision-making. The researchers propose that emotional signals help guide decisions through a process called somatic marking. One study recorded decision times across 100 trials per participant. Understanding how the human brain makes decisions when outcomes are uncertain has become a major focus of cognitive neuroscience, with implications ranging from financial planning to medical diagnosis. Understanding how the human brain makes decisions when outcomes are uncertain has become a major focus of cognitive neuroscience, with implications ranging from financial planning to medical diagnosis.",
+          "wordCount": 224
+        }
+      ],
+      "passageText": "Passage 1: The Story of Coffee Cultivation\nCoffee is now one of the most widely traded agricultural products in the world, yet its cultivation began in a relatively small region and spread only gradually across continents over several centuries. Coffee cultivation is believed to have originated in the highlands of Ethiopia. Coffee was first cultivated as a crop on the Arabian Peninsula around the fifteenth century. Coffeehouses first appeared in cities such as Mecca before spreading to Europe. European traders introduced coffee cultivation to colonies in Java during the seventeenth century. Brazil became the world's largest coffee producer by the nineteenth century. Today, coffee is grown commercially in over 70 countries. Early coffeehouses functioned largely as places for social and intellectual gathering, where news and ideas were exchanged. Brazil's rise was closely linked to its favourable climate and the establishment of large-scale plantations across vast areas of suitable land. Coffee cultivation is believed to have originated in the highlands of Ethiopia, not Brazil. Coffeehouses first appeared in cities such as Mecca before spreading to Europe. Today, coffee is grown commercially in over 70 countries, far more than ten. European traders introduced coffee cultivation to colonies in Java during the seventeenth century. Brazil became the world's largest coffee producer by the nineteenth century.\n\nPassage 2: How Cities Manage Urban Heat\nAs global temperatures rise, city planners are increasingly focused on the urban heat island effect, a phenomenon in which built-up areas become significantly warmer than surrounding rural land. Dense city centres can be up to 7 degrees warmer than nearby countryside at night. Dark surfaces such as asphalt absorb and re-emit thermal energy. One common mitigation strategy involves painting rooftops a lighter colour. Urban tree cover has been shown to reduce local temperatures by up to 4 degrees. A pilot scheme in one city planted 10000 trees along major roads. Green roofs also help reduce a building's demand for cooling. Permeable paving allows rainwater to be absorbed rather than causing runoff. Dark surfaces such as asphalt absorb and re-emit thermal energy, which is identified as the main cause of the urban heat island effect. Urban tree cover has been shown to reduce local temperatures by up to 4 degrees, providing meaningful relief in hot weather. Permeable paving allows rainwater to be absorbed rather than causing runoff, addressing both heat and drainage concerns. Dense city centres can be up to 7 degrees warmer than nearby countryside at night. One common mitigation strategy involves painting rooftops a lighter colour. A pilot scheme in one city planted 10000 trees along major roads. Green roofs also help reduce a building's demand for cooling.\n\nPassage 3: The Neuroscience of Decision-Making Under Uncertainty\nUnderstanding how the human brain makes decisions when outcomes are uncertain has become a major focus of cognitive neuroscience, with implications ranging from financial planning to medical diagnosis. Researchers commonly use a card-based gambling task involving four decks. Brain imaging studies frequently highlight activity in the prefrontal cortex during risky choices. One study recorded decision times across 100 trials per participant. Participants with damage to this brain region showed poorer long-term decision-making. The researchers propose that emotional signals help guide decisions through a process called somatic marking. Brain imaging studies frequently highlight activity in the prefrontal cortex during risky choices, pointing to its role in decision-making under risk. Participants with damage to this brain region showed poorer long-term decision-making across repeated trials. Researchers commonly use a card-based gambling task involving four decks. Participants with damage to this brain region showed poorer long-term decision-making. The researchers propose that emotional signals help guide decisions through a process called somatic marking. One study recorded decision times across 100 trials per participant. Understanding how the human brain makes decisions when outcomes are uncertain has become a major focus of cognitive neuroscience, with implications ranging from financial planning to medical diagnosis. Understanding how the human brain makes decisions when outcomes are uncertain has become a major focus of cognitive neuroscience, with implications ranging from financial planning to medical diagnosis."
+    },
+    "Writing": {
+      "durationMinutes": 60,
+      "questions": [
+        {
+          "questionId": "W03-01",
+          "questionType": "Essay",
+          "prompt": "The diagram below shows the process of producing bottled drinking water, from source to shelf. Summarise the information by describing the main stages of the process. Write at least 150 words.",
+          "marks": 1,
+          "task": 1,
+          "chartData": {
+            "stages": [
+              "Water extracted from spring source",
+              "Filtration to remove sediment",
+              "Ultraviolet treatment for purification",
+              "Mineral content tested in laboratory",
+              "Water bottled and sealed on production line",
+              "Bottles labelled and packed into crates",
+              "Crates transported to distribution centres"
+            ]
+          },
+          "modelAnswer": "The diagram illustrates the seven-stage process by which spring water is transformed into bottled drinking water ready for sale.\n\nThe process begins with water being extracted directly from a natural spring source. It then passes through a filtration stage designed to remove sediment and larger particles. Following this, the water undergoes ultraviolet treatment, a purification method that eliminates microorganisms without the use of chemicals.\n\nOnce purified, samples of the water are sent to a laboratory, where mineral content is tested to ensure it meets quality standards. After passing these checks, the water moves to a production line, where it is bottled and sealed. The sealed bottles are then labelled and packed into crates.\n\nIn the final stage, these crates are loaded and transported to distribution centres, from where the bottled water is delivered to retailers. Overall, the process moves in a clear, linear sequence from natural extraction through purification and testing to packaging and distribution.",
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "W03-02",
+          "questionType": "Essay",
+          "prompt": "In many countries, more people are choosing to work from home rather than commute to an office. What are the advantages and disadvantages of this trend? Write at least 250 words.",
+          "marks": 1,
+          "task": 2,
+          "modelAnswer": "The shift toward home-based work, accelerated by recent technological change, brings both clear benefits and notable drawbacks that deserve careful consideration.\n\nAmong the advantages, the most obvious is the time and cost saved by eliminating a daily commute. Employees can use this recovered time for rest, family, or personal development, which often improves overall wellbeing. Working from home can also increase flexibility, allowing people to arrange their schedules around personal responsibilities such as childcare, provided their output remains consistent.\n\nHowever, the disadvantages are equally significant. Many employees report feelings of isolation when working remotely for extended periods, since spontaneous conversations and informal support from colleagues become harder to replicate online. Home working can also blur the boundary between professional and personal life, leading some people to work longer hours than they would in an office, ultimately harming their work-life balance.\n\nEmployers, too, face challenges in maintaining company culture and ensuring effective collaboration when teams are physically dispersed. Training new employees remotely, for example, can take considerably longer than in a shared office environment.\n\nIn conclusion, while working from home offers valuable flexibility and reduces commuting burdens, it also risks social isolation and blurred boundaries between work and personal life. A hybrid approach, combining office and home working, may offer the most balanced solution for both employees and employers.",
+          "correctAnswer": ""
+        }
+      ],
+      "bandDescriptors": [
+        "Task Achievement / Response",
+        "Coherence and Cohesion",
+        "Lexical Resource",
+        "Grammatical Range and Accuracy"
+      ]
+    },
+    "Speaking": {
+      "durationMinutes": 14,
+      "questions": [
+        {
+          "questionId": "S03-01",
+          "questionType": "Speaking",
+          "prompt": "Do you prefer reading books in print or on a screen?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S03-02",
+          "questionType": "Speaking",
+          "prompt": "What kind of music do you usually listen to?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S03-03",
+          "questionType": "Speaking",
+          "prompt": "How often do you visit your local library or bookshop?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S03-04",
+          "questionType": "Speaking",
+          "prompt": "Do you think it's important to keep learning new things as an adult?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S03-05",
+          "questionType": "Speaking",
+          "prompt": "Describe a memorable journey you have taken. You should say: where you went, who you travelled with, what you did during the journey, and explain why it was memorable.",
+          "marks": 1,
+          "part": 2,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S03-06",
+          "questionType": "Speaking",
+          "prompt": "How do you think travel affects a person's understanding of other cultures?",
+          "marks": 1,
+          "part": 3,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S03-07",
+          "questionType": "Speaking",
+          "prompt": "Do you think people travel more now than in the past? Why?",
+          "marks": 1,
+          "part": 3,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S03-08",
+          "questionType": "Speaking",
+          "prompt": "What are the environmental impacts of increased international travel?",
+          "marks": 1,
+          "part": 3,
+          "correctAnswer": ""
+        }
+      ],
+      "bandDescriptors": [
+        "Fluency and Coherence",
+        "Lexical Resource",
+        "Grammatical Range and Accuracy",
+        "Pronunciation"
+      ]
+    }
+  },
+  "version": "1.0.1",
+  "contentHash": "5f35955c839dc9e7dafb5519bff3ca0e9126d188494897b7612fd538ed97a40c",
+  "publishedHash": "fcc5e6200e109c1b067f49fff78824c4e8dd7820fa60df32039f824fa61f2b83"
+}

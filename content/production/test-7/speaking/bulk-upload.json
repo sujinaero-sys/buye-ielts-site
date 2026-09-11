@@ -1,0 +1,94 @@
+{
+  "module": "Speaking",
+  "durationMinutes": 14,
+  "rows": [
+    {
+      "questionType": "Speaking",
+      "prompt": "What kind of books do you enjoy reading?",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Speaking",
+      "prompt": "Do you prefer physical books or e-books?",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Speaking",
+      "prompt": "How often do you visit a public library?",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Speaking",
+      "prompt": "Did you read many books when you were a child?",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Speaking",
+      "prompt": "Describe a memorable journey you took by train or bus. You should say: where you went, who you traveled with, what you saw during the trip, and explain why this journey was memorable to you.",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Speaking",
+      "prompt": "How has public transportation changed in your country over the past decade?",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Speaking",
+      "prompt": "Do you think private cars will eventually be banned from city centres?",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Speaking",
+      "prompt": "What measures can governments take to encourage people to travel sustainably?",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    }
+  ]
+}

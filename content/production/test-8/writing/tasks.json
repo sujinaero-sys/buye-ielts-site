@@ -1,0 +1,21 @@
+[
+  {
+    "questionId": "W08-01",
+    "questionType": "Essay",
+    "prompt": "The line graph below shows energy consumption trends across three sectors in country 8 from 2000 to 2024.",
+    "marks": 1,
+    "task": 1,
+    "chartData": "Sector 1: 50 -> 80; Sector 2: 70 -> 60; Sector 3: 30 -> 90.",
+    "modelAnswer": "The line graph illustrates energy consumption trends across three distinct sectors in country 8 between 2000 and 2024. Overall, energy usage increased significantly in Sector 1 and Sector 3, while Sector 2 experienced a gradual decline over the 24-year period. Sector 3 emerged as the largest energy consumer by the end of the timeframe. In 2000, Sector 2 accounted for the highest energy consumption at 70 units, followed by Sector 1 at 50 units and Sector 3 at 30 units. By 2012, Sector 1 overtook Sector 2 as consumption in Sector 2 dropped steadily. By 2024, Sector 3 experienced remarkable growth, reaching 90 units to become the dominant sector. Sector 1 also expanded steadily to 80 units, whereas Sector 2 fell to 60 units. In summary, energy demand shifted substantially toward Sector 3 over the period.",
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "W08-02",
+    "questionType": "Essay",
+    "prompt": "In many countries, government funding for arts and culture has been reduced in favor of healthcare and education. Is this a positive or negative development?",
+    "marks": 1,
+    "task": 2,
+    "modelAnswer": "Reallocating government funding from cultural initiatives to healthcare and education is a controversial public policy decision. While healthcare and education are essential for societal well-being, I believe completely neglecting arts funding is a negative development for cultural heritage and community cohesion. On the one hand, prioritizing healthcare and education addresses fundamental human needs. Modern medical facilities save lives, and well-funded schools equip young people with essential skills for the modern workforce. During economic downturns, governments must ensure that primary public services remain operational. On the other hand, art and culture play a vital role in preserving national identity and fostering community creativity. Public support for museums, theatres, and historical sites ensures that cultural heritage remains accessible to all citizens rather than becoming restricted to wealthy individuals. Furthermore, a vibrant cultural sector stimulates tourism and creates employment in creative industries. In conclusion, while healthcare and education deserve primary budget allocations, eliminating cultural funding entirely harms society's creative vitality and national heritage.",
+    "correctAnswer": ""
+  }
+]

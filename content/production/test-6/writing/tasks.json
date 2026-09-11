@@ -1,0 +1,21 @@
+[
+  {
+    "questionId": "W06-01",
+    "questionType": "Essay",
+    "prompt": "The table below shows the average daily agricultural water usage (in millions of litres) across four regions in 2010 and 2023.",
+    "marks": 1,
+    "task": 1,
+    "chartData": "Region A: 120 (2010) -> 145 (2023); Region B: 210 -> 190; Region C: 85 -> 110; Region D: 310 -> 340.",
+    "modelAnswer": "The table compares daily agricultural water consumption across four distinct geographical regions in 2010 and 2023. Overall, water usage increased in three out of the four regions, with Region D consistently registering the highest consumption levels across both recorded years. Region B was the only area to experience a decline in agricultural water usage over the 13-year period. In 2010, Region D led water consumption at 310 million litres per day, followed by Region B at 210 million litres. Regions A and C consumed significantly less water, at 120 million and 85 million litres per day respectively. By 2023, consumption in Region D rose to 340 million litres daily. Similarly, Region A experienced noticeable growth, increasing to 145 million litres per day, while Region C recorded a moderate rise to 110 million litres. Conversely, Region B reduced its daily usage from 210 million to 190 million litres. In summary, agricultural water demand expanded overall, driven by increases in Regions A, C, and D.",
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "W06-02",
+    "questionType": "Essay",
+    "prompt": "Some people believe that governments should subsidize healthy food options such as fresh fruit and vegetables, while others argue that public funds should be spent on healthcare infrastructure. Discuss both views and give your opinion.",
+    "marks": 1,
+    "task": 2,
+    "modelAnswer": "Subsidizing nutritious foods versus allocating public revenues to healthcare infrastructure represents a key debate in public health policy. While upgrading medical facilities provides essential emergency care, I believe subsidizing healthy food yields far greater long-term preventative health benefits for society. On the one hand, advocates of expanding healthcare infrastructure emphasize the immediate necessity of modern medical care. Advanced hospitals, state-of-the-art diagnostic machinery, and well-equipped emergency rooms are essential for treating acute illnesses, injuries, and complex diseases. Without sufficient funding for hospital beds and medical staff, healthcare systems risk collapse during health crises. Furthermore, infrastructure investments ensure that specialized treatments remain accessible to all citizens regardless of income. On the other hand, proponents of food subsidies argue that prevention is more effective than cure. Dietary habits strongly influence the prevalence of chronic conditions such as obesity, diabetes, and cardiovascular diseases. In many countries, fresh fruits and vegetables are more expensive than processed, calorie-dense foods, forcing low-income families toward unhealthy choices. Subsidizing organic produce lowers financial barriers, encouraging healthier eating habits and dramatically reducing the incidence of lifestyle-related illnesses. In my view, prioritizing food subsidies is a more sustainable approach. By reducing dietary health risks across the population, governments can prevent chronic conditions before they require costly hospital treatment, ultimately easing the burden on healthcare infrastructure.",
+    "correctAnswer": ""
+  }
+]

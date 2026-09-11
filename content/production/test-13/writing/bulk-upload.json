@@ -1,0 +1,28 @@
+{
+  "module": "Writing",
+  "durationMinutes": 60,
+  "rows": [
+    {
+      "questionType": "Essay",
+      "prompt": "The line graph below shows energy consumption trends across three sectors in country 13 from 2000 to 2024.",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Essay",
+      "prompt": "In many countries, government funding for arts and culture has been reduced in favor of healthcare and education. Is this a positive or negative development?",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    }
+  ]
+}

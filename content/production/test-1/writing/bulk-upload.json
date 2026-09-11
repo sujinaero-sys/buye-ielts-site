@@ -1,0 +1,28 @@
+{
+  "module": "Writing",
+  "durationMinutes": 60,
+  "rows": [
+    {
+      "questionType": "Essay",
+      "prompt": "The chart below shows the percentage of households in a small city using four different heating fuels in 1995 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Essay",
+      "prompt": "Some people think that governments should invest primarily in public transport rather than roads for private cars. To what extent do you agree or disagree? Give reasons for your answer and include relevant examples from your own knowledge or experience. Write at least 250 words.",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    }
+  ]
+}

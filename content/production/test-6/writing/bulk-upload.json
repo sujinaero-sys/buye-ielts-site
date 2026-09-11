@@ -1,0 +1,28 @@
+{
+  "module": "Writing",
+  "durationMinutes": 60,
+  "rows": [
+    {
+      "questionType": "Essay",
+      "prompt": "The table below shows the average daily agricultural water usage (in millions of litres) across four regions in 2010 and 2023.",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Essay",
+      "prompt": "Some people believe that governments should subsidize healthy food options such as fresh fruit and vegetables, while others argue that public funds should be spent on healthcare infrastructure. Discuss both views and give your opinion.",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    }
+  ]
+}

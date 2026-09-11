@@ -1,0 +1,34 @@
+[
+  {
+    "questionId": "W01-01",
+    "questionType": "Essay",
+    "prompt": "The chart below shows the percentage of households in a small city using four different heating fuels in 1995 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.",
+    "marks": 1,
+    "task": 1,
+    "chartData": {
+      "1995": {
+        "Gas": 55,
+        "Electricity": 20,
+        "Oil": 20,
+        "Solar": 5
+      },
+      "2020": {
+        "Gas": 35,
+        "Electricity": 30,
+        "Oil": 10,
+        "Solar": 25
+      }
+    },
+    "modelAnswer": "The chart compares the share of households using gas, electricity, oil and solar heating in 1995 and 2020. Overall, gas remained the most common fuel in both years, but its share fell considerably, while solar heating grew from a marginal option into a major source.\n\nIn 1995, just over half of households relied on gas, with electricity and oil each supplying a fifth of homes and solar heating used by only a small minority. By 2020, gas use had dropped to around a third of households, and oil usage halved to about a tenth. In contrast, electricity rose moderately, and solar heating increased fivefold to become the second most common fuel.\n\nOverall, the data indicate a clear shift away from oil and, to a lesser extent, gas, toward renewable and electrical alternatives over the twenty-five-year period.",
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "W01-02",
+    "questionType": "Essay",
+    "prompt": "Some people think that governments should invest primarily in public transport rather than roads for private cars. To what extent do you agree or disagree? Give reasons for your answer and include relevant examples from your own knowledge or experience. Write at least 250 words.",
+    "marks": 1,
+    "task": 2,
+    "modelAnswer": "Public spending on transport infrastructure is a recurring policy debate, and I largely agree that prioritising public transport over road expansion produces better long-term outcomes for cities.\n\nFirstly, investment in buses, trams and railways tends to reduce congestion more effectively than building additional roads. Widening a motorway often encourages more people to drive, a phenomenon known as induced demand, so the initial relief from congestion is frequently temporary. By contrast, a reliable rail network can shift large numbers of commuters away from private cars permanently.\n\nSecondly, public transport investment brings environmental benefits. Buses and trains typically emit far less carbon dioxide per passenger than private vehicles, particularly when powered by electricity. Given the urgency of reducing emissions, channelling limited public funds toward low-carbon transport seems a more responsible use of resources than expanding road capacity for private cars.\n\nHowever, road investment cannot be dismissed entirely. Rural communities, where public transport is often impractical due to low population density, still depend heavily on private vehicles and well-maintained roads. Ignoring this need risks leaving rural residents isolated.\n\nIn conclusion, while a balanced approach is necessary, I believe governments should direct the majority of transport funding toward public transport, since it addresses congestion and emissions more sustainably than expanding roads for private cars.",
+    "correctAnswer": ""
+  }
+]

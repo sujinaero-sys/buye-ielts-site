@@ -1,0 +1,66 @@
+[
+  {
+    "questionId": "S02-01",
+    "questionType": "Speaking",
+    "prompt": "Do you enjoy trying new kinds of food? Why or why not?",
+    "marks": 1,
+    "part": 1,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S02-02",
+    "questionType": "Speaking",
+    "prompt": "How do you usually spend your weekends?",
+    "marks": 1,
+    "part": 1,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S02-03",
+    "questionType": "Speaking",
+    "prompt": "Did you learn any foreign languages at school?",
+    "marks": 1,
+    "part": 1,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S02-04",
+    "questionType": "Speaking",
+    "prompt": "What is your favourite season of the year?",
+    "marks": 1,
+    "part": 1,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S02-05",
+    "questionType": "Speaking",
+    "prompt": "Describe a piece of technology you find useful in daily life. You should say: what it is, how often you use it, how you first started using it, and explain why it is useful to you.",
+    "marks": 1,
+    "part": 2,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S02-06",
+    "questionType": "Speaking",
+    "prompt": "How has technology changed communication between family members?",
+    "marks": 1,
+    "part": 3,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S02-07",
+    "questionType": "Speaking",
+    "prompt": "Do you think older people find it harder to adapt to new technology?",
+    "marks": 1,
+    "part": 3,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S02-08",
+    "questionType": "Speaking",
+    "prompt": "What are the disadvantages of relying too heavily on technology?",
+    "marks": 1,
+    "part": 3,
+    "correctAnswer": ""
+  }
+]

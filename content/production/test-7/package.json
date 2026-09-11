@@ -1,0 +1,937 @@
+{
+  "testId": "T07",
+  "title": "BUYE IELTS Practice Test 7",
+  "examType": "Academic",
+  "generatedAt": "2026-09-11T05:27:49.483463+00:00",
+  "qaStatus": "verified",
+  "modules": {
+    "Listening": {
+      "durationMinutes": 30,
+      "questions": [
+        {
+          "questionId": "L07-01",
+          "questionType": "Short Answer",
+          "prompt": "The car renter's surname is spelled ____.",
+          "correctAnswer": "Henderson",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L07-02",
+          "questionType": "Short Answer",
+          "prompt": "The requested vehicle collection day is ____.",
+          "correctAnswer": "Monday",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L07-03",
+          "questionType": "Short Answer",
+          "prompt": "The renter's month of birth is ____.",
+          "correctAnswer": "September",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L07-04",
+          "questionType": "Short Answer",
+          "prompt": "The pickup location office is on ____ Street.",
+          "correctAnswer": "Oakland",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L07-05",
+          "questionType": "Short Answer",
+          "prompt": "The designated emergency contact is the driver's ____.",
+          "correctAnswer": "mother",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L07-06",
+          "questionType": "Short Answer",
+          "prompt": "The booking reference phone number ends in ____.",
+          "correctAnswer": "5512",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L07-07",
+          "questionType": "Short Answer",
+          "prompt": "The required vehicle security deposit is £____.",
+          "correctAnswer": "50",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L07-08",
+          "questionType": "Short Answer",
+          "prompt": "The daily insurance coverage fee is £____.",
+          "correctAnswer": "25",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L07-09",
+          "questionType": "Short Answer",
+          "prompt": "The rental parking bay is situated behind the ____.",
+          "correctAnswer": "station",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L07-10",
+          "questionType": "Short Answer",
+          "prompt": "The rental confirmation voucher will be delivered by ____.",
+          "correctAnswer": "email",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L07-11",
+          "questionType": "Short Answer",
+          "prompt": "The new transit interchange will open in the month of ____.",
+          "correctAnswer": "April",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L07-12",
+          "questionType": "Short Answer",
+          "prompt": "The municipal budget allocated for construction is £____.",
+          "correctAnswer": "18000",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L07-13",
+          "questionType": "Short Answer",
+          "prompt": "Commuters must register their travel cards using an online ____.",
+          "correctAnswer": "portal",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L07-14",
+          "questionType": "Short Answer",
+          "prompt": "The maximum allowable group ticket size is ____ persons.",
+          "correctAnswer": "ten",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L07-15",
+          "questionType": "Short Answer",
+          "prompt": "Free city maps can be collected at the main information ____.",
+          "correctAnswer": "kiosk",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L07-16",
+          "questionType": "Short Answer",
+          "prompt": "Safety audits of the platforms take place every ____ months.",
+          "correctAnswer": "four",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L07-17",
+          "questionType": "Multiple Choice",
+          "prompt": "The primary objective of the new transit interchange is to",
+          "optionA": "reduce traffic bottlenecks",
+          "optionB": "increase parking fees",
+          "optionC": "promote private cars",
+          "optionD": "replace regional trains",
+          "correctAnswer": "reduce traffic bottlenecks",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L07-18",
+          "questionType": "Multiple Choice",
+          "prompt": "Frequent commuters who register online receive a discount of",
+          "optionA": "5 percent",
+          "optionB": "15 percent",
+          "optionC": "25 percent",
+          "optionD": "35 percent",
+          "correctAnswer": "15 percent",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L07-19",
+          "questionType": "Multiple Choice",
+          "prompt": "Feedback regarding transit schedule delays should be reported via the",
+          "optionA": "telephone hotline",
+          "optionB": "mobile app",
+          "optionC": "station complaint box",
+          "optionD": "council website",
+          "correctAnswer": "mobile app",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L07-20",
+          "questionType": "Multiple Choice",
+          "prompt": "Capital funding for the bus terminal extension was provided by a",
+          "optionA": "regional transport grant",
+          "optionB": "private bank loan",
+          "optionC": "local charity donation",
+          "optionD": "national lottery fund",
+          "correctAnswer": "regional transport grant",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L07-21",
+          "questionType": "Short Answer",
+          "prompt": "The university battery recycling trial started in the year ____.",
+          "correctAnswer": "2022",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L07-22",
+          "questionType": "Short Answer",
+          "prompt": "The survey collected feedback from ____ battery technicians.",
+          "correctAnswer": "280",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L07-23",
+          "questionType": "Short Answer",
+          "prompt": "Data gathering was conducted over a period of ____ weeks.",
+          "correctAnswer": "eight",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L07-24",
+          "questionType": "Short Answer",
+          "prompt": "Laboratory observations were logged every ____.",
+          "correctAnswer": "afternoon",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L07-25",
+          "questionType": "Short Answer",
+          "prompt": "The student research team consisted of ____ members.",
+          "correctAnswer": "three",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L07-26",
+          "questionType": "Short Answer",
+          "prompt": "The final report draft must be turned in by ____.",
+          "correctAnswer": "November",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L07-27",
+          "questionType": "Multiple Choice",
+          "prompt": "Ethan and Chloe selected electric vehicle battery recycling because it was",
+          "optionA": "recommended by their professor",
+          "optionB": "relevant to current environmental legislation",
+          "optionC": "covered in a TV documentary",
+          "optionD": "part of a commercial contest",
+          "correctAnswer": "relevant to current environmental legislation",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L07-28",
+          "questionType": "Multiple Choice",
+          "prompt": "They both agreed that the most difficult part of their research was",
+          "optionA": "finding historical data",
+          "optionB": "obtaining supply chain data",
+          "optionC": "interviewing car drivers",
+          "optionD": "calculating chemical emissions",
+          "correctAnswer": "obtaining supply chain data",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L07-29",
+          "questionType": "Multiple Choice",
+          "prompt": "Their project supervisor recommended that they expand the chapter on",
+          "optionA": "market advertising",
+          "optionB": "life cycle analysis",
+          "optionC": "battery disassembly tools",
+          "optionD": "transportation costs",
+          "correctAnswer": "life cycle analysis",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L07-30",
+          "questionType": "Multiple Choice",
+          "prompt": "For their final presentation, the students decided to incorporate",
+          "optionA": "printed posters",
+          "optionB": "digital slide demonstrations",
+          "optionC": "physical battery samples",
+          "optionD": "3D virtual animations",
+          "correctAnswer": "digital slide demonstrations",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L07-31",
+          "questionType": "Short Answer",
+          "prompt": "Paved road networks were first constructed in ancient ____.",
+          "correctAnswer": "Mesopotamia",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L07-32",
+          "questionType": "Short Answer",
+          "prompt": "Roman engineers used specialized instruments to measure road ____.",
+          "correctAnswer": "distances",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L07-33",
+          "questionType": "Short Answer",
+          "prompt": "Surveyors in the Middle Ages relied on iron measuring ____.",
+          "correctAnswer": "rods",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L07-34",
+          "questionType": "Short Answer",
+          "prompt": "During the Renaissance, expanding trade increased demand for skilled ____.",
+          "correctAnswer": "masons",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L07-35",
+          "questionType": "Short Answer",
+          "prompt": "Industrial quarrying techniques enabled mass production of stone ____.",
+          "correctAnswer": "cobblestones",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L07-36",
+          "questionType": "Short Answer",
+          "prompt": "Improved road surfaces significantly reduced overland shipping ____.",
+          "correctAnswer": "costs",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L07-37",
+          "questionType": "Short Answer",
+          "prompt": "Widespread road connectivity led to lower market ____.",
+          "correctAnswer": "prices",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L07-38",
+          "questionType": "Short Answer",
+          "prompt": "In the twentieth century, highway engineering shifted toward asphalt ____.",
+          "correctAnswer": "surfacing",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L07-39",
+          "questionType": "Short Answer",
+          "prompt": "Military transport needs during wartime accelerated paving ____.",
+          "correctAnswer": "durability",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L07-40",
+          "questionType": "Short Answer",
+          "prompt": "Modern road construction focuses on mitigating rainwater ____.",
+          "correctAnswer": "runoffs",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        }
+      ],
+      "transcript": "[Part 1]\nYou will hear a conversation regarding Car Rental & Transport Interchange enquiry. First you have time to look at questions 1 to 10. The car renter's surname is spelled Henderson. The requested vehicle collection day is Monday. The renter's month of birth is September. The pickup location office is on Oakland Street. The designated emergency contact is the driver's mother. The booking reference phone number ends in 5512. The required vehicle security deposit is £50. The daily insurance coverage fee is £25. The rental parking bay is situated behind the station. The rental confirmation voucher will be delivered by email.\n\n[Part 2]\nYou will hear a presentation about community initiative on Car Rental & Transport Interchange. First you have time to look at questions 11 to 20. The new transit interchange will open in the month of April. The municipal budget allocated for construction is £18000. Commuters must register their travel cards using an online portal. The maximum allowable group ticket size is ten persons. Free city maps can be collected at the main information kiosk. Safety audits of the platforms take place every four months. The transport officer highlighted that the interchange was designed mainly to reduce traffic bottlenecks in the city centre. Registered commuters who use the online portal receive a 15 percent discount on monthly passes. Passengers experiencing delays are asked to submit real-time reports through the mobile app. Construction costs for the terminal extension were funded by a regional transport grant.\n\n[Part 3]\nYou will hear two students discussing their academic research project on Car Rental & Transport Interchange. First you have time to look at questions 21 to 30. The university battery recycling trial started in the year 2022. The survey collected feedback from 280 battery technicians. Data gathering was conducted over a period of eight weeks. Laboratory observations were logged every afternoon. The student research team consisted of three members. The final report draft must be turned in by November. The students explained that they chose the topic because it was directly relevant to current environmental legislation. Chloe noted that obtaining accurate supply chain data from manufacturers proved to be their greatest hurdle. Their supervisor advised them to expand their life cycle analysis section to cover raw material extraction. To illustrate the recycling stages, the students chose to use digital slide demonstrations.\n\n[Part 4]\nYou will hear part of a university lecture on the history of Car Rental & Transport Interchange. First you have time to look at questions 31 to 40. Paved road networks were first constructed in ancient Mesopotamia. Roman engineers used specialized instruments to measure road distances. Surveyors in the Middle Ages relied on iron measuring rods. During the Renaissance, expanding trade increased demand for skilled masons. Industrial quarrying techniques enabled mass production of stone cobblestones. Improved road surfaces significantly reduced overland shipping costs. Widespread road connectivity led to lower market prices. In the twentieth century, highway engineering shifted toward asphalt surfacing. Military transport needs during wartime accelerated paving durability. Modern road construction focuses on mitigating rainwater runoffs."
+    },
+    "Reading": {
+      "durationMinutes": 60,
+      "questions": [
+        {
+          "questionId": "R07-01",
+          "questionType": "Short Answer",
+          "prompt": "The tropical sustainable building research center was founded in ____.",
+          "correctAnswer": "1998",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-02",
+          "questionType": "Short Answer",
+          "prompt": "Shaded courtyard systems can lower indoor temperatures by up to ____ degrees.",
+          "correctAnswer": "thirty-five",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-03",
+          "questionType": "Short Answer",
+          "prompt": "Automated louver blinds can reduce solar heat gain by ____ percent.",
+          "correctAnswer": "70",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-04",
+          "questionType": "Short Answer",
+          "prompt": "Fresh air currents are directed through vertical ventilation ____.",
+          "correctAnswer": "shafts",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-05",
+          "questionType": "Short Answer",
+          "prompt": "Roof-mounted solar panels supply power to water circulation ____.",
+          "correctAnswer": "pumps",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-06",
+          "questionType": "Short Answer",
+          "prompt": "High initial construction expenses are caused by specialized thermal ____.",
+          "correctAnswer": "insulation",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-07",
+          "questionType": "Multiple Choice",
+          "prompt": "According to the passage, the primary advantage of passive tropical design is",
+          "optionA": "reducing mechanical cooling requirements",
+          "optionB": "eliminating building foundations",
+          "optionC": "increasing glass window area",
+          "optionD": "lowering property taxes",
+          "correctAnswer": "reducing mechanical cooling requirements",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-08",
+          "questionType": "Multiple Choice",
+          "prompt": "Critics note that adoption of sustainable materials is restricted by",
+          "optionA": "high upfront construction expenses",
+          "optionB": "lack of skilled laborers",
+          "optionC": "strict heritage laws",
+          "optionD": "poor aesthetic appeal",
+          "correctAnswer": "high upfront construction expenses",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-09",
+          "questionType": "True/False/Not Given",
+          "prompt": "The research center studied traditional bamboo structures.",
+          "correctAnswer": "Not Given",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-10",
+          "questionType": "True/False/Not Given",
+          "prompt": "Passive cooling techniques reduce air conditioning energy use.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-11",
+          "questionType": "True/False/Not Given",
+          "prompt": "Tropical solar panels produce less electricity in humid weather.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-12",
+          "questionType": "True/False/Not Given",
+          "prompt": "Shaded courtyards improve natural airflow through buildings.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-13",
+          "questionType": "True/False/Not Given",
+          "prompt": "Maintenance costs for sustainable buildings rise every year.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R07-14",
+          "questionType": "Short Answer",
+          "prompt": "Neuroimaging reveals that sleep strengthens specific synaptic ____.",
+          "correctAnswer": "connections",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-15",
+          "questionType": "Short Answer",
+          "prompt": "Participants who slept after studying showed better memory ____.",
+          "correctAnswer": "recall",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-16",
+          "questionType": "Short Answer",
+          "prompt": "High stress levels negatively affect slow-wave sleep ____.",
+          "correctAnswer": "quality",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-17",
+          "questionType": "Short Answer",
+          "prompt": "Targeted memory reactivation during sleep can boost recall by ____ percent.",
+          "correctAnswer": "six",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-18",
+          "questionType": "Short Answer",
+          "prompt": "Brain activity during sleep is recorded using nocturnal ____.",
+          "correctAnswer": "polysomnography",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-19",
+          "questionType": "Short Answer",
+          "prompt": "Educational institutions are applying sleep research to study ____.",
+          "correctAnswer": "schedules",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-20",
+          "questionType": "Multiple Choice",
+          "prompt": "Neuroscientists discovered that declarative memories are consolidated when brains",
+          "optionA": "enter slow-wave sleep phases",
+          "optionB": "remain fully awake",
+          "optionC": "process loud audio signals",
+          "optionD": "experience muscle movement",
+          "correctAnswer": "enter slow-wave sleep phases",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-21",
+          "questionType": "Multiple Choice",
+          "prompt": "Functional MRI scans demonstrate that the hippocampus is",
+          "optionA": "highly active during REM sleep",
+          "optionB": "dormant throughout the night",
+          "optionC": "unaffected by learning tasks",
+          "optionD": "only active during daytime",
+          "correctAnswer": "highly active during REM sleep",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-22",
+          "questionType": "Multiple Choice",
+          "prompt": "Early twentieth-century memory studies were criticized because they",
+          "optionA": "relied on self-reported sleep logs",
+          "optionB": "used electronic brain monitors",
+          "optionC": "tested only animal subjects",
+          "optionD": "ignored nighttime awakenings",
+          "correctAnswer": "relied on self-reported sleep logs",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-23",
+          "questionType": "True/False/Not Given",
+          "prompt": "Adults require more REM sleep than young infants.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-24",
+          "questionType": "True/False/Not Given",
+          "prompt": "Short afternoon naps improve learning performance.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-25",
+          "questionType": "True/False/Not Given",
+          "prompt": "All brain regions undergo equal metabolic slowing during sleep.",
+          "correctAnswer": "Not Given",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-26",
+          "questionType": "True/False/Not Given",
+          "prompt": "Sleep deprivation impairs emotional regulation circuits.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R07-27",
+          "questionType": "Short Answer",
+          "prompt": "Initial commercial trials of autonomous ships took place in coastal ____.",
+          "correctAnswer": "waters",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-28",
+          "questionType": "Short Answer",
+          "prompt": "Supervised ocean vessels can travel distances exceeding ____ nautical miles.",
+          "correctAnswer": "4000",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-29",
+          "questionType": "Short Answer",
+          "prompt": "Automated navigation systems are designed to safely navigate hazardous ____.",
+          "correctAnswer": "cargo",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-30",
+          "questionType": "Short Answer",
+          "prompt": "Satellite communication links connect vessels to onshore maritime ____.",
+          "correctAnswer": "logistics",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-31",
+          "questionType": "Short Answer",
+          "prompt": "The largest autonomous container ships measure up to ____ metres long.",
+          "correctAnswer": "four00",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-32",
+          "questionType": "Short Answer",
+          "prompt": "Shipboard sensor arrays detect underwater reefs and mineral ____.",
+          "correctAnswer": "deposits",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-33",
+          "questionType": "Multiple Choice",
+          "prompt": "The primary financial incentive for developing autonomous ships is that",
+          "optionA": "crew expenses account for a third of voyage costs",
+          "optionB": "fuel prices have dropped globally",
+          "optionC": "port fees are waived for robotic ships",
+          "optionD": "shipbuilding materials are cheaper",
+          "correctAnswer": "crew expenses account for a third of voyage costs",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-34",
+          "questionType": "Multiple Choice",
+          "prompt": "Sensors on autonomous ships prevent collision by analyzing",
+          "optionA": "dissolved oxygen sensors",
+          "optionB": "satellite radar and optical feeds",
+          "optionC": "underwater sound frequencies",
+          "optionD": "water salinity levels",
+          "correctAnswer": "satellite radar and optical feeds",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-35",
+          "questionType": "Multiple Choice",
+          "prompt": "Maritime insurers remain hesitant about autonomous ships due to concerns over",
+          "optionA": "advanced collision avoidance algorithms",
+          "optionB": "cybersecurity vulnerability and software glitches",
+          "optionC": "excessive sailing speeds",
+          "optionD": "lack of container space",
+          "correctAnswer": "cybersecurity vulnerability and software glitches",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-36",
+          "questionType": "Multiple Choice",
+          "prompt": "Environmental groups support electric autonomous ships because they eliminate",
+          "optionA": "deep sea cargo operations",
+          "optionB": "shipboard diesel exhaust emissions",
+          "optionC": "underwater noise pollution",
+          "optionD": "ballast water discharge",
+          "correctAnswer": "shipboard diesel exhaust emissions",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-37",
+          "questionType": "True/False/Not Given",
+          "prompt": "Autonomous cargo ships require remote human oversight.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-38",
+          "questionType": "True/False/Not Given",
+          "prompt": "International maritime laws currently permit fully unmanned ocean crossings.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-39",
+          "questionType": "True/False/Not Given",
+          "prompt": "Navigational algorithms perform better than human captains in heavy fog.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R07-40",
+          "questionType": "True/False/Not Given",
+          "prompt": "All commercial seaports possess automated docking infrastructure.",
+          "correctAnswer": "Not Given",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        }
+      ],
+      "passages": [
+        {
+          "passageNumber": 1,
+          "title": "Sustainable Architecture in Tropical Climates",
+          "text": "Designing energy-efficient buildings in tropical regions presents unique engineering challenges involving heat dissipation, high humidity, and natural ventilation. The tropical sustainable building research center was founded in 1998. Shaded courtyard systems can lower indoor temperatures by up to thirty-five degrees. Automated louver blinds can reduce solar heat gain by 70 percent. Fresh air currents are directed through vertical ventilation shafts. Roof-mounted solar panels supply power to water circulation pumps. High initial construction expenses are caused by specialized thermal insulation. Architects emphasize that the main advantage of passive tropical design is reducing mechanical cooling requirements. Industry analysts observe that widespread adoption is currently restricted by high upfront construction expenses. The text discusses modern insulation and louver systems without specifying whether bamboo structures were evaluated. Monitoring proves that passive cooling techniques significantly reduce air conditioning energy consumption in hot climates. Data indicates high humidity does not decrease solar panel electrical output compared to dry conditions. Experimental measurements confirm that shaded courtyards effectively enhance natural airflow through interior spaces. Long-term trials show durable eco-friendly materials actually lower annual maintenance expenses over time.",
+          "wordCount": 179
+        },
+        {
+          "passageNumber": 2,
+          "title": "Cognitive Neuroscience of Sleep and Memory Consolidation",
+          "text": "Sleep is no longer viewed as a passive state of rest; recent neuroimaging proves it plays an active role in consolidating long-term memories. Neuroimaging reveals that sleep strengthens specific synaptic connections. Participants who slept after studying showed better memory recall. High stress levels negatively affect slow-wave sleep quality. Targeted memory reactivation during sleep can boost recall by six percent. Brain activity during sleep is recorded using nocturnal polysomnography. Educational institutions are applying sleep research to study schedules. Brain scans confirm declarative memories are consolidated primarily when subjects enter slow-wave sleep phases. fMRI imaging demonstrates that the hippocampus remains highly active during REM sleep, replaying daytime neural patterns. Historical memory studies were criticized because researchers relied on self-reported sleep logs rather than objective brain measurements. Neuroscience data proves infants spend a much higher proportion of sleep time in REM sleep than adults. Controlled trials show a 30-minute afternoon nap significantly improves learning performance on subsequent tasks. The passage describes metabolic changes in the prefrontal cortex but does not state if all brain regions slow equally. Studies confirm that sleep deprivation severely disrupts neural circuits responsible for emotional regulation.",
+          "wordCount": 187
+        },
+        {
+          "passageNumber": 3,
+          "title": "The Economic Impact of Autonomous Freight Shipping",
+          "text": "Autonomous cargo vessels promise to revolutionize international trade by reducing crew costs, optimizing fuel consumption, and improving maritime safety. Initial commercial trials of autonomous ships took place in coastal waters. Supervised ocean vessels can travel distances exceeding 4000 nautical miles. Automated navigation systems are designed to safely navigate hazardous cargo. Satellite communication links connect vessels to onshore maritime logistics. The largest autonomous container ships measure up to four00 metres long. Shipboard sensor arrays detect underwater reefs and mineral deposits. Shipping lines invest in autonomy because crew expenses account for a third of voyage costs on long routes. Onboard navigation systems prevent collisions by continuously analyzing satellite radar and optical feeds. Insurance underwriters express concern over cybersecurity vulnerability and software glitches in remote control systems. Environmental advocates support electric autonomous ships because they eliminate shipboard diesel exhaust emissions. Operators in shore-based control centers maintain continuous remote human oversight over autonomous cargo ships. Existing international maritime conventions require human crew onboard, prohibiting fully unmanned ocean crossings. Sensor fusion algorithms process infrared and radar data better than human vision in heavy fog conditions. The text mentions automated docking trials at select ports but does not state if all commercial seaports possess it.",
+          "wordCount": 199
+        }
+      ],
+      "passageText": "Passage 1: Sustainable Architecture in Tropical Climates\nDesigning energy-efficient buildings in tropical regions presents unique engineering challenges involving heat dissipation, high humidity, and natural ventilation. The tropical sustainable building research center was founded in 1998. Shaded courtyard systems can lower indoor temperatures by up to thirty-five degrees. Automated louver blinds can reduce solar heat gain by 70 percent. Fresh air currents are directed through vertical ventilation shafts. Roof-mounted solar panels supply power to water circulation pumps. High initial construction expenses are caused by specialized thermal insulation. Architects emphasize that the main advantage of passive tropical design is reducing mechanical cooling requirements. Industry analysts observe that widespread adoption is currently restricted by high upfront construction expenses. The text discusses modern insulation and louver systems without specifying whether bamboo structures were evaluated. Monitoring proves that passive cooling techniques significantly reduce air conditioning energy consumption in hot climates. Data indicates high humidity does not decrease solar panel electrical output compared to dry conditions. Experimental measurements confirm that shaded courtyards effectively enhance natural airflow through interior spaces. Long-term trials show durable eco-friendly materials actually lower annual maintenance expenses over time.\n\nPassage 2: Cognitive Neuroscience of Sleep and Memory Consolidation\nSleep is no longer viewed as a passive state of rest; recent neuroimaging proves it plays an active role in consolidating long-term memories. Neuroimaging reveals that sleep strengthens specific synaptic connections. Participants who slept after studying showed better memory recall. High stress levels negatively affect slow-wave sleep quality. Targeted memory reactivation during sleep can boost recall by six percent. Brain activity during sleep is recorded using nocturnal polysomnography. Educational institutions are applying sleep research to study schedules. Brain scans confirm declarative memories are consolidated primarily when subjects enter slow-wave sleep phases. fMRI imaging demonstrates that the hippocampus remains highly active during REM sleep, replaying daytime neural patterns. Historical memory studies were criticized because researchers relied on self-reported sleep logs rather than objective brain measurements. Neuroscience data proves infants spend a much higher proportion of sleep time in REM sleep than adults. Controlled trials show a 30-minute afternoon nap significantly improves learning performance on subsequent tasks. The passage describes metabolic changes in the prefrontal cortex but does not state if all brain regions slow equally. Studies confirm that sleep deprivation severely disrupts neural circuits responsible for emotional regulation.\n\nPassage 3: The Economic Impact of Autonomous Freight Shipping\nAutonomous cargo vessels promise to revolutionize international trade by reducing crew costs, optimizing fuel consumption, and improving maritime safety. Initial commercial trials of autonomous ships took place in coastal waters. Supervised ocean vessels can travel distances exceeding 4000 nautical miles. Automated navigation systems are designed to safely navigate hazardous cargo. Satellite communication links connect vessels to onshore maritime logistics. The largest autonomous container ships measure up to four00 metres long. Shipboard sensor arrays detect underwater reefs and mineral deposits. Shipping lines invest in autonomy because crew expenses account for a third of voyage costs on long routes. Onboard navigation systems prevent collisions by continuously analyzing satellite radar and optical feeds. Insurance underwriters express concern over cybersecurity vulnerability and software glitches in remote control systems. Environmental advocates support electric autonomous ships because they eliminate shipboard diesel exhaust emissions. Operators in shore-based control centers maintain continuous remote human oversight over autonomous cargo ships. Existing international maritime conventions require human crew onboard, prohibiting fully unmanned ocean crossings. Sensor fusion algorithms process infrared and radar data better than human vision in heavy fog conditions. The text mentions automated docking trials at select ports but does not state if all commercial seaports possess it."
+    },
+    "Writing": {
+      "durationMinutes": 60,
+      "questions": [
+        {
+          "questionId": "W07-01",
+          "questionType": "Essay",
+          "prompt": "The bar chart below shows the percentage of electricity generated from renewable sources in four European countries in 2015 and 2023.",
+          "marks": 1,
+          "task": 1,
+          "chartData": "Country A: 42% (2015) -> 58% (2023); Country B: 30% -> 41%; Country C: 15% -> 29%; Country D: 22% -> 32%.",
+          "modelAnswer": "The bar chart compares the proportion of electricity produced from renewable energy sources in four European nations in 2015 and 2023. Overall, all four countries increased their renewable electricity share over the eight-year period. Country A maintained the highest percentage in both years, while Country C recorded the most rapid proportional growth. In 2015, Country A led with 42% of its electricity generated from renewables, followed by Country B at 30%. Country D generated 22%, whereas Country C recorded the lowest proportion at 15%. By 2023, Country A expanded its renewable share to 58%, remaining the leading country. Country C almost doubled its figure to 29%, representing an increase of 14 percentage points. Country B and Country D also grew steadily, reaching 41% and 32% respectively. In summary, every surveyed nation made clear progress toward renewable energy adoption between 2015 and 2023.",
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "W07-02",
+          "questionType": "Essay",
+          "prompt": "Some people believe that governments should make all public transportation free of charge. Others argue that passengers should pay for their journeys. Discuss both views and give your opinion.",
+          "marks": 1,
+          "task": 2,
+          "modelAnswer": "Providing free public transportation versus charging passenger fares is a subject of major debate among urban planners. While ticket sales help fund transit network operations, I believe zero-fare public transport yields superior social and environmental returns. On the one hand, proponents of charging fares point out that ticket sales generate necessary revenue for transit authorities. This income directly funds routine maintenance, security personnel, and network expansions without relying entirely on local tax revenues. Without fare revenues, transport systems might suffer from budget deficits, leading to reduced service frequency and poorer maintenance standards. On the other hand, advocates of free public transport emphasize its environmental and socio-economic advantages. Fares place a financial strain on low-income workers, limiting their access to employment and education. Eliminating fares encourages private car drivers to switch to public transit, significantly reducing urban traffic congestion and carbon emissions. In my opinion, introducing free public transport is a highly effective policy. The public expenditure required is outweighed by long-term savings in healthcare, reduced road repairs, and lower pollution levels.",
+          "correctAnswer": ""
+        }
+      ],
+      "bandDescriptors": [
+        "Task Achievement / Response",
+        "Coherence and Cohesion",
+        "Lexical Resource",
+        "Grammatical Range and Accuracy"
+      ]
+    },
+    "Speaking": {
+      "durationMinutes": 14,
+      "questions": [
+        {
+          "questionId": "S07-01",
+          "questionType": "Speaking",
+          "prompt": "What kind of books do you enjoy reading?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S07-02",
+          "questionType": "Speaking",
+          "prompt": "Do you prefer physical books or e-books?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S07-03",
+          "questionType": "Speaking",
+          "prompt": "How often do you visit a public library?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S07-04",
+          "questionType": "Speaking",
+          "prompt": "Did you read many books when you were a child?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S07-05",
+          "questionType": "Speaking",
+          "prompt": "Describe a memorable journey you took by train or bus. You should say: where you went, who you traveled with, what you saw during the trip, and explain why this journey was memorable to you.",
+          "marks": 1,
+          "part": 2,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S07-06",
+          "questionType": "Speaking",
+          "prompt": "How has public transportation changed in your country over the past decade?",
+          "marks": 1,
+          "part": 3,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S07-07",
+          "questionType": "Speaking",
+          "prompt": "Do you think private cars will eventually be banned from city centres?",
+          "marks": 1,
+          "part": 3,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S07-08",
+          "questionType": "Speaking",
+          "prompt": "What measures can governments take to encourage people to travel sustainably?",
+          "marks": 1,
+          "part": 3,
+          "correctAnswer": ""
+        }
+      ],
+      "bandDescriptors": [
+        "Fluency and Coherence",
+        "Lexical Resource",
+        "Grammatical Range and Accuracy",
+        "Pronunciation"
+      ]
+    }
+  },
+  "version": "1.0.2",
+  "contentHash": "cd6f9034cb5f6124847ec107a35ec54ea46018953c1bf6c7fcb55348b1cf3cde",
+  "publishedHash": "d72952c1310ca57a655514e18219906cdf8c93854be3524d386e6ce6e36372b0"
+}

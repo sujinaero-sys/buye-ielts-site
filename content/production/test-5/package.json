@@ -1,0 +1,942 @@
+{
+  "testId": "T05",
+  "title": "BUYE IELTS Practice Test 5",
+  "examType": "Academic",
+  "generatedAt": "2026-09-11T05:27:48.976690+00:00",
+  "qaStatus": "verified",
+  "modules": {
+    "Listening": {
+      "durationMinutes": 30,
+      "questions": [
+        {
+          "questionId": "L05-01",
+          "questionType": "Short Answer",
+          "prompt": "The guest's surname is spelled ____.",
+          "correctAnswer": "Marchetti",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L05-02",
+          "questionType": "Short Answer",
+          "prompt": "The room type requested is a ____ room.",
+          "correctAnswer": "twin",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L05-03",
+          "questionType": "Short Answer",
+          "prompt": "The stay will begin on the ____ of October.",
+          "correctAnswer": "9th",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L05-04",
+          "questionType": "Short Answer",
+          "prompt": "The length of stay requested is ____ nights.",
+          "correctAnswer": "4",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L05-05",
+          "questionType": "Short Answer",
+          "prompt": "The conference rate discount is ____ percent.",
+          "correctAnswer": "15",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L05-06",
+          "questionType": "Short Answer",
+          "prompt": "Breakfast is included after ____ am.",
+          "correctAnswer": "6",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L05-07",
+          "questionType": "Short Answer",
+          "prompt": "The hotel is located on ____ Street.",
+          "correctAnswer": "Cathedral",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L05-08",
+          "questionType": "Short Answer",
+          "prompt": "A late check-out can be arranged until ____ pm.",
+          "correctAnswer": "2",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L05-09",
+          "questionType": "Short Answer",
+          "prompt": "The guest's company account number ends in ____.",
+          "correctAnswer": "4408",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L05-10",
+          "questionType": "Short Answer",
+          "prompt": "Confirmation will be sent to the guest's ____.",
+          "correctAnswer": "email",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "L05-11",
+          "questionType": "Short Answer",
+          "prompt": "The museum was founded in ____.",
+          "correctAnswer": "1934",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L05-12",
+          "questionType": "Short Answer",
+          "prompt": "New staff must complete ____ days of training.",
+          "correctAnswer": "3",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L05-13",
+          "questionType": "Short Answer",
+          "prompt": "Staff lockers are located near the ____ entrance.",
+          "correctAnswer": "staff",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L05-14",
+          "questionType": "Short Answer",
+          "prompt": "Uniforms are collected from the ____ office.",
+          "correctAnswer": "personnel",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L05-15",
+          "questionType": "Short Answer",
+          "prompt": "The museum's busiest day is usually ____.",
+          "correctAnswer": "Saturday",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L05-16",
+          "questionType": "Short Answer",
+          "prompt": "Staff receive a discount of ____ percent in the museum shop.",
+          "correctAnswer": "20",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L05-17",
+          "questionType": "Multiple Choice",
+          "prompt": "According to the speaker, new staff should first report to",
+          "optionA": "the main entrance",
+          "optionB": "the security office",
+          "optionC": "the personnel office",
+          "optionD": "the staff canteen",
+          "correctAnswer": "the personnel office",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L05-18",
+          "questionType": "Multiple Choice",
+          "prompt": "The speaker says photography by visitors is restricted in",
+          "optionA": "the whole museum",
+          "optionB": "the ceramics gallery",
+          "optionC": "the gift shop",
+          "optionD": "the entrance hall",
+          "correctAnswer": "the ceramics gallery",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L05-19",
+          "questionType": "Multiple Choice",
+          "prompt": "Staff parking is available",
+          "optionA": "free of charge",
+          "optionB": "at a discounted rate",
+          "optionC": "only for managers",
+          "optionD": "off-site only",
+          "correctAnswer": "at a discounted rate",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L05-20",
+          "questionType": "Multiple Choice",
+          "prompt": "The speaker recommends new staff attend the",
+          "optionA": "monthly social event",
+          "optionB": "curator's weekly briefing",
+          "optionC": "annual conference",
+          "optionD": "volunteer programme",
+          "correctAnswer": "curator's weekly briefing",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "L05-21",
+          "questionType": "Short Answer",
+          "prompt": "The dissertation proposal is due in week ____.",
+          "correctAnswer": "6",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L05-22",
+          "questionType": "Short Answer",
+          "prompt": "The word limit for the full dissertation is ____ words.",
+          "correctAnswer": "10000",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L05-23",
+          "questionType": "Short Answer",
+          "prompt": "Grace plans to interview ____ participants.",
+          "correctAnswer": "15",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L05-24",
+          "questionType": "Short Answer",
+          "prompt": "Leo will attend a ____ workshop on research methods.",
+          "correctAnswer": "research",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L05-25",
+          "questionType": "Short Answer",
+          "prompt": "Grace's supervisor specialises in ____ studies.",
+          "correctAnswer": "social",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L05-26",
+          "questionType": "Short Answer",
+          "prompt": "They plan to meet again in ____ weeks.",
+          "correctAnswer": "two",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L05-27",
+          "questionType": "Multiple Choice",
+          "prompt": "Leo is considering a dissertation on",
+          "optionA": "marine biology",
+          "optionB": "consumer behaviour",
+          "optionC": "renewable energy policy",
+          "optionD": "urban planning",
+          "correctAnswer": "renewable energy policy",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L05-28",
+          "questionType": "Multiple Choice",
+          "prompt": "Grace's main concern about her chosen topic is",
+          "optionA": "access to interview participants",
+          "optionB": "the word count",
+          "optionC": "the submission deadline",
+          "optionD": "finding a supervisor",
+          "correctAnswer": "access to interview participants",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L05-29",
+          "questionType": "Multiple Choice",
+          "prompt": "They agree that the department's ethics process usually takes",
+          "optionA": "one week",
+          "optionB": "two weeks",
+          "optionC": "one month",
+          "optionD": "two months",
+          "correctAnswer": "one month",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L05-30",
+          "questionType": "Multiple Choice",
+          "prompt": "Leo decides his next step should be to",
+          "optionA": "change his topic entirely",
+          "optionB": "email a potential supervisor",
+          "optionC": "start collecting data immediately",
+          "optionD": "drop the module",
+          "correctAnswer": "email a potential supervisor",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "L05-31",
+          "questionType": "Short Answer",
+          "prompt": "Early trade relied heavily on a system known as ____ exchange.",
+          "correctAnswer": "barter",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L05-32",
+          "questionType": "Short Answer",
+          "prompt": "The first metal coins are believed to have been minted in ____.",
+          "correctAnswer": "Lydia",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L05-33",
+          "questionType": "Short Answer",
+          "prompt": "Coins allowed traders to avoid the problem of matching ____ of wants.",
+          "correctAnswer": "coincidence",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L05-34",
+          "questionType": "Short Answer",
+          "prompt": "Paper currency was first widely used in ____ during the Tang and Song dynasties.",
+          "correctAnswer": "China",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L05-35",
+          "questionType": "Short Answer",
+          "prompt": "European banks began issuing paper banknotes around the ____ century.",
+          "correctAnswer": "seventeenth",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L05-36",
+          "questionType": "Short Answer",
+          "prompt": "The gold standard tied currency values to a fixed weight of ____.",
+          "correctAnswer": "gold",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L05-37",
+          "questionType": "Short Answer",
+          "prompt": "Most major economies abandoned the gold standard by the ____ century.",
+          "correctAnswer": "twentieth",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L05-38",
+          "questionType": "Short Answer",
+          "prompt": "Digital payment systems have reduced the use of ____ in many countries.",
+          "correctAnswer": "cash",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L05-39",
+          "questionType": "Short Answer",
+          "prompt": "The lecturer notes central banks now closely monitor ____ currencies.",
+          "correctAnswer": "digital",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        },
+        {
+          "questionId": "L05-40",
+          "questionType": "Short Answer",
+          "prompt": "The lecture closes by considering the future role of ____ currencies.",
+          "correctAnswer": "central bank digital",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 4
+        }
+      ],
+      "transcript": "[Part 1]\nYou will hear a phone conversation between a hotel receptionist and a guest booking accommodation for a conference. First you have some time to look at questions 1 to 10. The guest's surname is spelled Marchetti. The room type requested is a twin room. The stay will begin on the 9th of October. The length of stay requested is 4 nights. The conference rate discount is 15 percent. Breakfast is included after 6 am. The hotel is located on Cathedral Street. A late check-out can be arranged until 2 pm. The guest's company account number ends in 4408. Confirmation will be sent to the guest's email.\n\n[Part 2]\nYou will hear a talk given to new employees during their orientation at a museum. First you have some time to look at questions 11 to 20. The museum was founded in 1934. New staff must complete 3 days of training. Staff lockers are located near the staff entrance. Uniforms are collected from the personnel office. The museum's busiest day is usually Saturday. Staff receive a discount of 20 percent in the museum shop. New staff should first report to the personnel office to collect their identification badge. Photography by visitors is restricted specifically in the ceramics gallery, due to lighting sensitivity of the exhibits. Staff parking is available at a discounted rate in the adjacent car park. New staff are strongly encouraged to attend the curator's weekly briefing to stay informed about current exhibitions.\n\n[Part 3]\nYou will hear two students, Leo and Grace, discussing possible dissertation topics. First you have some time to look at questions 21 to 30. The dissertation proposal is due in week 6. The word limit for the full dissertation is 10000 words. Grace plans to interview 15 participants. Leo will attend a research workshop on research methods. Grace's supervisor specialises in social studies. They plan to meet again in two weeks. Leo said he was leaning toward a dissertation on renewable energy policy in developing regions. Grace's main concern was getting access to enough interview participants for her case study. Both agreed that the department's ethics approval process usually takes about one month. Leo decided his next step should be to email a potential supervisor with expertise in energy policy.\n\n[Part 4]\nYou will hear part of a lecture on the history of currency and trade. First you have some time to look at questions 31 to 40. Early trade relied heavily on a system known as barter exchange. The first metal coins are believed to have been minted in Lydia. Coins allowed traders to avoid the problem of matching coincidence of wants. Paper currency was first widely used in China during the Tang and Song dynasties. European banks began issuing paper banknotes around the seventeenth century. The gold standard tied currency values to a fixed weight of gold. Most major economies abandoned the gold standard by the twentieth century. Digital payment systems have reduced the use of cash in many countries. The lecturer notes central banks now closely monitor digital currencies. The lecture closes by considering the future role of central bank digital currencies."
+    },
+    "Reading": {
+      "durationMinutes": 60,
+      "questions": [
+        {
+          "questionId": "R05-01",
+          "questionType": "Short Answer",
+          "prompt": "Genetic evidence suggests horses were first domesticated on the ____ steppe.",
+          "correctAnswer": "Eurasian",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-02",
+          "questionType": "Short Answer",
+          "prompt": "Early domestication is estimated to have occurred around ____ years ago.",
+          "correctAnswer": "5500",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-03",
+          "questionType": "Short Answer",
+          "prompt": "Horses were initially kept mainly for their ____ and milk.",
+          "correctAnswer": "meat",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-04",
+          "questionType": "Short Answer",
+          "prompt": "The invention of the ____ allowed riders far greater control.",
+          "correctAnswer": "bridle",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-05",
+          "questionType": "Short Answer",
+          "prompt": "Mounted warfare is believed to have spread rapidly from around ____ BCE.",
+          "correctAnswer": "1000",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-06",
+          "questionType": "Short Answer",
+          "prompt": "Selective breeding later produced horses suited to ____ rather than just riding.",
+          "correctAnswer": "farm work",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-07",
+          "questionType": "Multiple Choice",
+          "prompt": "According to the passage, horses were initially valued primarily for",
+          "optionA": "racing",
+          "optionB": "meat and milk",
+          "optionC": "military transport",
+          "optionD": "ceremonial display",
+          "correctAnswer": "meat and milk",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-08",
+          "questionType": "Multiple Choice",
+          "prompt": "The passage suggests the bridle's invention was significant because it",
+          "optionA": "reduced the cost of keeping horses",
+          "optionB": "allowed riders far greater control",
+          "optionC": "made horses faster",
+          "optionD": "improved horse breeding",
+          "correctAnswer": "allowed riders far greater control",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-09",
+          "questionType": "True/False/Not Given",
+          "prompt": "Horses were used for farm work before they were ridden.",
+          "correctAnswer": "Not Given",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-10",
+          "questionType": "True/False/Not Given",
+          "prompt": "Domestication is believed to have taken place on the Eurasian steppe.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-11",
+          "questionType": "True/False/Not Given",
+          "prompt": "Mounted warfare appeared before horses were domesticated for milk production.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-12",
+          "questionType": "True/False/Not Given",
+          "prompt": "All ancient societies used horses exclusively for ceremonial purposes.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-13",
+          "questionType": "True/False/Not Given",
+          "prompt": "Selective breeding was used to produce horses for specific purposes.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 1
+        },
+        {
+          "questionId": "R05-14",
+          "questionType": "Short Answer",
+          "prompt": "Vertical farms typically use up to ____ percent less water than traditional field farming.",
+          "correctAnswer": "95",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-15",
+          "questionType": "Short Answer",
+          "prompt": "Crops are commonly grown under ____ lighting rather than natural sunlight.",
+          "correctAnswer": "LED",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-16",
+          "questionType": "Short Answer",
+          "prompt": "One facility studied produces crops across ____ stacked layers.",
+          "correctAnswer": "12",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-17",
+          "questionType": "Short Answer",
+          "prompt": "Because conditions are controlled, vertical farms can operate for ____ months of the year.",
+          "correctAnswer": "12",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-18",
+          "questionType": "Short Answer",
+          "prompt": "The main crop grown in many pilot facilities is leafy ____.",
+          "correctAnswer": "greens",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-19",
+          "questionType": "Short Answer",
+          "prompt": "High initial setup costs remain a barrier due to expensive ____ systems.",
+          "correctAnswer": "climate control",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-20",
+          "questionType": "Short Answer",
+          "prompt": "Some cities have integrated vertical farms into disused ____ buildings.",
+          "correctAnswer": "warehouse",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-21",
+          "questionType": "Multiple Choice",
+          "prompt": "According to the passage, one major advantage of vertical farming is",
+          "optionA": "lower construction costs",
+          "optionB": "significantly reduced water use",
+          "optionC": "no need for electricity",
+          "optionD": "unlimited crop variety",
+          "correctAnswer": "significantly reduced water use",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-22",
+          "questionType": "Multiple Choice",
+          "prompt": "The passage identifies the main barrier to expansion as",
+          "optionA": "lack of consumer interest",
+          "optionB": "high initial setup costs",
+          "optionC": "poor crop yields",
+          "optionD": "government regulation",
+          "correctAnswer": "high initial setup costs",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-23",
+          "questionType": "Multiple Choice",
+          "prompt": "Many pilot vertical farms have been built inside",
+          "optionA": "shopping centres",
+          "optionB": "disused warehouse buildings",
+          "optionC": "underground car parks",
+          "optionD": "university campuses",
+          "correctAnswer": "disused warehouse buildings",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-24",
+          "questionType": "True/False/Not Given",
+          "prompt": "Vertical farms rely mainly on natural sunlight to grow crops.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-25",
+          "questionType": "True/False/Not Given",
+          "prompt": "Vertical farming can operate throughout the entire year.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-26",
+          "questionType": "True/False/Not Given",
+          "prompt": "Leafy greens are mentioned as a commonly grown crop in these facilities.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-27",
+          "questionType": "True/False/Not Given",
+          "prompt": "Vertical farming has completely replaced traditional agriculture in the cities studied.",
+          "correctAnswer": "Not Given",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 2
+        },
+        {
+          "questionId": "R05-28",
+          "questionType": "Short Answer",
+          "prompt": "The phrase 'less is more' is often associated with a modernist architect from the ____ century.",
+          "correctAnswer": "twentieth",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-29",
+          "questionType": "Short Answer",
+          "prompt": "Minimalist product design often removes visible ____ in favour of clean surfaces.",
+          "correctAnswer": "buttons",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-30",
+          "questionType": "Short Answer",
+          "prompt": "A study of consumer preferences found that ____ percent of participants associated minimalist packaging with higher quality.",
+          "correctAnswer": "63",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-31",
+          "questionType": "Short Answer",
+          "prompt": "Critics argue minimalist design can sometimes reduce ____ for users unfamiliar with a product.",
+          "correctAnswer": "usability",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-32",
+          "questionType": "Short Answer",
+          "prompt": "Minimalist architecture frequently relies on open floor ____.",
+          "correctAnswer": "plans",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-33",
+          "questionType": "Multiple Choice",
+          "prompt": "The passage indicates that minimalist packaging is often associated by consumers with",
+          "optionA": "lower cost",
+          "optionB": "higher quality",
+          "optionC": "environmental harm",
+          "optionD": "shorter shelf life",
+          "correctAnswer": "higher quality",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-34",
+          "questionType": "Multiple Choice",
+          "prompt": "According to critics quoted in the passage, a possible downside of minimalist design is reduced",
+          "optionA": "durability",
+          "optionB": "usability for unfamiliar users",
+          "optionC": "manufacturing cost",
+          "optionD": "aesthetic appeal",
+          "correctAnswer": "usability for unfamiliar users",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-35",
+          "questionType": "True/False/Not Given",
+          "prompt": "All consumers surveyed disliked minimalist packaging.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-36",
+          "questionType": "True/False/Not Given",
+          "prompt": "Minimalist architecture often makes use of open floor plans.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-37",
+          "questionType": "True/False/Not Given",
+          "prompt": "Every critic mentioned in the passage rejects minimalist design entirely.",
+          "correctAnswer": "Not Given",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-38",
+          "questionType": "True/False/Not Given",
+          "prompt": "Minimalist product design tends to remove visible buttons in favour of clean surfaces.",
+          "correctAnswer": "True",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-39",
+          "questionType": "True/False/Not Given",
+          "prompt": "Minimalism has had no influence on architecture.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        },
+        {
+          "questionId": "R05-40",
+          "questionType": "True/False/Not Given",
+          "prompt": "The phrase 'less is more' originated in the nineteenth century.",
+          "correctAnswer": "False",
+          "marks": 1,
+          "passageOrAudioURL": "",
+          "part": 3
+        }
+      ],
+      "passages": [
+        {
+          "passageNumber": 1,
+          "title": "The Domestication of the Horse",
+          "text": "The domestication of the horse marked a turning point in human history, transforming transport, agriculture and warfare across many societies over thousands of years. Genetic evidence suggests horses were first domesticated on the Eurasian steppe. Early domestication is estimated to have occurred around 5500 years ago. Horses were initially kept mainly for their meat and milk. The invention of the bridle allowed riders far greater control. Mounted warfare is believed to have spread rapidly from around 1000 BCE. Selective breeding later produced horses suited to farm work rather than just riding. Horses were initially kept mainly for their meat and milk before their role in transport developed. The invention of the bridle allowed riders far greater control, transforming how horses could be used. Selective breeding later produced horses suited to farm work rather than just riding. Genetic evidence suggests horses were first domesticated on the Eurasian steppe. Horses were initially kept mainly for their meat and milk before their role in transport developed. The domestication of the horse marked a turning point in human history, transforming transport, agriculture and warfare across many societies over thousands of years. Selective breeding later produced horses suited to farm work rather than just riding.",
+          "wordCount": 200
+        },
+        {
+          "passageNumber": 2,
+          "title": "Vertical Farming and Urban Food Security",
+          "text": "As urban populations grow, some cities are turning to vertical farming, the practice of growing crops in stacked layers within controlled indoor environments, as a way to shorten supply chains and reduce land use. Vertical farms typically use up to 95 percent less water than traditional field farming. Crops are commonly grown under LED lighting rather than natural sunlight. One facility studied produces crops across 12 stacked layers. Because conditions are controlled, vertical farms can operate for 12 months of the year. The main crop grown in many pilot facilities is leafy greens. High initial setup costs remain a barrier due to expensive climate control systems. Some cities have integrated vertical farms into disused warehouse buildings. Vertical farms typically achieve significantly reduced water use, up to 95 percent less than traditional field farming. High initial setup costs remain a barrier due to expensive climate control systems. Some cities have integrated vertical farms into disused warehouse buildings, making use of existing urban space. Crops are commonly grown under LED lighting rather than natural sunlight. Because conditions are controlled, vertical farms can operate for 12 months of the year. The main crop grown in many pilot facilities is leafy greens. One facility studied produces crops across 12 stacked layers.",
+          "wordCount": 207
+        },
+        {
+          "passageNumber": 3,
+          "title": "The Philosophy and Practice of Minimalism in Design",
+          "text": "Minimalism, an approach that favours simplicity and the deliberate removal of unnecessary elements, has influenced fields ranging from architecture to product design over the past century. The phrase 'less is more' is often associated with a modernist architect from the twentieth century. Minimalist product design often removes visible buttons in favour of clean surfaces. A study of consumer preferences found that 63 percent of participants associated minimalist packaging with higher quality. Critics argue minimalist design can sometimes reduce usability for users unfamiliar with a product. Minimalist architecture frequently relies on open floor plans. A study of consumer preferences found that 63 percent of participants associated minimalist packaging with higher quality. Critics argue minimalist design can sometimes reduce usability for users unfamiliar with a product. A study of consumer preferences found that 63 percent of participants associated minimalist packaging with higher quality. Minimalist architecture frequently relies on open floor plans. Critics argue minimalist design can sometimes reduce usability for users unfamiliar with a product. Minimalist product design often removes visible buttons in favour of clean surfaces. Minimalism, an approach that favours simplicity and the deliberate removal of unnecessary elements, has influenced fields ranging from architecture to product design over the past century. The phrase 'less is more' is often associated with a modernist architect from the twentieth century.",
+          "wordCount": 217
+        }
+      ],
+      "passageText": "Passage 1: The Domestication of the Horse\nThe domestication of the horse marked a turning point in human history, transforming transport, agriculture and warfare across many societies over thousands of years. Genetic evidence suggests horses were first domesticated on the Eurasian steppe. Early domestication is estimated to have occurred around 5500 years ago. Horses were initially kept mainly for their meat and milk. The invention of the bridle allowed riders far greater control. Mounted warfare is believed to have spread rapidly from around 1000 BCE. Selective breeding later produced horses suited to farm work rather than just riding. Horses were initially kept mainly for their meat and milk before their role in transport developed. The invention of the bridle allowed riders far greater control, transforming how horses could be used. Selective breeding later produced horses suited to farm work rather than just riding. Genetic evidence suggests horses were first domesticated on the Eurasian steppe. Horses were initially kept mainly for their meat and milk before their role in transport developed. The domestication of the horse marked a turning point in human history, transforming transport, agriculture and warfare across many societies over thousands of years. Selective breeding later produced horses suited to farm work rather than just riding.\n\nPassage 2: Vertical Farming and Urban Food Security\nAs urban populations grow, some cities are turning to vertical farming, the practice of growing crops in stacked layers within controlled indoor environments, as a way to shorten supply chains and reduce land use. Vertical farms typically use up to 95 percent less water than traditional field farming. Crops are commonly grown under LED lighting rather than natural sunlight. One facility studied produces crops across 12 stacked layers. Because conditions are controlled, vertical farms can operate for 12 months of the year. The main crop grown in many pilot facilities is leafy greens. High initial setup costs remain a barrier due to expensive climate control systems. Some cities have integrated vertical farms into disused warehouse buildings. Vertical farms typically achieve significantly reduced water use, up to 95 percent less than traditional field farming. High initial setup costs remain a barrier due to expensive climate control systems. Some cities have integrated vertical farms into disused warehouse buildings, making use of existing urban space. Crops are commonly grown under LED lighting rather than natural sunlight. Because conditions are controlled, vertical farms can operate for 12 months of the year. The main crop grown in many pilot facilities is leafy greens. One facility studied produces crops across 12 stacked layers.\n\nPassage 3: The Philosophy and Practice of Minimalism in Design\nMinimalism, an approach that favours simplicity and the deliberate removal of unnecessary elements, has influenced fields ranging from architecture to product design over the past century. The phrase 'less is more' is often associated with a modernist architect from the twentieth century. Minimalist product design often removes visible buttons in favour of clean surfaces. A study of consumer preferences found that 63 percent of participants associated minimalist packaging with higher quality. Critics argue minimalist design can sometimes reduce usability for users unfamiliar with a product. Minimalist architecture frequently relies on open floor plans. A study of consumer preferences found that 63 percent of participants associated minimalist packaging with higher quality. Critics argue minimalist design can sometimes reduce usability for users unfamiliar with a product. A study of consumer preferences found that 63 percent of participants associated minimalist packaging with higher quality. Minimalist architecture frequently relies on open floor plans. Critics argue minimalist design can sometimes reduce usability for users unfamiliar with a product. Minimalist product design often removes visible buttons in favour of clean surfaces. Minimalism, an approach that favours simplicity and the deliberate removal of unnecessary elements, has influenced fields ranging from architecture to product design over the past century. The phrase 'less is more' is often associated with a modernist architect from the twentieth century."
+    },
+    "Writing": {
+      "durationMinutes": 60,
+      "questions": [
+        {
+          "questionId": "W05-01",
+          "questionType": "Essay",
+          "prompt": "The chart below shows the proportion of energy generated from four sources in one country in 2010 and 2022. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.",
+          "marks": 1,
+          "task": 1,
+          "chartData": {
+            "2010": {
+              "Coal": 45,
+              "Gas": 30,
+              "Nuclear": 15,
+              "Renewables": 10
+            },
+            "2022": {
+              "Coal": 15,
+              "Gas": 25,
+              "Nuclear": 20,
+              "Renewables": 40
+            }
+          },
+          "modelAnswer": "The chart compares the share of electricity generated from coal, gas, nuclear power and renewables in 2010 and 2022. Overall, renewables became the leading energy source by 2022, while reliance on coal fell sharply.\n\nIn 2010, coal was the dominant source, providing almost half of all electricity, followed by gas at three-tenths and nuclear power at fifteen percent, with renewables contributing the smallest share. By 2022, this order had changed considerably: renewables had quadrupled to become the largest source at forty percent, while coal's share had fallen to just fifteen percent, a drop of two-thirds. Gas declined slightly, whereas nuclear power's contribution rose modestly.\n\nOverall, the data show a marked shift away from coal toward renewable energy over the twelve-year period, with gas and nuclear power remaining comparatively stable contributors.",
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "W05-02",
+          "questionType": "Essay",
+          "prompt": "Some people believe that university education should be free for all students, while others think students should pay towards the cost of their studies. Discuss both views and give your own opinion. Write at least 250 words.",
+          "marks": 1,
+          "task": 2,
+          "modelAnswer": "Whether university education should be free or fee-based is a contentious issue, with strong arguments made on both sides.\n\nAdvocates of free tuition argue that education is a public good that benefits society as a whole, not just the individual student. They point out that talented students from low-income backgrounds may be deterred from applying to university if fees are high, meaning free tuition promotes equality of opportunity. Countries that already offer free or heavily subsidised higher education are often cited as evidence that such systems can produce highly skilled workforces.\n\nOn the other hand, those who support fees argue that students who benefit financially from their degree, through higher future earnings, should contribute towards its cost. They also note that tuition fees generate revenue that universities can reinvest in research facilities and staff, potentially improving the quality of education. Without this income, some argue, government funding alone might be insufficient to maintain high academic standards.\n\nIn my opinion, a balanced system works best: fees can be justified if paired with generous means-tested grants and manageable repayment plans, ensuring students from disadvantaged backgrounds are not excluded while still allowing universities access to necessary funding.\n\nIn conclusion, while both fully free and fee-based systems have merit, a hybrid approach that combines fee contributions with strong financial support for disadvantaged students appears to best balance fairness and sustainability.",
+          "correctAnswer": ""
+        }
+      ],
+      "bandDescriptors": [
+        "Task Achievement / Response",
+        "Coherence and Cohesion",
+        "Lexical Resource",
+        "Grammatical Range and Accuracy"
+      ]
+    },
+    "Speaking": {
+      "durationMinutes": 14,
+      "questions": [
+        {
+          "questionId": "S05-01",
+          "questionType": "Speaking",
+          "prompt": "What kinds of things do you like to do in your free time?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S05-02",
+          "questionType": "Speaking",
+          "prompt": "Do you prefer working alone or as part of a team?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S05-03",
+          "questionType": "Speaking",
+          "prompt": "How do you usually keep in touch with friends who live far away?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S05-04",
+          "questionType": "Speaking",
+          "prompt": "Is punctuality important to you? Why or why not?",
+          "marks": 1,
+          "part": 1,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S05-05",
+          "questionType": "Speaking",
+          "prompt": "Describe a place you have visited that you found particularly peaceful. You should say: where it was, when you went there, what you did while you were there, and explain why you found it peaceful.",
+          "marks": 1,
+          "part": 2,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S05-06",
+          "questionType": "Speaking",
+          "prompt": "Why do you think some people seek out peaceful places to relax?",
+          "marks": 1,
+          "part": 3,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S05-07",
+          "questionType": "Speaking",
+          "prompt": "How has city life changed the way people experience calm and quiet?",
+          "marks": 1,
+          "part": 3,
+          "correctAnswer": ""
+        },
+        {
+          "questionId": "S05-08",
+          "questionType": "Speaking",
+          "prompt": "Do you think governments should protect natural quiet spaces? Why?",
+          "marks": 1,
+          "part": 3,
+          "correctAnswer": ""
+        }
+      ],
+      "bandDescriptors": [
+        "Fluency and Coherence",
+        "Lexical Resource",
+        "Grammatical Range and Accuracy",
+        "Pronunciation"
+      ]
+    }
+  },
+  "version": "1.0.1",
+  "contentHash": "133d6d606f41a8ab31f1bc6e3639b4289ca48b89bd296896e502c08a4aada6dd",
+  "publishedHash": "4d306122cd436f06cd01d90c09ded9ba76196702f8ab20c5f7090c95857c9437"
+}

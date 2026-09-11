@@ -1,0 +1,28 @@
+{
+  "module": "Writing",
+  "durationMinutes": 60,
+  "rows": [
+    {
+      "questionType": "Essay",
+      "prompt": "The chart below shows the proportion of energy generated from four sources in one country in 2010 and 2022. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    },
+    {
+      "questionType": "Essay",
+      "prompt": "Some people believe that university education should be free for all students, while others think students should pay towards the cost of their studies. Discuss both views and give your own opinion. Write at least 250 words.",
+      "optionA": "",
+      "optionB": "",
+      "optionC": "",
+      "optionD": "",
+      "correctAnswer": "",
+      "marks": 1,
+      "passageOrAudioUrl": ""
+    }
+  ]
+}

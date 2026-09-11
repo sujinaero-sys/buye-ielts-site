@@ -1,0 +1,21 @@
+[
+  {
+    "questionId": "W07-01",
+    "questionType": "Essay",
+    "prompt": "The bar chart below shows the percentage of electricity generated from renewable sources in four European countries in 2015 and 2023.",
+    "marks": 1,
+    "task": 1,
+    "chartData": "Country A: 42% (2015) -> 58% (2023); Country B: 30% -> 41%; Country C: 15% -> 29%; Country D: 22% -> 32%.",
+    "modelAnswer": "The bar chart compares the proportion of electricity produced from renewable energy sources in four European nations in 2015 and 2023. Overall, all four countries increased their renewable electricity share over the eight-year period. Country A maintained the highest percentage in both years, while Country C recorded the most rapid proportional growth. In 2015, Country A led with 42% of its electricity generated from renewables, followed by Country B at 30%. Country D generated 22%, whereas Country C recorded the lowest proportion at 15%. By 2023, Country A expanded its renewable share to 58%, remaining the leading country. Country C almost doubled its figure to 29%, representing an increase of 14 percentage points. Country B and Country D also grew steadily, reaching 41% and 32% respectively. In summary, every surveyed nation made clear progress toward renewable energy adoption between 2015 and 2023.",
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "W07-02",
+    "questionType": "Essay",
+    "prompt": "Some people believe that governments should make all public transportation free of charge. Others argue that passengers should pay for their journeys. Discuss both views and give your opinion.",
+    "marks": 1,
+    "task": 2,
+    "modelAnswer": "Providing free public transportation versus charging passenger fares is a subject of major debate among urban planners. While ticket sales help fund transit network operations, I believe zero-fare public transport yields superior social and environmental returns. On the one hand, proponents of charging fares point out that ticket sales generate necessary revenue for transit authorities. This income directly funds routine maintenance, security personnel, and network expansions without relying entirely on local tax revenues. Without fare revenues, transport systems might suffer from budget deficits, leading to reduced service frequency and poorer maintenance standards. On the other hand, advocates of free public transport emphasize its environmental and socio-economic advantages. Fares place a financial strain on low-income workers, limiting their access to employment and education. Eliminating fares encourages private car drivers to switch to public transit, significantly reducing urban traffic congestion and carbon emissions. In my opinion, introducing free public transport is a highly effective policy. The public expenditure required is outweighed by long-term savings in healthcare, reduced road repairs, and lower pollution levels.",
+    "correctAnswer": ""
+  }
+]

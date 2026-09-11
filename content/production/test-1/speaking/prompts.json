@@ -1,0 +1,66 @@
+[
+  {
+    "questionId": "S01-01",
+    "questionType": "Speaking",
+    "prompt": "Let's talk about your hometown. What do you like most about it?",
+    "marks": 1,
+    "part": 1,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S01-02",
+    "questionType": "Speaking",
+    "prompt": "Do you prefer spending time indoors or outdoors? Why?",
+    "marks": 1,
+    "part": 1,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S01-03",
+    "questionType": "Speaking",
+    "prompt": "How often do you use public transport?",
+    "marks": 1,
+    "part": 1,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S01-04",
+    "questionType": "Speaking",
+    "prompt": "What kind of weather do you enjoy most?",
+    "marks": 1,
+    "part": 1,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S01-05",
+    "questionType": "Speaking",
+    "prompt": "Describe a skill you would like to learn. You should say: what the skill is, why you want to learn it, how you would learn it, and explain how learning this skill would benefit you.",
+    "marks": 1,
+    "part": 2,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S01-06",
+    "questionType": "Speaking",
+    "prompt": "Do you think schools should teach practical skills as well as academic subjects?",
+    "marks": 1,
+    "part": 3,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S01-07",
+    "questionType": "Speaking",
+    "prompt": "How has technology changed the way people learn new skills?",
+    "marks": 1,
+    "part": 3,
+    "correctAnswer": ""
+  },
+  {
+    "questionId": "S01-08",
+    "questionType": "Speaking",
+    "prompt": "Is it more important to master one skill deeply or to have a broad range of skills?",
+    "marks": 1,
+    "part": 3,
+    "correctAnswer": ""
+  }
+]
