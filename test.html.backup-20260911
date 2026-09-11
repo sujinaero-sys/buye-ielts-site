@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Take a test — BUYE IELTS</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+  /* ---- Exam-mode additions (on top of app.css) ---- */
+  body.exam-mode header.appbar{ display:none; }
+  body.exam-mode main{ padding-top:0; }
+
+  .exam-bar{
+    position:sticky; top:0; z-index:60; background:var(--ink); color:var(--paper);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .exam-bar .wrap{
+    display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:16px; flex-wrap:wrap;
+  }
+  .exam-bar .title{font-family:'Source Serif 4',serif; font-weight:600; font-size:1rem;}
+  .exam-bar .title .part{color:var(--sage); font-weight:500; font-size:0.85rem; display:block; margin-top:2px;}
+  .exam-bar .status{font-size:0.78rem; color:rgba(255,255,255,0.72); display:block; margin-top:3px;}
+  .exam-actions{display:flex; align-items:center; gap:10px; margin-left:auto;}
+  .exam-timer{
+    font-family:'IBM Plex Mono',monospace; font-size:1.15rem; font-weight:600;
+    background:rgba(255,255,255,0.08); padding:8px 16px; border-radius:8px; letter-spacing:0.03em;
+  }
+  .exam-timer.low{ color:#FFD3CC; background:rgba(225,74,59,0.25); }
+
+  .exam-layout{ display:grid; grid-template-columns:1fr; gap:0; }
+  .exam-layout.has-passage{ grid-template-columns:1fr 1fr; align-items:start; }
+  .passage-panel{
+    position:sticky; top:78px; align-self:start; max-height:calc(100vh - 160px); overflow-y:auto;
+    background:var(--paper-dim); border-right:1px solid var(--line); padding:28px 26px;
+  }
+  .passage-panel .kicker{ font-size:0.78rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px; }
+  .passage-panel p{ white-space:pre-wrap; line-height:1.75; }
+  .questions-panel{ padding:28px 26px; }
+  .questions-panel.full-width{ max-width:760px; margin:0 auto; }
+
+  .word-count{ font-size:0.82rem; color:var(--muted); margin-top:6px; text-align:right; }
+  .word-count.ok{ color:var(--emerald); }
+
+  .recorder{ border:1px solid var(--line); border-radius:12px; padding:18px; background:var(--paper-dim); }
+  .rec-status{ font-size:0.88rem; color:var(--muted); margin-left:4px; }
+  .rec-status.recording{ color:var(--red); font-weight:600; }
+  .rec-status.recording::before{ content:"●"; margin-right:6px; animation:pulse 1s infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+
+  .exam-nav{
+    position:sticky; bottom:0; z-index:55; background:var(--paper); border-top:1px solid var(--line);
+    padding:14px 24px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .exam-nav .dots{ display:flex; gap:8px; flex-wrap:wrap; flex:1; }
+  .navdot{
+    width:32px; height:32px; border-radius:50%; border:1.5px solid var(--line); background:var(--paper);
+    display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace;
+    font-size:0.8rem; font-weight:600; cursor:pointer; color:var(--ink-soft);
+  }
+  .navdot.answered{ background:var(--emerald); border-color:var(--emerald); color:var(--paper); }
+  .navdot.current{ outline:3px solid rgba(43,125,125,0.25); outline-offset:2px; }
+  .navdot.flagged{ border-color:var(--rust); color:var(--rust); }
+  .exam-warning{display:none;max-width:1100px;margin:0 auto;padding:10px 24px;background:#fff4d6;color:#6e4b00;border-bottom:1px solid #e7c76c;font-size:0.88rem;}
+
+  @media (max-width:860px){
+    .exam-layout.has-passage{ grid-template-columns:1fr; }
+    .passage-panel{ position:static; max-height:none; border-right:none; border-bottom:1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="wrap">
+    <a href="index.html" class="logo"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCAEAAQADASIAAhEBAxEB/8QAHQAAAgICAwEAAAAAAAAAAAAAAAECCAYHAwUJBP/EAFYQAAEDAwMCBAIFBAsNAw0AAAEAAgMEBREGBxIhMQgTQVEiYRQycYGRCRUjUhYYM0JidZKhsbPSFyQlNTc4c3aTo7TB0UNWshkmJzQ5VWV0goaVovH/xAAcAQACAgMBAQAAAAAAAAAAAAAAAQIFAwQGBwj/xAA7EQABBAECBAMECAUDBQAAAAABAAIDEQQFIQYSMUFRYXETIoGhBxQVkcHR4fAjMmKx4hYX8TRUcpKi/9oADAMBAAIRAxEAPwC7YOQpZHsotTXAWrgoTCSAoEoUkIQhRQhCEWhCEiUZKLTpNCWSjJRaKTQllNFpIQhCLQhCEItCEIQi0IQhCLQhCEItCRQMIPdA7oTTQhCLSQhCEWhHTCimeySaYSamohSUlIoTCSY7qBSTQhCFFCRKCUkJgIRkKJKWUKVKeQjKhlNCKUk8qCYKVpEKaFFSTSQhCEJIQlkIyhCaEIQhCEIQhI90Dug90DuhSTQhCFFCEIQhI9kkz2SQmFEKSi1SUlIoTHdJMd1EpJoQhCike6ie6fqooUwkVwz1ENPC6aeVkUbernyODWj7SegXMRk4Vad0NRVd/wBe1tDJK4W+3yupoKfPwlzejnkeric9fQALYxMc5D+UGgqHiLX49FxhM5vM4mgOnzViaO6W64F30C4UtVx+t5EzZMfbgnC+wHoqeUdTU2u4xXC2VD6Srhdyjmi+EtP/ADHuD0KsLftcXKl2KpdZ26liFZVRw5D2l0cLnni5xHqAQcZ9xlZ8nT3ROaGm72VNofG0OoQyvnZyGMcxrex5dP33Wfggpha62n1petYWe4fnqKF0tHIxraqCPg2UOBJaR25Nx6ehHRbFWlJG6J5Y7qF1enZ8WoY7MqD+V3S/uTCainlRW5SaEspIRSkhRQhFKSYKjlNCRCkhRynlCVIPdA7pIHdCakhCEKKEIQhCR7JJnskhSCi1SUQpKSZQmO6SY7qJSTQhCFFRUVM91EhCkFErQO6WgrtRapq9Q2yimq7fWv8AOl8hhe6CQ/W5NHXiT1B+ZBW/0wSD0WbGyHY7+dqp9e0OHWMb2Epog2COxVTLFpHUepLmyjtlsqOpw+omjcyKIfrOcR/MOpVoLVZqK0aQpNPNYKikp6cQEStDhIAOpcD06nJx812nIn3P3qtu5mp7vd9e3O2OrZo7dRTGnipY3FrCW9HOcB9Yk579hjC3i+TUH8nQBciMTD4MxjkPuV79vDz86Hj17KwtNFQ2+kbS0NNT0sDfqxQsaxo+wDouUTs/WH4qoIacfXd+JTwf1nfyisv2Oe7/AJfqtFv0msaA1uLQ/wDL/FW989vuPxR57f1h+KqDh367/wCUUcXfrv8A5RR9j/1/L9U/9zm/9t/9/wCKt95zT6j8U+ZPYE/YqgFpx9Z38oqUU9VTP8ylq6mB47Oilcw/zFH2P/X8v1Tb9J7L3xj/AO3+Kt8HeikCqv2rcfW1mna6K+S1kQ7wV485pHtk/EPuK3Nofcy0aue23zM/N9245+ivdybLgdTG719+J6j591pz6fLCObqPJdPo3Gmnao8Qgljz0Du/oenw2Pks8QkOyMrSXWqaFEFPKEqTQO6MoHdCSkhCEKKEIQhCR7JJnskhMKIUlEKSmpFCY7pJjuoFJNCEIUUj2STKR7IUgoFHogpEoUlIH4gqp6wcP7peoR/8Qm/8ZVqgeoVItwNQXWm3f1TDHNEY2XScNa6IHA8x3quo4W0qbUZpGQVYF7+q4Lj/AAZMvFibHVh3f0XecgnkFYZT6unaQKujY8eroXcT+ByP5131DeaG4dKecGT1jf8AC8fd6/cuizdDzcMc0sfu+I3Hy6fFePZGmZOOOZ7NvEbrtMhHJZJpfb7Umrra+4WttLFStkMQlqZCwPcO4aACTjI6rvjslrLH/rdo/wBs/wDsKgflwscWudRW1jcO6nkxiaGBxaeh8VrsuXJTUtVWy+XSwukI7kdAPtPos6ds5qukJnrBSzwMHJzaSUuefkAQFOngipqdsMEYjY3s0Kn1PXmYw5YRzOP3fqvQODfosytXeZdRPsom9hRefTqAPM/Ad1j1LpUEB1dUnP6kQ/5n/ouxprFbqOqiqadkzZoniSOTzSHMcDkEY9V2vqkcLkp9YzJjZkI9Nv7L3rTfo74ewGgR4rXEd3e8fX3r+VLc2mL1+ftORVknEVDSYp2t6APHqPkRg/eu4Wu9s6gisuVHno5jJgPmCWn+kLtNX6vmstU23W5kTqotD5JJByEYPYY9Se/yW7FlNEIkeVoZWmPOc7GgHmPTr8lmSFqy27iXiCsabn5NVTE/GGxhj2j3aR7exW0Y5GSwslicHse0Oa4diCMgrNDksmHurWzdOmwiBKOvQhSUx3XGeymO6zrQKkhCEKCEIQhCR7JJnskhSCi1SUWqSkmUJjukmO6iUk0IQeyFFRUUz2Sz0QphIrUe6HiC0ftjqBmn6qjr7xduDZZqWhLGina4Zbze8gciOoaMnGCcZC253KpV4g9mtfu3ou2qbFp643613h7alstBEZnwP4Na6N7G5cMcQQ7GCD8l0PDGDhZuZ7LOdTasb1Z8L+arNWyZ8eHmxxZv1pWn263G01uZpX8/abmm4RyeTUUtS0MmppMA8XgEjqDkEEgjt6qne5H+WbVf8a1H9Y5b58L+2mp9B6SvNz1XRPttXeJoTFQSkeZFFEHYdIAfhc4vPw9wAM98LQ25H+WTVf8AGtR/WOXfcFY+Pjazlw4ruZgAo9e4796OyoNalklwoXzCnErGfRROQQ4EgjqCO4TQvUnC1yyubsFUTT+H+zy1EhkkM1UC89yBO4DK2YCFTfbne28bf6bfYXWiC7UAldNAyScwvgc7q4AgEFpPXGOhJ69Vu7TO8FZf9MwXabTUVL5xdwjFWX/CDgHPAd8FfPHGOh5GmZMuZM0CJ7zykEd7IFdenlWy9J4ce3NjZiYwt7W7jpQFDr0W2slaW1MyBms7m2mwIxUO7dgehd/Pld9W7i3OandHRUcFI8jHm8jI5vzGQBn8VhznOe9z3uLnOJLnE5JJ7lec52SyUBrF6Roelz4r3STbWKpRKieykouOVXrpgsz2zie7UNZMB8DabiftLxj+grj3CtdTT6kdcy0upqlrQH46Nc0YLT+GQsi0BbTbtMyXGo/Ruqz5vxdOMbQcE/b1K5Br3TlTXmhlbKYHnj58kYMbuvqD1x8yFaiJhx2seaJ3XHPy5RqUk+OzmA2NeH/IWr6Skqa+sjpKOJ000hw1jev/APB81vS30n0G0UtEX8zBCyIu98DGU4KGioyTSUdPAXdzFGG5/Bc62cTF9hZJslVmq6sc8tAbQCRUx3UVMd1vKnKaEIQoIQhCEJHskmeySEwk1NRCkpKRQmO6SY7qJSTSKaRQkoOSKke6iUKYXDUVEFJSS1dVPHBTwsMkssrg1kbQMlziegAAJJWmKvxX7R0t3NHHV3qria7ia2noCYvtHJwe4fMNXN4pam403hmuv0B0jY5aqmhqzHn9wc/4gf4JcGA/aqKcuRJyu94W4WxdTxnZGST1oAGuldfvXNaxrEuLKIowOl7r0/0/qKyaq07S37TtyguFuqRmKohPQ4OCCD1a4HoWkAg91RncSqhm3s1fCx/xx3aoa5p7/ujltjwbVFzfZtW0r3Sm2R1FNJEDng2dzXh/H5lrY8/YFoDdUlu/esyCQReak5H+lcrvhLEGlaxlYzDzBoH3Gj9+60tYyDlYUUrhRJXOhY1T3qshAa9zZm/w+/4rsIr9TOH6WOVh+Q5BeotymO70uX5SuzeeMbj7AlWNsULaTTFvpY/qx00bR/ICrlb4K2/NmZZLZcri5jfjFHRyzFmR0zwacKz1vs15baKUOtNc0+THkGneCPgHcYXjn0u5LZIcaJjr3cSB6CvxXqP0ZsayaeR+2wq/U3+CELlmoq+nZzqaKphZ+tJE5o/EhcOV4b06r2Frg7dptBPRdtpunstRe4xfKsQwNILWOaeMp9nO/ej+ldQhSY7lIKjNGZYywEi+46rfNRTsq7bNSZDWTRGPLfQEYyFqxm32o3XEU0kMLICcGp81pbx9wO+flhffoTUk9PcorHVyF9NMS2AuPWJ/cNH8E+3oVssHorkRxZjQ89lwzpsnR5Hwto83evmoxRthgjhaXFsbQwEnJIAx1UkIVgBSokwFId0kDumolSQhCFFCEIQhI9kkz2SQmFEKSi1SU1IoTHdJMd1ApJpFNHohRUD3USpqJCamF8N3s9r1Dp6tsd7oo623VsToKinkzxkYe4OOo+0dR3Cr5V+DfST7q+Wh1heaajc7Ip308Ur2D2Ehxn7SCftVkUKxwNYzdPsYshaD16H5G1qZOBBkkGVt0sf0VorTm32kYNN6Yo3U1HG8yvc95fJNI7HKR7vVxwPYdAAAAvP3df8Ay960/jmp/rXL0hz8S83d1/8AL5rT+Oan+tcuy4DlfNmzySG3EAkn1VHxHG2OCNrRQB/BYkkThGV9NFbqm4ylsLcMH1pHdm/9T8l6mBZoLlYYXzPEcYslXk8LVLS0vhotdTTxCOWrrKuWd7e8jhKWAn7GsaPuW5ORz9Y/iq7bB7i6N0ttFTaRv16jt1VQTzPa+pBDZ2SPMmWkAgEFxGD16Arabd29tHuDG61tZd7Bzv8AovDOItLzRqE8joncvMTdGq8b6VS9MwcSSOFkRb7wAFDff4LNn4fGWPw5pGC13UEfMLQuu7np7Te4FXaDUfRhwjnEfluLWB7c4BA7Zys9r94dvKGkfMzULK14GWw0kT3vefYZAA+8qtWsdRzau1vX6gnhEP0hwEcQOfLjaA1jc+pwOvzJXJz4zZhT16JwfoeU/Ic+ZjmR13FWbFdevdbIpLjQV4zRVkFR8o3gn8O6+rPRaSaXRvD43Frx2c04I+9ZJaNaXGic2K4E1sHbLv3Rv2H1+/8AFVsumuaLjNrucjRHs3iN+XdbOppnU9fBUMOHRSseD9jgVvs/WJHbKrzZ6ulvRp3UEolbNI2MYGC0kgYI9D1VhT0JA91k0wOHMCvM+Km8skYIo7/gmmO6SY7K2XKFNA7oTHdCimhCEKKEIQhCR7JJnskhSCTU1EKSmmUJjukmO6gUk0IQhRSISUkHshMFQIUOqmeyiQnakFH98F5vbsH/ANPmtP45qf61y9IvVecG7tPUQeIfWdK+I+abxOQ335vLm/iHA/eu/wDo+/6qYf0j+65vibeJnr+Cxy126S41fDJbE3rI8eg9h8ysyhgiggbDCwMY0YDQuC30jaCgZTNGXDq9w/fO9Svr5L2WKLkFnqrvRNKbgwhzh756/l++6mDjsUiXBwcHEEdcg9lHmguUnNa4Fp6K8a8g2F3NJVioiw44kb3H/Nc+Vj7XujdzY4tcOxC+6G5Mdhk5Ebvf96f+i8Z4m4KnxpHZGA3mjO9Dq34dx6bj5r1bh7iuKdggy3crx3PQ/kf35LscpF3XootJc3I7e6y7Re3OpNb1jDb6YwW8OxLcZ2kRMHrx/Xd8m/eQvP3bbFdfk5kGLEZ53hrR3P7/AOVk+xFhr7nuEbqx72W63N8yo/VlkIPls+0dXfIN+as7hdPpfTNq0hpmCyWiItgjy50j+r5nn6z3n1J/mGAOgXcLGAAbXgvEer/aua7IaKb0HoO58z1+XZCY7pIUlRKSY7pBA7pqKkhCEKKEIQhCR7JJnskhSCiPRSUQnkKaZTR6pZQCoFKlNCjlCEqUkFRQhFIUUyVElCkEeq1vrvYrQOv9TM1JcaWporwGhklZRSBpnDRhvmMcC1xA6B2Ae3Xotj56qXLotrEzJ8OQS47y13iFCSJslcwujfxWkf2sOigP8d3v/c/2Ev2sOis4/Pl7z3x+i/sLd7SC8ZGRnqFWq36D3cj8TzL3U0taacXN00t3MoEElJy+qOvYx4YGY7/Zldfpet6pmtlMmd7PkaSLr3j4Dp+J8itlsjjdupZP+1g0V/77vf8Auv7CX7WHRg7X29j/AGP9hffvlujedCR260acbDFX1zHzurJmCQQxtcG4a09C4nPU9AB269Pn2M3Vv2uK25WPUvkT1lLCKqKshiEXNnINc1zR0yCQQRjOT7LMMniY6b9q+3/h+ourq6rpfnflSkDLyc97L5j4X9JOPTUl6A/0cP8AZXNT+GLQ7JAaq83yob+qHRR5+8MK3XnojKov9XayRRyD9w/JY/av8VgFi2T2109M2ek099Jlb2dX1D6gfbwceH/6rPI42QxMhhY1jGjixjAAGj2AHZTz0XHIHuicGHDy0hp9jjoqLJyJcmQyzOLnHudym6WR4DXuJA6Wei07rvfOOyX2ey6ZoaeunpnmOerqHHymvHdrGtwXYOQSTjI6ZUdD77RXi9QWjVNBBQSVDxHDW0zj5XMnAa9rsluT05AkZ747qv8AXU9VRXCekrInx1EMjo5WP7teDhwPzyoU9PUVdTFS0sbnzyvbHExgyXPJAaB884WOgvaRwXpf1Lkr3q/ns3ddetV5dFevrnBGCEKLA9sbWyHLw0Bx9yB1/nTPdILxJSCahlTQkUwUZSQhKlJCinlCVIKSD1QhNRHZCQ7IJwsikllMFRyfQE/YEsu/Vd+CgU6XIhQDsqWDjODj3wkik0KOUYOM4dj3whJSSwj4h1IcB8wjKEIwjCZDgM8XAfYonl+q78Ci0Jg4KnzK4uuMlrh9oKllFIpYjuBttp7ce0QU14dUU1TSuLqatpiPMj5Y5Nw4EOacDIPsCMLi292w05tvRVLLTJU1dbVANnraot5va3qGtDQA1oJzgdz3PZZnkoyrAatmDE+oiQ+yu+Xt4/de9dL36p8xrlvZNI90icHAyT7DqjJAyWuA9yMKuCSEBCEyhYLrPaXS+srg65z/AEiguDwBJU0pH6XAwC9rgQTgDr0KWjdo9L6PuLLnEZ7hcI8+VU1WAIs9MsY3oD8+p9sLPOSReGtLnEAAZJJwAEddlZ/bOeMf6p7Z3s+lX28PGvLopIwuptmptN3usNLZdQ2i4zhvmGKirop3BuQORDHEgZI69uoWEaS8QW02uNzKjQWmtUtq71F5gY0wPZFUmP64hkI4yEdT07gEjICzNxpnBxDT7u526eqqTI0VutmEI5IPZLosKmnyKORSwjCaFLKeVEJpIpSyhRQD1QlSTeyR6lA7I9VkUlSDx0a11jpXcXSVPprVd7s0Mtpmlljt1dLTtkcJyMuDHDJx0yV8NP4cfF5PZYbrQ7xyTebC2eOIakrmPcHNDgPiZgHr6nHzXwflBuu52jR2/wADTf8AEFfe3xfeIG26Vhjg2bpqeCnpmMbVz22vc1rWsADz1A7AHvhd7BHk/Z+OcNrbN3zV47dVUvI9o7mJXL4ZfEFubT78w7PboV9XdRV1E1A2W5u5VdvqomvPAyDq9pLC0hxODgg9wflj1vrR/wCVLOmjq+/fmb9k7ofzb9Pl+jeWISeHlcuPH5Ywvh8HVl0trjxDV+5GrtZ00+sopqivpLH5ZifPNKHeZUZIDXhoe7DGZIyCcBvXr4P/AGup/wBa3/1BU5YIBmZDWsAIj322vxH5qHM7lbv3XogwZLAfcLzz0nrvXNV+UlOm6nWeoZrQdX1lL+bpLjMafyg6UCPy+XHiABgY6YC9DIz8TPtC80tGHH5Uz/72rf8AxzLn+H2NdHklwumLcyyQWrur7rXcTw5+NWCg1LrXU130rBWNnEVfcJqplRbJyRy4vcQXsGRnvyi+aujvPuZRbYbB3rXMNRDNUfRxFauvJtRUyjEOPdvXmf4LStY+M7aaHXOxj9Z22ka6+6XY6q5tHxTUXeeM+/HpIM9uLsfWKpXcNwdd7zaS222Xp4xUSWqU0FES8k1UkjwyJ0nsI4/hz+qHFWePhxavHBlGhybSdthvfx/HyWuZHQlzPHorC+Eek3H1fbtV7m6u1zqm4Wu2UVRRW6Cruc0kc1WYS6SQtc7B8tpaB0+s/p1atLbN2Xfve68XG1aT3UvFNPbqaOpmdcr7WRtc1zuI4lvLJz74XopYND2fbXw+/sJsUYFLbbTPGZcYM8hieZJXfN7y53349F5qeHzdnW202obvcNE6QZqOorqOKCeJ8M8nlMa/kHYh6jJOOq2cHIdmDKmxmi9g2wKrf+6T2lnKHFWj2u8PHiQ0nvJp3UWrt0I7nZKGrE1ZRi+1s5mj4uBbwewNd1I6FW8xgYVY9jvEZuruXvBBpXV228NhtslJPOaxlNVxkPY0Frcy/D1KxTd3xQ70aI3t1HpLTegbZcLVbqoQ01VLbquR8jeDXZLmPDT1J7BUGVhZ2bleykDecC9qAr4LZjkjjbe6uOsb17rixbcbcXXWmopjHQW+HmWN+vM89GRM93OcQB9uT0BVJ/25fiDz12ytH/4qu/trvvF5qm96j8I+1l0u8DaOqvVQ24V1LGxzGxy/Rc8Q13xAAyO6HqnDw9M3JiiyKDXGtjfTcqUmU3kJZ1WDDcHxM+KTWldQaDqa2z2WE/HS26rNFSUjDniJ6gYdI8j06k9SGgKV62d8W2ythm1lbtU3GelpB51V+ZbzLVmJo6l8kEgw9o9SA7A6npkq0/g/s9us3g90tPQxsbLcjUV1XI0dZJTO9mT8w1jG/Y1b0a8O+Fw5A9CD1z8ltZWvfVch2PBE0RNNVXWtt1hbAXs5idyq4eF7xIneaiqNL6np4KXVtvgE7pKcBsVwhBDTK1v7x4JbyaOnUEdMgbHot9dorjuLPoSk1xRu1BTzTwTUT4Zo/LfAHOlDpHMDAGhjyTyx0VFttaaHR35T+G0afcyCjp9V1tBEyIYa2B/mtMYHsAcfcFjU+iJ9yfH7fdCx10tGy66quEM9REMuZAJZHykDsTwa4YPTqMrcm0DElne8EsYWB4rt+nelFmS8NrvdK9FR4sPD9T6hNofuJTveDg1UVJO+mz7eaGcT9o6fNbRkuduvWhZ7taK+mr6CqoJZYKqmkEkcrDE7DmuHQhVk3V8Fm2FDste7roeO7UV+tlFJWwS1Ne6ZlR5bS9zHtcMDk1rgC3GDj06LD/Arqm5VWidwtHVNVLJQUlIy40cTzlsJkZKyUN9g7DCR7gn1KrJNNw5MU5eE93uEAh1dz2pZRO/m5HjqsK8AbI3eJO7NMbTy01MMYxnM8C2psRtt4brb4oDdNB7nVeobzSfSpbfYp6KSMUZGWucZXMHmFjXOAzjvnqQtWeAD/OYuf+rkv/EQLg8H5P7emXr/ANjdP6Sr7VWPdkZrmvIpjdh32PX9FqxkANsK7EG/ez1VuNLoOHXFJ+yGKqlo5KF9PMzhLFy8wF7mBgDeDsnljp3WO1Xix8PtJqI2eTcOnkeDxdVQUk8tMD7ec1haftGR81RC8aNO4Xj8v2h/pz6Fl31hW0slSwcnRxmeQvIHYniHYB6Z79FaXdHwW7U2zZG/XbR7bzR3y12+Wtp6ieudO2cxMLyyRhHHDg0jLcYJB9MKol0rTcYxtyJHW8A7Vtfc7dFnGRK6+UdFaa13W2Xuz012s1wpbhQVTBJBVUsgkjlaexa4dCFiOvt5tr9sC2LW2sKG3VT282UTQ6epcPQ+VGC4A+5ACpv4Pt17lo3aXdNtVJ9Kt1itQv8AQ0kp+Fk+HMLR7Ne4RZHuM+pWtNn6fbTcjdi+6s8RWvzSRO4zuZNNJHLcp3kggvY0lsbGt7DB6sA6Apx8NBk03tnEsjr+Ubm+n6puzCWjlG5V+dE+I/ZbcG8Q2fTut6YXOZ3GKiuEMlHJKfZnmANcfkDn5LavbovM/wAQOkPDPRaUp77shrenkuUdQ2OosjaiadssTv8AtIzI3LXNIBIyQQfQjrcPwobh3Pcfw0W2vvlXNWXa11MtpqqqY5fOY+Lo3uPqfLewEnqS0n1WnqmjxwY7cuDmDSaIcKIP5KcGQXO5HLdqQ7pqPqueW4hvZBPVMdkE9VkTVAfyg+f7pmjsDvZpx/vyrLWrxS7BW/Sdvjqd0beHwUkTHxxw1D3BzY2gjAj6nIXdbpeH/breO8266a0iur6igp3U0JoqwwN4OfyORxOTn1WCt8D+w7T1pdSO+Ruzv7K6P67p8+JDj5JcCy+gHf1Vc6ORr3OaOqqtoi7Umu/ylNq1HtnbZaC11eohWxRNi8vjTNZ/fEjmjowPaJXEfw8d12G/0Oo9l/Hw3ceSh8+lqblFfaB5GGVMYDWyxZ9HN+Jp9uTT2IV7NuNmttNpqeZuhtMwUNRUNDJ66V7p6mZuc8XSvJIbn96MDoOi7jW+g9GbkaYdp/W1gpbvQcvMYybIdE/GOcb2kOY7HTIIWZ3EcIyw5rCYuXkN9SPFQGM7k81pqTxobBQ6c/O0WobpPUAcm2ptslFTnvxJI8se2eeFWfwr2O8bpeNar3NqLc6GhoKqrvda5gJiinn5iKEOPrykJA74jJVj2eB3YhlwFQafUr485+jOup8vHtkM5Y/+pbz0ppDS2hNLQ6c0fY6Sz2yElzaembgFx7uc45c9x9XOJKwO1HAxMeSPBDi6QUS7sPJZBHLI4GToF3YZHK3yJWNkjeOD2OGQ4HoQR6jC8zfBxSUv7dalYaaJzaamuLoQ5ufLLWloLfYgEjPsV6YtPF4d7HK0/t/4Z9r9s9xxrfS8d6bdRHNH/fVd50eJRh3w8R93VaOmahHjY2RE+7eAB8/zWWaIuc0hbN1If/My8/8AyFR/VOXnb4K9ydEbba51PXa31NTWOnq7ZBDBJUB5Ej2y8iBwafRej1XSw19uqaGo5eVURPhfxODxc0tOD6HBKrw3wObENaAINTe3+NT/AGFl0nPxYcabHySafXTyUZ43lwczstiWHxEbL6r1RRac0/uNb7hdK6XyaaljZPylfgnA5MA9D3K2Vk4+u7H2laM0f4SdoNC69tWr7DFfxcrZOKin+kXIyR8gCPibx6jqfVbyHToq3NGMHj6oSW+azQ89e+EyT+u78StKeKPaau3a2EqaGxxGa/WmcXO3w561DmtLZIR83scePu4NW6k2nBWLGyH40zZmHdptSkYHtLSvPvwweJ20bWabqNs9zorhR22kqpHUVayndI+ic536WCaIfEGh3J2QCQS4Edsbx1341tn9PaXqpdF3WfVN7MR+iU8NJLFAJCPhMskgbho7kNBJxj1yti7j+HjaPdS4G6ap0w1t2OA652+Z1LUPA/Xc3o/7XAnoOqw2xeC7YWyXeOvmst1vPlnk2nulwdJDn5sYG8vsOR8l0UuXo+TJ9ZmY4OO5aKon9fgtMMnaORp2WgfBvtnqLXO+s++WqKZ/5spZ6ipgqnjiK6vlLg4sHq1nOQkjoHcR1wcdLtPj/wArHXY/7xXvH+zqF6KUdNR26hgobfSQUlLTsEcMEEYjjjaOzWtGAAPYLVFk8OO2end85N2rbFeRqKSrqa1xkrucHmTh4k/R8e36R2Bnp09kxxA2WSd8ooObytA7JnGcA0Dx3Wf60OdrNTD3tFX/AFD1RjwG/wCMtyP4ih/pkV+rhQ091s1Xa6vmaergkppeDuLuD2lrsH0OCeq1tth4fdutop7xLpCK7NddqZtJVfTK3zv0bc44/COJ+I9VoYOoRQYU2O7q4ivgVlkicZA4dlTj8n//AJzFz/1cl/4inXz+D/8Az6Zf9BdP6SrkbWeHLbTZ7Wc2p9Gw3hlfNSOonfTK4zs8tz2POG8R1zG3r9qhoDw27Y7a7mu13pmK8tuzmzMP0qu82PEv1/h4j7uqtMvXceV+S5t/xGgD1FrXbjvAaD2VM9B4d+Vckx/3zuR/r16Da/OdndUt97NWf8PIsBtXhp2wsu+B3WoYr0NQm4TXPMleXQ+dLz5fBx+r8bsDPTotq3O3Ut4sNbZ64PNLW08lLMGO4u4PYWOwfQ4J6qq1TUIsqSJ8fRoAPwWaGFzQ6+684vCFpF2vbJuxo2KRsc910q2mhe/6rZTIfLJ+XPisa2BOzNl3IvemPERpvgx2IIamsMzBb6mNzhJHKI3AgOyBkg4LR2Byr/bU7AbdbN3i4XTRcV1ZUV9O2mm+m1hnbwa7kMDiMHKjuX4dNpd2Lr+eNUWB8N34hrrnbZzTTyAdAHkZa/HYFwJA6ZV27iOB88rSXCN4G42cCAsH1Z4aD3CqpudqrwWaMnpKXRW1tBrqeXLql1JdaumgpmgdP0jiQ5xPoB0HUnsFa/YKy2K1bF2yvsG3o0JDeXOub7KauSqdGXgNY9z34ILo2MdxwMAgd8rHNGeETY/RWpIb7T2SuvNZTuD4Pz1VfSY4njs4RhrWkj05A47reT3ZKqNV1CCaJsMDnurclxO/wuvks0ETg7mcoKPqp5KQOXKiC3UDshA7IwVkQhPJSwmBlYyBaE0ZSwkigkglcX0iAVjaUzRidzDIIuQ5loIBcG98AkDPbJCmsGvNBqGl32suprdpye6W38yVFrqJoKmCI0z5KqCQOc2R7S5vGNxPHJ6YwpxsDiRdJPdyi1l1TebRR3CKgrLtQU9XNjyqeapYySTJwOLScnJ6DAXNJVU8VTDTy1EUcs5Ihje8B0hAyQ0Hq7A6nHYdVrG+6R1E/wAUVJrGms1dVWg2qjonT0jqAtbJHVTveJW1AMoYGyNdmHDj1GegUNwdH68ve6NHqqx09DJS6cjo5rdTTY86smNQX1bYpOYEPKFrIiXgggnGFnbBG4tHNVi/j4LEZSL2WzKi6W2kroaKquNHBVTfuUEs7GPk64+FpOXdfZc0lZTQzthmqYY5HMdI1j3hrnNbjk4AnJAyMn0yMrTu722GpdZa3nudqgZNbhZIKKan/vcSVzRXGSWCOSQF1PIYiS2VuMOx19R325+jNQag1Ta9Qacpon1tmtle+kdLI1jZJ5HwD6M7J6MmhbPGXdmktcewUmYsLiy31d35eH3oMrt/dWyGSMlibLG9r2PAc1zTkOB6gg+oT656DJWN0dVVadsGkbLJbJp56hsFvlEb2n6NwpiXSO9HNaY+Jx+sCvq1nZrhqLbPUVgtVW2kuFxtlTR01Q5xaIpJInMa4kdQASOo6j0WtyAOonbxWTn2tffQ3S23SOSS2XGjrWRSGKR1LOyUMeO7XFpOCPY9UrfdrVdo3yWu50Vcxh4vdSVDJg0+xLScfesP25tV/ofzw24aTg0zbXxU0dDa2CkzC9sTmSta+m+vF+58HSHn9boBgLoNmtudQ6JvENTqOJs7/wBjtuoop4WU8LaYx5M1K9sQBlcHgOEzs5aePQgl2y/Hjbz+/wBKrzWITONbLaUF0t1Vcqm3Utxo56ylx9Ipop2Plhz25sBy3PzAS/Oluyf8IUnR0jD+mb0dHkyDv3bg8h6Y64Wo9F7e6otuuNKOqtM0dnZp2S5PuF9hqYpHX76RzDW8W/pMOc9sz/NA4vjaG8u46TcDazX121hqW46dttIKeGZ89kzUxx+dJcYG0twc4E/CWRl7wXdz9XuVNuJCZOUybV1/f7pL2zqvlVgI5I5YWyxPa9j2hzXtOQ4HqCCO4UKmop6Skkqquoip4I28nyzPDGMHuXHoB9q6h1V+x+v05pmgtNTU0k7X0v0iIgNo44IMtfID+9dxawY7Oc1dXurYbpqbZjUFistIaqvqqZrIYGvjYXkSMdgGT4M4accume/RajYwXgE0D3WUv92+6yOG8Wie2fnGnutDNRc/L+kx1DHRcuQbx5g4zyIGM9yAvojqYJhKYZ45BE8xyFjweDh3a7HYj1B7LAKvT13ufh5uumJNNTz3CsimpW0l2dRROcZJMNneaQNhAYHCQcAHfox++K66fQeqarwvXXQLo4XXwGaJ1RNOGtvWKnzXTSubngapnLmD9V0jh1AGcogjI3d3r4eKgZXeC2TT3a1VdpddKW6UM9C0OLquKoY+IBvcl4PEY9evRKnvFoq7XLcqS60FRRRZ8ypiqGPiZgZOXg4GPXJ6LCdQ2O7al8PesLBbNCx6br7jQVNNSWozUo8174g1rnOhJiaSenUno0E+w+Kt0tqK5eGPVWk4rRcGXeut9XTU9Pc3W+OSZ748MyaQNhAz8IJAPTr7qPsGdb718PFHtXeC2fnomutslZca+0MqbpYqmy1BcWmkqZ4pntA6B3KJzm4PtnPuuyAWAijSzA2LQn96MIwighPqkQjBTCVIUcJgdU0JotRHopKI9FJTQUIQgd1A9UkYSIU1FCAVHCYOE8JYQnalyPujkSkhKkqRy+aWU0IpCXI4wjJTR190UmjkUAoQikky447pcuiEIpASyfcoyQjHzRhFJp8kcvmkAmiktk+R90uXRGAlgJUjZJMdkEJpgJlCEwE01G0sFGE0IRaRCSZSQmFEeikoAp8lJMhSQo5ygFQJ3RS5EKGUckWlSlhGFHkjki0UpYRhR5I5ItFFSwlgpckckWiinhCXJGUWik8FPBUeSOSLRRTwUJckZRaKTRhLKMotFJ4KMFLkjki0UpYKSXJGUWik0Duokp5RadKaFDkjki0uVTQockckWjlUj2SSylnqmEUv/9k=" alt="BUYE logo"> BUYE IELTS</a>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <span class="who" id="whoName"></span>
+      <a href="#" onclick="logout(); return false;">Log out</a>
+    </nav>
+  </div>
+</header>
+
+<!-- STEP 1: choose a test -->
+<main>
+  <div class="wrap" id="pickStep">
+    <div class="page-head"><h1>Choose a practice test</h1><p>Pick a module to start. Once you begin, the clock runs exactly like the real exam — you can submit early any time.</p></div>
+    <div class="grid grid-2" id="testList">Loading…</div>
+  </div>
+</main>
+
+<!-- STEP 2: exam mode -->
+<div id="testStep" style="display:none;">
+  <div class="exam-bar">
+    <div class="wrap">
+      <div class="title" id="examTitleBox">—<span class="part" id="examMeta"></span><span class="status">Practice exam mode</span></div>
+      <div class="exam-actions">
+        <div class="exam-timer" id="examTimer">--:--</div>
+        <button class="btn btn-primary" onclick="confirmSubmit()">Submit test</button>
+      </div>
+    </div>
+  </div>
+  <div class="exam-warning" id="examWarning" role="status"></div>
+  <div class="exam-layout" id="examLayout">
+    <div class="passage-panel" id="passagePanel" style="display:none;">
+      <div class="kicker" id="passageKicker">Passage</div>
+      <div id="passageBody"></div>
+    </div>
+    <div class="questions-panel" id="questionsPanel"></div>
+  </div>
+  <div class="exam-nav">
+    <div class="dots" id="navDots"></div>
+    <span style="font-size:0.85rem; color:var(--muted);" id="answeredCount"></span>
+  </div>
+</div>
+
+<!-- STEP 3: results -->
+<main>
+  <div class="wrap" id="resultStep" style="display:none;">
+    <div class="page-head"><h1>Your result</h1></div>
+    <div class="card" id="resultCard"></div>
+    <div style="margin-top:24px; display:flex; gap:14px;">
+      <a href="dashboard.html" class="btn btn-primary">Go to dashboard</a>
+      <a href="test.html" class="btn">Take another test</a>
+    </div>
+  </div>
+</main>
+
+<script src="assets/config.js"></script>
+<script>
+  let currentAttemptId = null, currentTestId = null, currentModule = null, currentQuestions = [];
+  let timerInterval = null, examEndTime = null, hasSubmitted = false;
+
+  const demoMode = new URLSearchParams(window.location.search).get('demo');
+  if (demoMode === 'listening2') {
+    startListeningTestTwo();
+  } else if (demoMode === 'listening3') {
+    startListeningTestThree();
+  } else if (demoMode === 'listening') {
+    startListeningDemo();
+  } else if (requireAuth()) {
+    document.getElementById('whoName').textContent = getName();
+    loadTests();
+  }
+
+  function startListeningDemo() {
+    currentTestId = 'local-listening-demo';
+    currentModule = 'Listening';
+    currentAttemptId = 'local-demo-attempt';
+    apiGet('getQuestions', { testId: 'T_3f505c57' }).then(function (res) {
+      if (!res.success || !res.data || res.data.length !== 40) {
+        throw new Error('Expected 40 Listening questions, received ' + ((res.data && res.data.length) || 0) + '.');
+      }
+
+      currentQuestions = res.data.map(function (question) {
+        const copy = Object.assign({}, question);
+        copy.PassageOrAudioURL = 'assets/listening-test-1.mp3';
+        return copy;
+      });
+      renderTest('BUYE IELTS Practice Test 1', 'Listening', 30, currentQuestions);
+      const warning = document.getElementById('examWarning');
+      warning.textContent = 'Local preview only — answers are not submitted and no live account or data is used.';
+      warning.style.display = 'block';
+      document.querySelector('.exam-bar .status').textContent = 'Local preview · 40-question Listening test';
+    }).catch(function (error) {
+      document.getElementById('testStep').style.display = 'none';
+      document.getElementById('pickStep').parentElement.style.display = 'block';
+      document.getElementById('testList').innerHTML =
+        '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load the 40-question preview: ' +
+        esc(error.message) + '</div>';
+    });
+  }
+
+  function startListeningTestTwo() {
+    currentTestId = 'local-listening-test-2';
+    currentModule = 'Listening';
+    currentAttemptId = 'local-test-2-attempt';
+    apiGet('getQuestions', { testId: 'T_7c2d4a91' }).then(function (res) {
+      if (!res.success || !res.data || !res.data.length) {
+        throw new Error('Test 2 questions were not available.');
+      }
+      currentQuestions = res.data.filter(function (question) {
+        return String(question.QuestionID || '') !== 'Q_27c6b3e2';
+      }).map(function (question) {
+        const copy = Object.assign({}, question);
+        copy.PassageOrAudioURL = 'assets/listening-test-2.mp3';
+        if (['Q17', 'Q18', 'Q19', 'Q20'].indexOf(String(copy.QuestionID)) !== -1) {
+          copy.SupportMaterialURL = 'content/staging/listening/test-2/hinchingbrooke-park-map-color.svg';
+          copy.SupportMaterialType = 'image';
+          copy.SupportMaterialName = 'Hinchingbrooke Park Map (staging color version)';
+          copy.SupportMaterialAltText = 'Color map of Hinchingbrooke Park showing the lake, gates, paths, refreshments, and locations A to I.';
+        }
+        return copy;
+      });
+      renderTest('BUYE IELTS Practice Test 2', 'Listening', 30, currentQuestions);
+      const warning = document.getElementById('examWarning');
+      warning.textContent = 'Local staging preview only — Test 2 answers are not submitted.';
+      warning.style.display = 'block';
+      document.querySelector('.exam-bar .status').textContent = 'Local staging · Test 2 media check';
+    }).catch(function (error) {
+      document.getElementById('testStep').style.display = 'none';
+      document.getElementById('pickStep').parentElement.style.display = 'block';
+      document.getElementById('testList').innerHTML =
+        '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load Test 2: ' +
+        esc(error.message) + '</div>';
+    });
+  }
+
+  function startListeningTestThree() {
+    currentTestId = 'local-listening-test-3';
+    currentModule = 'Listening';
+    currentAttemptId = 'local-test-3-attempt';
+    fetch('content/staging/listening/test-3/questions.json').then(function (response) {
+      if (!response.ok) throw new Error('Question file returned HTTP ' + response.status + '.');
+      return response.json();
+    }).then(function (questions) {
+      if (!Array.isArray(questions) || questions.length !== 40) {
+        throw new Error('Test 3 must contain exactly 40 questions.');
+      }
+      currentQuestions = questions.map(function (question) {
+        const copy = Object.assign({}, question);
+        copy.PassageOrAudioURL = 'content/production/test-3/listening/listening.wav';
+        return copy;
+      });
+      renderTest('BUYE IELTS Practice Test 3', 'Listening', 30, currentQuestions);
+      const warning = document.getElementById('examWarning');
+      warning.textContent = 'Local staging preview only — Test 3 answers are not submitted.';
+      warning.style.display = 'block';
+      document.querySelector('.exam-bar .status').textContent = 'Local staging · Test 3 · 40 questions';
+    }).catch(function (error) {
+      document.getElementById('testStep').style.display = 'none';
+      document.getElementById('pickStep').parentElement.style.display = 'block';
+      document.getElementById('testList').innerHTML =
+        '<div class="card" style="grid-column:1/-1;color:var(--rust);">Unable to load Test 3: ' +
+        esc(error.message) + '</div>';
+    });
+  }
+
+  function loadTests() {
+    apiGet('getTests').then(function (res) {
+      if (!res.success) return;
+      document.getElementById('testList').innerHTML = res.data.length
+        ? res.data.map(function (t) {
+            const c = moduleColor(t.Module);
+            return '<div class="card" style="border-top:4px solid ' + c + ';"><h3>' + t.Title + '</h3>' +
+              '<p style="color:var(--muted); margin:6px 0 16px;">' + t.ExamType + ' · ' + t.Module + ' · ' + t.DurationMinutes + ' min</p>' +
+              '<button class="btn btn-primary" style="background:' + c + '; border-color:' + c + ';" onclick="startTest(\'' + t.TestID + '\',\'' + t.Title.replace(/'/g,"\\'") + '\',\'' + t.Module + '\',' + t.DurationMinutes + ')">Start</button></div>';
+          }).join('')
+        : '<div class="card" style="grid-column:1/-1; color:var(--muted);">No tests published yet — check back soon.</div>';
+    });
+  }
+
+  function moduleColor(module) {
+    const m = (module || '').toLowerCase();
+    if (m.indexOf('listen') > -1) return 'var(--blue)';
+    if (m.indexOf('read') > -1) return 'var(--emerald)';
+    if (m.indexOf('writ') > -1) return 'var(--rust)';
+    if (m.indexOf('speak') > -1) return 'var(--purple)';
+    return 'var(--ink)';
+  }
+
+  function startTest(testId, title, module, durationMinutes) {
+    currentTestId = testId;
+    currentModule = module;
+    apiPost('startAttempt', { token: getToken(), testId: testId }).then(function (res) {
+      if (!res.success) { alert(res.error); return; }
+      currentAttemptId = res.data.attemptId;
+      apiGet('getQuestions', { testId: testId }).then(function (qres) {
+        if (!qres.success || !qres.data.length) { alert('No questions found for this test yet.'); return; }
+        currentQuestions = qres.data;
+        renderTest(title, module, durationMinutes, qres.data);
+      });
+    });
+  }
+
+  function renderSupportMaterial(q) {
+    const rawUrl = q.SupportMaterialURL ? String(q.SupportMaterialURL).trim() : '';
+    const isRelativeUrl = /^(assets|content)\//i.test(rawUrl);
+    if (!rawUrl || (!/^https?:\/\//i.test(rawUrl) && !isRelativeUrl)) return '';
+
+    const url = esc(rawUrl);
+    const type = q.SupportMaterialType ? String(q.SupportMaterialType).toLowerCase() : '';
+    const name = q.SupportMaterialName ? esc(String(q.SupportMaterialName)) : 'Question support material';
+    const alt = q.SupportMaterialAltText ? esc(String(q.SupportMaterialAltText)) : name;
+
+    const lowerUrl = rawUrl.toLowerCase();
+    const isImage = type === 'image' || type === 'chart' || /\.(png|jpe?g|gif|webp|svg)(\?.*)?$/i.test(lowerUrl);
+    const isPdf = type === 'pdf' || /\.pdf(\?.*)?$/i.test(lowerUrl);
+    const isAudio = type === 'audio' || /\.(mp3|wav|ogg|m4a|aac)(\?.*)?$/i.test(lowerUrl);
+    const isVideo = type === 'video' || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(lowerUrl);
+    const isTable = type === 'table';
+
+    let body = '';
+
+    if (isImage) {
+      body =
+        '<img src="' + url + '" alt="' + alt + '" ' +
+        'style="display:block;max-width:100%;height:auto;margin:10px auto;border-radius:8px;" ' +
+        'loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\';">' +
+        '<div style="display:none;color:var(--muted);">Unable to display this image. <a href="' + url + '" target="_blank" rel="noopener">Open material</a></div>';
+    } else if (isPdf) {
+      body =
+        '<iframe src="' + url + '" title="' + alt + '" ' +
+        'style="width:100%;height:520px;border:1px solid var(--border);border-radius:8px;" loading="lazy"></iframe>' +
+        '<div style="margin-top:8px;"><a href="' + url + '" target="_blank" rel="noopener" class="btn">Open PDF in new tab</a></div>';
+    } else if (isAudio) {
+      body =
+        '<audio controls style="width:100%;margin-top:8px;" src="' + url + '"></audio>';
+    } else if (isVideo) {
+      body =
+        '<video controls preload="metadata" style="display:block;width:100%;max-height:520px;border-radius:8px;margin-top:8px;" src="' + url + '"></video>';
+    } else if (isTable) {
+      body =
+        '<div style="overflow-x:auto;margin-top:8px;">' +
+          '<a href="' + url + '" target="_blank" rel="noopener" class="btn">Open table</a>' +
+        '</div>';
+    } else {
+      body =
+        '<a href="' + url + '" target="_blank" rel="noopener" class="btn btn-primary">Open support material</a>';
+    }
+
+    return (
+      '<div class="support-material" style="margin:16px 0;padding:14px;border:1px solid var(--border);border-radius:10px;background:rgba(0,0,0,0.02);">' +
+        '<div style="font-weight:700;margin-bottom:8px;">' + name + '</div>' +
+        body +
+      '</div>'
+    );
+  }
+  function renderTest(title, module, durationMinutes, questions) {
+    document.body.classList.add('exam-mode');
+    document.getElementById('pickStep').parentElement.style.display = 'none';
+    document.getElementById('testStep').style.display = 'block';
+    document.getElementById('examTitleBox').innerHTML = title + '<span class="part">' + module + ' · ' + questions.length + ' question(s)</span><span class="status">Practice exam mode</span>';
+
+    // ---- Passage / audio panel (shared context, shown once) ----
+    const passageSource = questions.find(function (q) { return q.PassageOrAudioURL && String(q.PassageOrAudioURL).trim(); });
+    const layout = document.getElementById('examLayout');
+    const panel = document.getElementById('passagePanel');
+    const isListening = /listen/i.test(module || '');
+
+    if (passageSource) {
+      const p = String(passageSource.PassageOrAudioURL).trim();
+      const isUrl = /^https?:\/\//i.test(p);
+      const isAudio = /\.(mp3|wav|ogg|m4a|aac)(\?.*)?$/i.test(p) || (isListening && isUrl);
+
+      if (isListening) {
+        if (isAudio) {
+          document.getElementById('passageKicker').textContent = 'Listening recording';
+          document.getElementById('passageBody').innerHTML =
+           '<div style="font-weight:600;margin-bottom:10px;">Listen carefully to the recording.</div>' +
+            '<audio controls preload="metadata" style="width:100%;" src="' + esc(p) + '"></audio>';
+          panel.style.display = 'block';
+          layout.classList.add('has-passage');
+        } else {
+          panel.style.display = 'none';
+          layout.classList.remove('has-passage');
+        }
+        configureListeningAudio();
+      } else {
+        document.getElementById('passageKicker').textContent = isAudio || isUrl ? 'Audio' : 'Passage';
+        document.getElementById('passageBody').innerHTML = isAudio
+          ? '<audio controls style="width:100%;" src="' + esc(p) + '"></audio>'
+          : isUrl
+            ? '<a href="' + esc(p) + '" target="_blank" class="btn btn-primary">Listen to audio</a>'
+            : '<p>' + esc(p) + '</p>';
+        panel.style.display = 'block';
+        layout.classList.add('has-passage');
+      }
+    } else {
+      panel.style.display = 'none';
+      layout.classList.remove('has-passage');
+    }
+
+    // ---- Questions ----
+    const isWriting = /writ/i.test(module || '');
+    const isSpeaking = /speak/i.test(module || '');
+    const qPanel = document.getElementById('questionsPanel');
+    qPanel.className = 'questions-panel' + (passageSource ? '' : ' full-width');
+    qPanel.innerHTML = questions.map(function (q, i) {
+      let inputHtml;
+      const questionType = String(q.QuestionType || '').toLowerCase();
+      const isMultipleChoice = questionType === 'multiple choice' || questionType === 'mcq';
+      const isTrueFalse = questionType === 'true/false/not given' || questionType === 'true false not given';
+      if (isMultipleChoice && (q.OptionA || q.OptionB || q.OptionC || q.OptionD)) {
+        inputHtml = ['A', 'B', 'C', 'D'].map(function (letter) {
+          const opt = q['Option' + letter];
+          if (!opt) return '';
+          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + esc(opt) + '" onchange="recordAnswer(' + i + ')"> ' + esc(opt) + '</label>';
+        }).join('');
+      } else if (isTrueFalse) {
+        inputHtml = ['True', 'False', 'Not Given'].map(function (v) {
+          return '<label class="option"><input type="radio" name="q_' + q.QuestionID + '" value="' + v + '" onchange="recordAnswer(' + i + ')"> ' + v + '</label>';
+        }).join('');
+      } else if (isSpeaking) {
+        inputHtml =
+          '<div class="recorder">' +
+            '<button class="btn btn-primary" id="recBtn_' + q.QuestionID + '" onclick="startRecording(\'' + q.QuestionID + '\',' + i + ')">● Record answer</button>' +
+            '<button class="btn" id="stopBtn_' + q.QuestionID + '" style="display:none;" onclick="stopRecording(\'' + q.QuestionID + '\')">Stop</button>' +
+            '<span class="rec-status" id="recStatus_' + q.QuestionID + '"></span>' +
+            '<audio id="recPlayback_' + q.QuestionID + '" controls style="display:none; margin-top:12px; width:100%;"></audio>' +
+            '<input type="hidden" id="q_' + q.QuestionID + '_text" value="">' +
+          '</div>';
+      } else if (isWriting) {
+        inputHtml = '<textarea id="q_' + q.QuestionID + '_text" rows="9" placeholder="Type your response…" oninput="updateWordCount(\'' + q.QuestionID + '\'); recordAnswer(' + i + ')"></textarea>' +
+          '<div class="word-count" id="wc_' + q.QuestionID + '">0 words</div>';
+      } else {
+        inputHtml = '<input type="text" id="q_' + q.QuestionID + '_text" placeholder="Your answer" oninput="recordAnswer(' + i + ')">';
+      }
+      return '<div class="q-card" id="qcard_' + i + '"><div class="qnum">Question ' + (i + 1) + '</div>' +
+        '<p style="margin:10px 0 14px;">' + esc(q.Prompt) + '</p>' + renderSupportMaterial(q) + inputHtml + '</div>';
+    }).join('');
+    restoreDraftAnswers();
+
+    // ---- Bottom navigator ----
+    document.getElementById('navDots').innerHTML = questions.map(function (q, i) {
+      return '<div class="navdot" id="dot_' + i + '" onclick="jumpTo(' + i + ')">' + (i + 1) + '</div>';
+    }).join('');
+    if (questions.length) document.getElementById('dot_0').classList.add('current');
+    updateAnsweredCount();
+
+    // ---- Timer ----
+    examEndTime = Date.now() + durationMinutes * 60 * 1000;
+    clearInterval(timerInterval);
+    timerInterval = setInterval(tickTimer, 1000);
+    tickTimer();
+  }
+
+  function tickTimer() {
+    const remainingMs = examEndTime - Date.now();
+    const el = document.getElementById('examTimer');
+    if (remainingMs <= 0) {
+      clearInterval(timerInterval);
+      el.textContent = '00:00';
+      alert("Time's up — submitting your test now.");
+      submitTest();
+      return;
+    }
+    const totalSec = Math.floor(remainingMs / 1000);
+    const mm = String(Math.floor(totalSec / 60)).padStart(2, '0');
+    const ss = String(totalSec % 60).padStart(2, '0');
+    el.textContent = mm + ':' + ss;
+    el.classList.toggle('low', totalSec <= 60);
+  }
+
+  function jumpTo(i) {
+    const card = document.getElementById('qcard_' + i);
+    if (card) {
+      document.querySelectorAll('.navdot.current').forEach(function (dot) { dot.classList.remove('current'); });
+      const dot = document.getElementById('dot_' + i);
+      if (dot) dot.classList.add('current');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  function markAnswered(i) {
+    document.getElementById('dot_' + i).classList.add('answered');
+    updateAnsweredCount();
+  }
+
+  function draftKey() {
+    return 'buye_exam_draft_' + String(currentTestId || '').replace(/[^a-z0-9_-]/gi, '_');
+  }
+
+  function recordAnswer(i) {
+    markAnswered(i);
+    const q = currentQuestions[i];
+    if (!q) return;
+    const checked = document.querySelector('input[name="q_' + q.QuestionID + '"]:checked');
+    const text = document.getElementById('q_' + q.QuestionID + '_text');
+    const value = checked ? checked.value : (text ? text.value : '');
+    const draft = JSON.parse(localStorage.getItem(draftKey()) || '{}');
+    draft[q.QuestionID] = value;
+    localStorage.setItem(draftKey(), JSON.stringify(draft));
+  }
+
+  function restoreDraftAnswers() {
+    const draft = JSON.parse(localStorage.getItem(draftKey()) || '{}');
+    currentQuestions.forEach(function (q, i) {
+      const value = draft[q.QuestionID];
+      if (!value) return;
+      const options = document.querySelectorAll('input[name="q_' + q.QuestionID + '"]');
+      options.forEach(function (option) { option.checked = option.value === value; });
+      const text = document.getElementById('q_' + q.QuestionID + '_text');
+      if (text) {
+        text.value = value;
+        if (/writ/i.test(currentModule || '')) updateWordCount(q.QuestionID);
+      }
+      markAnswered(i);
+    });
+  }
+
+  function updateAnsweredCount() {
+    const total = currentQuestions.length;
+    const answered = document.querySelectorAll('.navdot.answered').length;
+    document.getElementById('answeredCount').textContent = answered + ' of ' + total + ' answered';
+  }
+
+  function updateWordCount(questionId) {
+    const el = document.getElementById('q_' + questionId + '_text');
+    const words = el.value.trim().length ? el.value.trim().split(/\s+/).length : 0;
+    const wc = document.getElementById('wc_' + questionId);
+    wc.textContent = words + ' words';
+    wc.classList.toggle('ok', words >= 100);
+  }
+
+  // ---- Speaking: mic recording ----
+  const activeRecorders = {}; // questionId -> { recorder, chunks, stream }
+
+  function pickMimeType() {
+    const candidates = ['audio/webm', 'audio/mp4', 'audio/ogg'];
+    for (let i = 0; i < candidates.length; i++) {
+      if (window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(candidates[i])) return candidates[i];
+    }
+    return '';
+  }
+
+  function startRecording(questionId, index) {
+    if (!navigator.mediaDevices || !window.MediaRecorder) {
+      alert('Voice recording isn\'t supported in this browser. Try Chrome, Edge, or a recent Safari.');
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      const mimeType = pickMimeType();
+      const recorder = mimeType ? new MediaRecorder(stream, { mimeType: mimeType }) : new MediaRecorder(stream);
+      const chunks = [];
+      recorder.ondataavailable = function (e) { if (e.data.size > 0) chunks.push(e.data); };
+      recorder.onstop = function () { handleRecordingStop(questionId, index, chunks, recorder.mimeType || mimeType || 'audio/webm'); };
+      activeRecorders[questionId] = { recorder: recorder, stream: stream };
+      recorder.start();
+
+      document.getElementById('recBtn_' + questionId).style.display = 'none';
+      document.getElementById('stopBtn_' + questionId).style.display = 'inline-block';
+      const status = document.getElementById('recStatus_' + questionId);
+      status.textContent = 'Recording…';
+      status.classList.add('recording');
+    }).catch(function () {
+      alert('Microphone access was blocked. Please allow microphone permission and try again.');
+    });
+  }
+
+  function stopRecording(questionId) {
+    const entry = activeRecorders[questionId];
+    if (!entry) return;
+    entry.recorder.stop();
+    entry.stream.getTracks().forEach(function (t) { t.stop(); });
+    document.getElementById('stopBtn_' + questionId).style.display = 'none';
+    const status = document.getElementById('recStatus_' + questionId);
+    status.textContent = 'Uploading…';
+    status.classList.remove('recording');
+  }
+
+  function handleRecordingStop(questionId, index, chunks, mimeType) {
+    const blob = new Blob(chunks, { type: mimeType });
+    const localUrl = URL.createObjectURL(blob);
+    const playback = document.getElementById('recPlayback_' + questionId);
+    playback.src = localUrl;
+    playback.style.display = 'block';
+
+    const reader = new FileReader();
+    reader.onloadend = function () {
+      const base64Data = reader.result.split(',')[1];
+      apiPost('uploadRecording', { token: getToken(), base64Data: base64Data, mimeType: mimeType, questionId: questionId })
+        .then(function (res) {
+          const status = document.getElementById('recStatus_' + questionId);
+          const btn = document.getElementById('recBtn_' + questionId);
+          if (res.success) {
+            document.getElementById('q_' + questionId + '_text').value = res.data.url;
+            status.textContent = 'Saved ✓';
+            markAnswered(index);
+          } else {
+            status.textContent = 'Upload failed — try again.';
+          }
+          btn.textContent = '● Re-record';
+          btn.style.display = 'inline-block';
+        }).catch(function () {
+          document.getElementById('recStatus_' + questionId).textContent = 'Upload failed — check your connection.';
+          document.getElementById('recBtn_' + questionId).style.display = 'inline-block';
+        });
+    };
+    reader.readAsDataURL(blob);
+  }
+
+  function confirmSubmit() {
+    const total = currentQuestions.length;
+    const answered = document.querySelectorAll('.navdot.answered').length;
+    if (answered < total) {
+      if (!confirm('You have ' + (total - answered) + ' unanswered question(s). Submit anyway?')) return;
+    }
+    submitTest();
+  }
+
+  function configureListeningAudio() {
+    if (!/listen/i.test(currentModule || '')) return;
+    document.querySelectorAll('#passagePanel audio').forEach(function (audio) {
+      let lastAllowedTime = 0;
+      audio.addEventListener('timeupdate', function () { lastAllowedTime = audio.currentTime; });
+      audio.addEventListener('seeking', function () {
+        if (audio.currentTime > lastAllowedTime + 1.5) audio.currentTime = lastAllowedTime;
+      });
+      audio.addEventListener('ratechange', function () { audio.playbackRate = 1; });
+    });
+  }
+
+  window.addEventListener('beforeunload', function (event) {
+    if (document.body.classList.contains('exam-mode') && !hasSubmitted) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
+  });
+
+  function submitTest() {
+    if (hasSubmitted) return;
+    if (currentAttemptId === 'local-demo-attempt' || currentAttemptId === 'local-test-3-attempt') {
+      alert('This is a local preview. Answers are not submitted.');
+      return;
+    }
+    hasSubmitted = true;
+    const answers = currentQuestions.map(function (q) {
+      let value = '';
+      const questionType = String(q.QuestionType || '').toLowerCase();
+      const isMultipleChoice = questionType === 'multiple choice' || questionType === 'mcq';
+      const isTrueFalse = questionType === 'true/false/not given' || questionType === 'true false not given';
+      if (isMultipleChoice || isTrueFalse) {
+        const checked = document.querySelector('input[name="q_' + q.QuestionID + '"]:checked');
+        value = checked ? checked.value : '';
+      } else {
+        const el = document.getElementById('q_' + q.QuestionID + '_text');
+        value = el ? el.value.trim() : '';
+      }
+      return { questionId: q.QuestionID, answer: value };
+    });
+
+    clearInterval(timerInterval);
+    apiPost('submitTest', { token: getToken(), attemptId: currentAttemptId, testId: currentTestId, answers: answers }).then(function (res) {
+      if (!res.success) { hasSubmitted = false; alert(res.error); return; }
+      localStorage.removeItem(draftKey());
+      showResult(res.data);
+    });
+  }
+
+  function showResult(data) {
+    document.body.classList.remove('exam-mode');
+    document.getElementById('testStep').style.display = 'none';
+    document.getElementById('resultStep').style.display = 'block';
+    document.getElementById('resultCard').innerHTML =
+      '<div style="text-align:center; margin-bottom:24px;"><div class="num" style="font-size:3rem; color:var(--rust); font-weight:600;">' + data.overallBand + '</div>' +
+      '<div style="color:var(--muted);">Estimated band score</div></div>' +
+      '<table><thead><tr><th>Module</th><th>Score</th><th>Band</th></tr></thead><tbody>' +
+      data.moduleResults.map(function (m) { return '<tr><td>' + m.module + '</td><td>' + m.raw + ' / ' + m.max + '</td><td class="num">' + m.band + '</td></tr>'; }).join('') +
+      '</tbody></table>';
+  }
+
+  function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+</script>
+</body>
+</html>
