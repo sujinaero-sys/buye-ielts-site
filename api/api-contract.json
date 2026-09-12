@@ -1,0 +1,20 @@
+﻿{
+  "read": [
+    "getTests",
+    "getQuestions",
+    "getDashboard"
+  ],
+  "attempt": [
+    "startAttempt",
+    "submitTest"
+  ],
+  "speaking": [
+    "uploadRecording"
+  ],
+  "admin": [
+    "adminAddTest",
+    "adminAddQuestion",
+    "adminBulkAddQuestions",
+    "adminSetManualScore"
+  ]
+}

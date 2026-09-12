@@ -1,0 +1,26 @@
+﻿{
+  "test": {
+    "testId": "",
+    "title": "",
+    "examType": "Academic",
+    "module": "Listening",
+    "category": "Sectional",
+    "durationMinutes": 30,
+    "version": "1.0.0",
+    "qaStatus": "draft"
+  },
+  "runtime": {
+    "testId": "",
+    "attemptId": "",
+    "questions": [],
+    "answers": {}
+  },
+  "result": {
+    "attemptId": "",
+    "testId": "",
+    "module": "",
+    "rawScore": 0,
+    "maxScore": 0,
+    "bandScore": 0
+  }
+}

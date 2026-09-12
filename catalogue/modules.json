@@ -1,0 +1,44 @@
+﻿{
+  "name": "BUYE IELTS",
+  "version": "1.0.0",
+  "structure": {
+    "academic": {
+      "reading": {
+        "label": "Academic Reading",
+        "engine": "reading"
+      },
+      "writing": {
+        "label": "Academic Writing",
+        "engine": "writing"
+      },
+      "fullMock": {
+        "label": "Academic Full Mock",
+        "engine": "full-mock"
+      }
+    },
+    "general": {
+      "reading": {
+        "label": "General Training Reading",
+        "engine": "reading"
+      },
+      "writing": {
+        "label": "General Training Writing",
+        "engine": "writing"
+      },
+      "fullMock": {
+        "label": "General Training Full Mock",
+        "engine": "full-mock"
+      }
+    },
+    "shared": {
+      "listening": {
+        "label": "Listening",
+        "engine": "listening"
+      },
+      "speaking": {
+        "label": "Speaking",
+        "engine": "speaking"
+      }
+    }
+  }
+}

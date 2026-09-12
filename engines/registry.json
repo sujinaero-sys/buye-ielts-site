@@ -1,0 +1,25 @@
+﻿{
+  "engines": {
+    "listening": {
+      "status": "framework-integrated",
+      "source": "provided-listening-framework",
+      "entry": "engines/listening/exam-engine.js"
+    },
+    "reading": {
+      "status": "planned",
+      "entry": "engines/reading/"
+    },
+    "writing": {
+      "status": "planned",
+      "entry": "engines/writing/"
+    },
+    "speaking": {
+      "status": "planned",
+      "entry": "engines/speaking/"
+    },
+    "full-mock": {
+      "status": "planned",
+      "entry": "engines/shared/"
+    }
+  }
+}

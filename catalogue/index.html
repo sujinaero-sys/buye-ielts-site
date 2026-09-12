@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUYE IELTS — Test Catalogue</title>
+<link rel="stylesheet" href="../assets/app.css">
+<style>
+.catalogue-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+.catalogue-header {
+  margin-bottom: 28px;
+}
+
+.catalogue-header h1 {
+  margin-bottom: 8px;
+}
+
+.catalogue-header p {
+  margin: 0;
+  opacity: .75;
+}
+
+.catalogue-group {
+  margin-top: 30px;
+}
+
+.catalogue-group h2 {
+  margin-bottom: 16px;
+}
+
+.catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.catalogue-card {
+  display: block;
+  padding: 22px;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 14px;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.catalogue-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+.catalogue-card h3 {
+  margin: 0 0 8px;
+}
+
+.catalogue-card p {
+  margin: 0 0 14px;
+  opacity: .7;
+  line-height: 1.45;
+}
+
+.catalogue-count {
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.catalogue-status {
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.04);
+}
+
+.test-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.test-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.test-item-title {
+  font-weight: 600;
+}
+
+.test-item-meta {
+  font-size: .9rem;
+  opacity: .7;
+  margin-top: 3px;
+}
+
+.test-action {
+  white-space: nowrap;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .test-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="brand">BUYE IELTS</a>
+  </div>
+</header>
+
+<main class="catalogue-shell">
+
+  <section class="catalogue-header">
+    <h1>IELTS Test Catalogue</h1>
+    <p>Choose your IELTS pathway and module.</p>
+  </section>
+
+  <section class="catalogue-group">
+    <h2>Academic</h2>
+
+    <div class="catalogue-grid">
+      <a class="catalogue-card" href="?examType=Academic&module=Reading">
+        <h3>Reading</h3>
+        <p>Academic Reading practice tests.</p>
+        <span class="catalogue-count" id="academic-reading-count">Loading…</span>
+      </a>
+
+      <a class="catalogue-card" href="?examType=Academic&module=Writing">
+        <h3>Writing</h3>
+        <p>Academic Writing Task 1 and Task 2.</p>
+        <span class="catalogue-count" id="academic-writing-count">Loading…</span>
+      </a>
+
+      <a class="catalogue-card" href="?examType=Academic&category=FullMock">
+        <h3>Full Mock</h3>
+        <p>Complete Academic IELTS practice.</p>
+        <span class="catalogue-count" id="academic-full-count">Coming with full-mock engine</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="catalogue-group">
+    <h2>General Training</h2>
+
+    <div class="catalogue-grid">
+      <a class="catalogue-card" href="?examType=General&module=Reading">
+        <h3>Reading</h3>
+        <p>General Training Reading practice tests.</p>
+        <span class="catalogue-count" id="general-reading-count">Loading…</span>
+      </a>
+
+      <a class="catalogue-card" href="?examType=General&module=Writing">
+        <h3>Writing</h3>
+        <p>General Training Writing Task 1 and Task 2.</p>
+        <span class="catalogue-count" id="general-writing-count">Loading…</span>
+      </a>
+
+      <a class="catalogue-card" href="?examType=General&category=FullMock">
+        <h3>Full Mock</h3>
+        <p>Complete General Training IELTS practice.</p>
+        <span class="catalogue-count" id="general-full-count">Coming with full-mock engine</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="catalogue-group">
+    <h2>Shared</h2>
+
+    <div class="catalogue-grid">
+      <a class="catalogue-card" href="?module=Listening">
+        <h3>Listening</h3>
+        <p>Listening tests shared by Academic and General Training.</p>
+        <span class="catalogue-count" id="shared-listening-count">Loading…</span>
+      </a>
+
+      <a class="catalogue-card" href="?module=Speaking">
+        <h3>Speaking</h3>
+        <p>Speaking practice and assessment.</p>
+        <span class="catalogue-count" id="shared-speaking-count">Loading…</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="results-section" class="catalogue-group hidden">
+    <h2 id="results-title">Available Tests</h2>
+    <div id="catalogue-status" class="catalogue-status">Loading tests…</div>
+    <div id="test-list" class="test-list"></div>
+  </section>
+
+</main>
+
+<script src="../assets/config.js"></script>
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const selectedExam = params.get('examType');
+  const selectedModule = params.get('module');
+
+  const countEls = {
+    academicReading: document.getElementById('academic-reading-count'),
+    academicWriting: document.getElementById('academic-writing-count'),
+    generalReading: document.getElementById('general-reading-count'),
+    generalWriting: document.getElementById('general-writing-count'),
+    listening: document.getElementById('shared-listening-count'),
+    speaking: document.getElementById('shared-speaking-count')
+  };
+
+  function countWhere(tests, examType, module) {
+    return tests.filter(function (t) {
+      return String(t.ExamType || '').toLowerCase() === examType.toLowerCase()
+        && String(t.Module || '').toLowerCase() === module.toLowerCase();
+    }).length;
+  }
+
+  function updateCounts(tests) {
+    countEls.academicReading.textContent =
+      countWhere(tests, 'Academic', 'Reading') + ' test(s)';
+
+    countEls.academicWriting.textContent =
+      countWhere(tests, 'Academic', 'Writing') + ' test(s)';
+
+    countEls.generalReading.textContent =
+      countWhere(tests, 'General', 'Reading') + ' test(s)';
+
+    countEls.generalWriting.textContent =
+      countWhere(tests, 'General', 'Writing') + ' test(s)';
+
+    countEls.listening.textContent =
+      tests.filter(function (t) {
+        return String(t.Module || '').toLowerCase() === 'listening';
+      }).length + ' test(s)';
+
+    countEls.speaking.textContent =
+      tests.filter(function (t) {
+        return String(t.Module || '').toLowerCase() === 'speaking';
+      }).length + ' test(s)';
+  }
+
+  function showSelected(tests) {
+    if (!selectedExam && !selectedModule) return;
+
+    const section = document.getElementById('results-section');
+    const status = document.getElementById('catalogue-status');
+    const list = document.getElementById('test-list');
+
+    section.classList.remove('hidden');
+
+    let filtered = tests.filter(function (t) {
+      const examMatch = !selectedExam ||
+        String(t.ExamType || '').toLowerCase() === selectedExam.toLowerCase();
+
+      const moduleMatch = !selectedModule ||
+        String(t.Module || '').toLowerCase() === selectedModule.toLowerCase();
+
+      return examMatch && moduleMatch;
+    });
+
+    document.getElementById('results-title').textContent =
+      (selectedExam || 'Shared') + ' · ' +
+      (selectedModule || 'Tests');
+
+    if (!filtered.length) {
+      status.textContent = 'No tests are currently registered for this selection.';
+      return;
+    }
+
+    status.classList.add('hidden');
+
+    filtered.forEach(function (test) {
+      const item = document.createElement('div');
+      item.className = 'test-item';
+
+      const info = document.createElement('div');
+
+      const title = document.createElement('div');
+      title.className = 'test-item-title';
+      title.textContent = test.Title || test.TestID || 'IELTS Test';
+
+      const meta = document.createElement('div');
+      meta.className = 'test-item-meta';
+      meta.textContent =
+        [test.ExamType, test.Module, test.DurationMinutes ? test.DurationMinutes + ' min' : '']
+          .filter(Boolean)
+          .join(' · ');
+
+      info.appendChild(title);
+      info.appendChild(meta);
+
+      const action = document.createElement('a');
+      action.className = 'test-action';
+      action.href = '../test.html?testId=' + encodeURIComponent(test.TestID);
+      action.textContent = 'Open';
+
+      item.appendChild(info);
+      item.appendChild(action);
+      list.appendChild(item);
+    });
+  }
+
+  apiGet('getTests')
+    .then(function (response) {
+      if (!response || !Array.isArray(response.tests)) {
+        throw new Error('Invalid test catalogue response.');
+      }
+
+      updateCounts(response.tests);
+      showSelected(response.tests);
+    })
+    .catch(function (error) {
+      Object.keys(countEls).forEach(function (key) {
+        countEls[key].textContent = 'Unavailable';
+      });
+
+      const status = document.getElementById('catalogue-status');
+      status.textContent =
+        'The test catalogue could not be loaded. Please try again later.';
+      console.error(error);
+    });
+})();
+</script>
+
+</body>
+</html>

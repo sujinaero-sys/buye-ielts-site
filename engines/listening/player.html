@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUYE IELTS Listening</title>
+  <meta name="description" content="BUYE IELTS computer-delivered Listening practice engine">
+</head>
+
+<body style="margin:0;background:#111827;">
+
+  <script>
+    (function () {
+      "use strict";
+
+      const params = new URLSearchParams(window.location.search);
+      const testId = (params.get("testId") || "T01").toLowerCase();
+
+      const routes = {
+        "t01": "./tests/test-1/index.html",
+        "t1": "./tests/test-1/index.html",
+        "test-1": "./tests/test-1/index.html"
+      };
+
+      const route = routes[testId];
+
+      if (!route) {
+        document.body.innerHTML =
+          '<div style="max-width:760px;margin:80px auto;padding:32px;background:white;border-radius:16px;font-family:Arial,sans-serif">' +
+          '<h2>Listening test not registered</h2>' +
+          '<p>Test ID: <strong>' + testId + '</strong></p>' +
+          '<p>The reusable Listening engine is ready, but this test has not yet been registered.</p>' +
+          '</div>';
+        return;
+      }
+
+      /*
+       * Direct navigation is intentional.
+       * No iframe is used.
+       *
+       * The current ZIP reference page is the first
+       * working implementation of the reusable engine.
+       */
+      window.location.replace(route);
+    })();
+  </script>
+
+</body>
+</html>

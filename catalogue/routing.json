@@ -1,0 +1,14 @@
+﻿{
+  "version": "1.0.0",
+  "catalogue": "catalogue/index.html",
+  "engines": {
+    "Listening": "engines/listening",
+    "Reading": "engines/reading",
+    "Writing": "engines/writing",
+    "Speaking": "engines/speaking"
+  },
+  "fullMock": {
+    "Academic": "orchestration",
+    "General": "orchestration"
+  }
+}

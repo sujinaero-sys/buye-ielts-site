@@ -1,0 +1,22 @@
+﻿{
+  "engine": "BUYE Listening Engine",
+  "version": "0.1.0",
+  "status": "local-reference",
+  "referenceFramework": "ZIP Listening framework",
+  "engineScript": "engines/listening/exam-engine.js",
+  "theme": "engines/listening/exam-theme.css",
+  "player": "engines/listening/player.html",
+  "tests": {
+    "T01": {
+      "route": "engines/listening/tests/test-1/index.html",
+      "status": "reference"
+    }
+  },
+  "architecture": {
+    "oneEngineManyTests": true,
+    "fourParts": true,
+    "fortyQuestions": true,
+    "backendConnected": false,
+    "productionConnected": false
+  }
+}
